@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<!--Written by Shea Yuin Ng-->
+<!--Created 30 August 2012-->
+<!--This is the lecturer's homepage when first log in-->
+ 
+<html>
+
+<head>
+
+	<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
+	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>-->
+	<script type="text/javascript">
+	//$.post("http://syngtest.myproject/username.php", function(data){
+	$.post("http://118.138.154.21/username.php", function(data){
+		//document.getElementById("puname").innerHTML=data;
+		$("#puname").text(data);
+	});
+	</script>
+</head>
+ 
+<body>
+
+	<!-- /Lecturer home page -->
+	<div data-role="page" id="lecturer_homepage">
+		<script type="text/javascript" charset="utf-8" src="jsscript/logout.js"></script>
+		<!--<script type="text/javascript" charset="utf-8" src="jsscript/lecturer_homepage.js"></script>-->
+		
+		<div data-role="header">
+			<h1>Welcome </h1> 
+			<h1 id="puname"></h1> 
+		</div><!-- /header -->
+		
+		<div data-role="content">
+			<p>Please choose an option</p>
+			<ul data-role="listview" data-theme="e" id="lecturer_optionlist" data-icon="arrow-r">
+				<li><a href="add_unitpage.html" rel="external" data-ajax="false">Add unit</a></li>
+				<li><a href="view_unitpage.html" rel="external" data-ajax="false">View unit</a></li>
+			</ul>
+			<br>
+			<fieldset>
+				<div>
+					<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
+				</div><!-- /logout button -->
+			</fieldset>
+		</div><!-- /content -->
+
+	</div><!-- /page --> 
+	
+</body>
+</html>

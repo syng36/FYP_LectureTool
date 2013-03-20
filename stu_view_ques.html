@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+   <head>
+		<script src="http://118.138.154.21:8000/socket.io/socket.io.js"></script>
+		<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
+		<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <script type="text/javascript">
+		$.post("http://118.138.154.21/join_session.php", function(data){
+		//$.post("http://syngtest.myproject/join_session.php", function(data){
+	
+			var name = data;
+			var socket = io.connect('http://118.138.154.21:8000');
+			 
+			 // at document read (runs only ones).
+			 $(document).ready(function(){
+				// on click of the button (jquery thing)
+				// the things inside this clause happen only when 
+				// the button is clicked.
+				// listen for chat event and recieve data
+				socket.on('ques', function (data) {
+			 
+				// Display data
+				$("h1#lec_ques").html(data.ques);
+				$('#btnA').parent().find('.ui-btn-text').text(data.A);
+				//$('#btnA').text(data.A);
+				$('#btnB').parent().find('.ui-btn-text').text(data.B);
+				$('#btnC').parent().find('.ui-btn-text').text(data.C);
+				$('#btnD').parent().find('.ui-btn-text').text(data.D);
+
+				// print data (jquery thing)
+				$("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
+				
+				// we log this event for fun :D
+				$("p#log").html('from: ' + data.msgr);
+				});
+				
+				// ask user to log in again if no username available.
+				while (name == '') {
+				   name = alert("Please log in!");
+				   $.mobile.changePage($(document.location.href="index.html"), "slideup");
+				}
+				
+				// send the name to the server, and the server's 
+				// register wait will recieve this.
+				socket.emit('register', name );
+				
+				
+				// When a button is clicked / Student answers question
+				$("button").live('click',function(){
+					
+					// Get the id of the button clicked
+					var lec_ques = $('#lec_ques').val();
+					var stumcqanswer = $(this).attr("id");
+					
+					
+					//console.log(mcq_answer);
+					
+					$.ajax({
+						//url: "http://syngtest.myproject/stu_answers.php",
+						url: "http://118.138.154.21/stu_answers.php",
+						type: 'post',
+						data: 'stumcqanswer='+stumcqanswer,
+						success: function (result) {
+						//results sent by PHP
+							console.log(result);
+							
+						},
+						error: function(){	
+						alert('There was an error in student answering question');	
+						}
+						
+					});
+			
+					socket.emit('updated',{
+					lec_ques: lec_ques,
+					mcq_answer: stumcqanswer}
+					);
+						
+					
+					
+					
+					return false;
+				});
+         
+         });
+         // listen for chat event and recieve data
+         //socket.on('ques', function (data) {
+         
+            // print data (jquery thing)
+           // $("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
+  
+            
+         //});
+		 
+		// Student answer the question
+		//$('#button_pressed').live('click',function(){
+
+		// send message on inputbox to server
+         //      socket.emit('ques', { ,
+		//			A: //percentage,
+		//			B://percentage,
+		//			C: //percentage,
+		//			D: //percentage
+		//		});
+		//return false;
+		//});
+		});
+
+
+      </script>
+   </head>
+   <body>
+  <!-- Lecturer sessionpage -->
+<div data-role="page" id="lec_sessionpage">
+	
+	<div data-role="header">
+		<h1>Answer a question</h1>
+	</div><!-- /header -->
+	<div data-role="content">
+
+		<div>
+			<label for="answer">Question</label>
+			<h1 id="lec_ques">There is no question available momentarily</h1>
+		</div>
+		
+		<div>
+			<label for="answer">A</label>
+			<button data-theme="c" id="btnA"></button>
+		</div>
+		<div>
+			<label for="answer">B</label>
+			<button data-theme="c" id="btnB"></button>
+		</div>
+		<div>
+			<label for="answer">C</label>
+			<button data-theme="c" id="btnC"></button>
+		</div>
+		<div>
+			<label for="answer">D</label>
+			<button data-theme="c" id="btnD"></button>
+		</div>
+		
+		<p id='log'>
+		</p>
+		<p id='data_received'>
+		</p>
+		
+		<fieldset>
+			<div><button data-theme="e" id="clear_question">Clear</button></div>
+		</fieldset>
+		
+		<!-- Buttons to direct to other functions -->
+		<div data-role="controlgroup">
+			<br>
+			<a href=".html" data-role="button">Post a question</a>
+			<a href=".html" data-role="button">U-scale</a>
+		</div>
+		
+		<!-- Buttons to direct to other functions -->
+		<div>
+			<a href="student_homepage.html" rel="external" data-role="button" data-mini = "true" id="end_session">End Session</a>
+		</div>
+
+
+	</div><!-- /content -->
+
+</div><!-- /page --> 
+   </body>
+</html>

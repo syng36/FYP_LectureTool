@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<!--Written by Shea Yuin Ng-->
+<!--Created 4 September 2012-->
+<!--To add units taught by lecturer-->
+ 
+<html>
+
+<head>
+	<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
+	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+ 
+<body>
+	<!-- Lecturer- add unit page -->
+	<div data-role="page" id="add_unitpage">
+		
+		<!-- Define javascripts -->
+		<script type="text/javascript" charset="utf-8" src="jsscript/add_unit.js"></script>
+		<script type="text/javascript" charset="utf-8" src="jsscript/logout.js"></script>
+		
+		<div data-role="header">
+			<h1>Add unit</h1>  
+		</div><!-- /header -->
+		
+		<div data-role="content">
+			<!-- Get input for unit code -->
+			<div>
+				<label for="unit_code">Unit code</label>
+				<input type="text" id="unit_code" />
+			</div><!-- /unit code -->
+			
+			<!-- Get name of unit -->
+			<div>
+				<label for="unit_name">Unit name</label>
+				<input type="text" id="unit_name" />
+			</div><!-- /unit name -->
+			
+			<fieldset>
+				<div><button type="button" data-theme="e" id="add_unit_submit">Add unit</button></div>
+			</fieldset>
+			
+			<!-- To write message from PHP -->
+			<div>
+				<p id="message"></p>
+			</div>
+			
+			<!-- /Go back to lecturer's homepage -->
+			<div>
+				<a href="lecturer_homepage.html" rel="external" data-role="button" data-mini = "true" data-ajax="false">Back</a>
+			</div><!-- /Back button -->
+			
+			<!-- /Log out button -->
+			<div>
+				<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
+			</div><!-- /Log out button -->
+		</div><!-- /content -->
+
+	</div><!-- /page --> 
+</body>
+</html>

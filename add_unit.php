@@ -1,0 +1,56 @@
+<?php
+// Written by Shea Yuin Ng
+// Created 4 September 2012
+// To add units into lecturer's account
+
+// Resume session from previous session
+session_start();
+
+// Connect to mySQL
+include('connections.php');
+
+//Get unit code and unit name from form
+$unit_code = $_POST['unit_code'];
+$unit_name = $_POST['unit_name'];
+//$ip = $_SERVER['REMOTE_ADDR'];
+
+// Select database to connect
+mysql_select_db("main_database",$dbcon) or die("Cannot select main database!");
+
+// Get username from session variable
+$uname = $_SESSION['uname'];
+
+// Check whether the username already existed
+$sql="SELECT * FROM units WHERE unit_code = '$unit_code' and lecturer = '$uname'";
+$r = mysql_query($sql);
+
+// If error in selecting table
+if(!$r) {
+$err=mysql_error();
+print $err;
+exit();
+}
+
+// If username not used before
+if(mysql_affected_rows()==0){//no username exist in database
+	// Insert username and password into list of units table in database
+	mysql_query("INSERT INTO units(unit_code, unit_name, lecturer) VALUES('$unit_code','$unit_name','$uname')")  or die("Unit cannot be added!! Please ensure the unit code has only 7 characters including spacing");
+	
+	// Create database for the unit to hold sessions
+	$database_name = $unit_code.'_'.$uname;
+	mysql_query("CREATE DATABASE $database_name");
+	
+	// Create table in newly created database to store the list of students and a list to store the participants
+	mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
+	mysql_query("CREATE TABLE student_list (username VARCHAR(10), first_name VARCHAR(30), last_name VARCHAR(50))")  or die("Students' list table cannot be added!!");
+	mysql_query("CREATE TABLE participant (username VARCHAR(10), mcq_answer VARCHAR(4))")  or die("Participants' table cannot be added!!");
+	
+	echo("1");
+}
+else{
+	echo("0");
+}
+
+// Close connection to mySOL
+mysql_close($dbcon);
+?>

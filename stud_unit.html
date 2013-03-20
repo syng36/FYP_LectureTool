@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!--Written by Shea Yuin Ng-->
+<!--Created 18 March 2013-->
+<!--View the unit page-->
+
+<html>
+
+<head>
+	<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
+	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<script type="text/javascript">
+	
+		function start_session(){ 
+			$.post("http://118.138.154.21/join_session.php", function(data){
+			//$.post("http://syngtest.myproject/join.php", function(data){
+				console.log(data);
+				window.location.href = "stu_view_ques.html";
+			});
+		}
+	</script>
+</head>
+
+<body>
+	<!-- /Lecturer- unit page-->
+	<div data-role="page" id="view_unitpage">
+
+		<div data-role="header">
+			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
+			<script type="text/javascript" charset="utf-8" src="jsscript/logout.js"></script>
+			<h1 id="unitcode"></h1> 
+		</div><!-- /header -->
+		
+		<div data-role="content">
+			<p>Please choose an option</p>
+	
+			<ul data-role="listview" data-theme="e" id="unit_optionlist" data-icon="arrow-r">
+				<li><a href='#' onclick="start_session();">Answer questions</a></li>
+				<li><a href="stu_ask_ques.html" rel="external" data-ajax="false">Ask questions</a></li>
+			</ul>
+			
+			<!-- /Go back to view units list page -->
+			<div>
+				<br>
+				<a href="student_homepage.html" rel="external" data-role="button" data-mini = "true">Back</a>
+			</div><!-- /Back button -->
+			
+			<!-- /Log out button -->
+			<div>
+				<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
+			</div><!-- /logout button -->
+		</div><!-- /content -->
+
+	</div><!-- /page -->
+
+</body>
+</html>
