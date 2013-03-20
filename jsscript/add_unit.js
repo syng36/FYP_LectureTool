@@ -17,7 +17,7 @@ $('#add_unit_submit').live('click',function(){
   	//use jquery ajax to post data to php server
   	$.ajax({
       	//url: "http://syngtest.myproject/add_unit.php",
-		url: "http://118.138.154.21/add_unit.php",
+		url: "add_unit.php",
       	type: 'post',
       	data: 'unit_code='+unit_code+'&unit_name='+unit_name,
       	success: function (result) {

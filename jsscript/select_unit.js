@@ -7,7 +7,7 @@ $('.chooseunit').live('click',function(){
 	  	
 	$.ajax({
       	//url: "http://syngtest.myproject/select_unit.php",
-		url: "http://118.138.154.21/select_unit.php",
+		url: "select_unit.php",
       	type: 'post',
       	data: 'unit_chosen='+unit_chosen,
       	success: function (status) {

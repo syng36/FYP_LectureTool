@@ -31,7 +31,7 @@ $('#create_account_submit').live('click',function(){
   	//use jquery ajax to post data to php server
   	$.ajax({
       	//url: "http://syngtest.myproject/create_account.php",
-		url: "http://118.138.154.21/create_account.php",
+		url: "create_account.php",
       	type: 'post',
       	data: 'uname='+uname+'&pswd='+pswd+'&fname='+fname+'&lname='+lname+'&status='+status+'&email='+email,
       	success: function (result) {

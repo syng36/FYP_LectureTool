@@ -8,10 +8,9 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
       <script type="text/javascript">
 		function end_session(){
-			$.get("http://118.138.154.21/end_session.php", function(data){
+			$.get("end_session.php", function(data){
 			//$.get("http://syngtest.myproject/end_session.php", function(data){
-				console.log("svrrgreg");
-			console.log(data);
+			//console.log(data);
 
 			window.location.href = "view_unitpage.html";
 			});

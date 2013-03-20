@@ -1,5 +1,6 @@
-//Written by Shea Yuin Ng
-//Date:18/1/13
+// Written by Shea Yuin Ng
+// Created 18 January 2013
+// To add students into database
  
 $('#add_student_submit').live('click',function(){
 	
@@ -25,7 +26,7 @@ $('#add_student_submit').live('click',function(){
   	//use jquery ajax to post data to php server
   	$.ajax({
       	//url: "http://syngtest.myproject/add_student.php",
-		url: "http://118.138.154.21/add_student.php",
+		url: "add_student.php",
       	type: 'post',
       	data: 'stud_name='+stud_name+'&fname='+fname+'&lname='+lname+'&status='+status+'&email='+email,
       	success: function (result) {

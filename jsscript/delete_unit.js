@@ -10,7 +10,7 @@ $('#delete_unitsubmit').live('click',function(){
 	  	//use jquery ajax to post data to php server
 		$.ajax({
 			//url: "http://syngtest.myproject/delete_unit.php",
-			url: "http://118.138.154.21/delete_unit.php",
+			url: "delete_unit.php",
 			type: 'post',
 			success: function (result) {
 			//results sent by PHP

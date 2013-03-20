@@ -18,7 +18,7 @@ $('#page_login_submit').live('click',function(){
   	//use jquery ajax to post data to php server
   	$.ajax({
       	//url: "http://syngtest.myproject/log_in.php",
-		url: "http://118.138.154.21/log_in.php",
+		url: "log_in.php",
       	type: 'post',
       	data: 'uname='+uname+'&pswd='+pswd,
       	success: function (result) {

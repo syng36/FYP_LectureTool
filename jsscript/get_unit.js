@@ -5,7 +5,7 @@
 // Use jquery ajax to post data to php server
 $.ajax({
 	//url: "http://syngtest.myproject/get_unit.php",
-	url: "http://118.138.154.21/get_unit.php",
+	url: "get_unit.php",
 	type: 'post',
 	dataType: "xml",  
 	success: function (xml) {
