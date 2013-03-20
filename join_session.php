@@ -4,6 +4,7 @@
 // To add the username to the list when joining session
 
 // Resume session from previous session
+//fdgdfg
 session_start();
 
 // Connect to mySQL
