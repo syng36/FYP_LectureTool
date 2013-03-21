@@ -1,222 +1,224 @@
 <!DOCTYPE html>
+
+<!--Written by Shea Yuin Ng-->
+<!--Created 3 October 2012-->
+<!--This is the page that lecturer post question-->
+
 <html>
-   <head>
-		<script src="http://118.138.154.21:8000/socket.io/socket.io.js"></script>
-		<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
-		<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-      <script type="text/javascript">
+<head>
+	<script src="http://118.138.154.21:8000/socket.io/socket.io.js"></script>
+	<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
+	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<script type="text/javascript">
 		function end_session(){
 			$.get("end_session.php", function(data){
 			//$.get("http://syngtest.myproject/end_session.php", function(data){
-			//console.log(data);
-
-			window.location.href = "view_unitpage.html";
+				window.location.href = "view_unitpage.html";
 			});
-			};
+		};
 
-		$.post("http://118.138.154.21/username.php", function(data){
+		$.post("username.php", function(data){
 		//$.post("http://syngtest.myproject/username.php", function(data){
-	
-		var name = data;
-		var socket = io.connect('http://118.138.154.21:8000');
-         
-         // at document read (runs only once).
-         $(document).ready(function(){
-            // on click of the button (jquery thing)
-            // the things inside this clause happen only when 
-            // the button is clicked.
-            $('#post_question_submit').click(function(){
-            
-               // Save in database
-			   //get question
-				var lec_ques = $("input#lec_ques").val();
-				if (!lec_ques) { alert('Please enter your question.'); return false; }
-  	
-				//get answer A
-				var A = $("input#A").val();
-				if (!A) { alert('Please enter your answer for A.'); return false; }
-				//get answer B
-				var B = $("input#B").val();
-				if (!B) { alert('Please enter your answer for B.'); return false; }
-				//get answer C
-				var C = $("input#C").val();
-				if (!C) { alert('Please enter your answer for C.'); return false; }
-				//get answer D
-				var D = $("input#D").val();
-				if (!D) { alert('Please enter your answer for D.'); return false; }
-			  
-				//use jquery ajax to post data to php server
-				$.ajax({
-					//url: "http://syngtest.myproject/lec_question.php",
-					url: "http://118.138.154.21/lec_question.php",
-					type: 'post',
-					data: 'lec_ques='+lec_ques+'&A='+A+'&B='+B+'&C='+C+'&D='+D,
-					success: function (result) {
-					//results sent by PHP	 
-					},
-					error: function(){	
-					alert('There was an error saving lecturers question');	
-					}
+
+			var name = data;
+			var socket = io.connect('http://118.138.154.21:8000');
+			 
+			 // at document read (runs only once).
+			 $(document).ready(function(){
+				// on click of the button (jquery thing)
+				// the things inside this clause happen only when 
+				// the button is clicked.
+				$('#post_question_submit').click(function(){
+				
+				   // Save in database
+				   //get question
+					var lec_ques = $("input#lec_ques").val();
+					if (!lec_ques) { alert('Please enter your question.'); return false; }
+		
+					//get answer A
+					var A = $("input#A").val();
+					if (!A) { alert('Please enter your answer for A.'); return false; }
+					//get answer B
+					var B = $("input#B").val();
+					if (!B) { alert('Please enter your answer for B.'); return false; }
+					//get answer C
+					var C = $("input#C").val();
+					if (!C) { alert('Please enter your answer for C.'); return false; }
+					//get answer D
+					var D = $("input#D").val();
+					if (!D) { alert('Please enter your answer for D.'); return false; }
+				  
+					//use jquery ajax to post data to php server
+					$.ajax({
+						//url: "http://syngtest.myproject/lec_question.php",
+						url: "lec_question.php",
+						type: 'post',
+						data: 'lec_ques='+lec_ques+'&A='+A+'&B='+B+'&C='+C+'&D='+D,
+						success: function (result) {
+						//results sent by PHP	 
+						},
+						error: function(){	
+						alert('There was an error saving lecturers question');	
+						}
+						
+					});
 					
+				   
+				   // send message on inputbox to server
+				   socket.emit('ques', { 
+						ques: $("input#lec_ques").val(),
+						A: $("input#A").val(),
+						B: $("input#B").val(),
+						C: $("input#C").val(),
+						D: $("input#D").val()
+					});
+				   
+					$('p#resulta').html('0 out of 0');
+					$('p#resultb').html('0 out of 0');
+					$('p#resultc').html('0 out of 0');
+					$('p#resultd').html('0 out of 0');
+					$("p#log").html('Question posted');
+				   return false;
 				});
 				
-			   
-               // send message on inputbox to server
-               socket.emit('ques', { 
-					ques: $("input#lec_ques").val(),
-					A: $("input#A").val(),
-					B: $("input#B").val(),
-					C: $("input#C").val(),
-					D: $("input#D").val()
-				});
-			   
-				$('p#resulta').html('0 out of 0');
-				$('p#resultb').html('0 out of 0');
-				$('p#resultc').html('0 out of 0');
-				$('p#resultd').html('0 out of 0');
-				$("p#log").html('Question posted');
-			   return false;
-            });
-			
-			// Updated answers from students
-			socket.on('updated', function (data) {
-			console.log('Chat message by ', data.mcq_answer);
-			var lec_ques = data.lec_ques;
-			var mcq_answer = data.mcq_answer;
-			
-			$.ajax({
-					//url: "http://syngtest.myproject/getstu_answers.php",
-					url: "http://118.138.154.21/getstu_answers.php",
-					type: 'post',
-					dataType: "xml",  
-					success: function (xml) {
-			
-					//results sent by PHP
-						cntA = xml.getElementsByTagName("CntA")[0].childNodes[0].nodeValue;
-						cntB = xml.getElementsByTagName("CntB")[0].childNodes[0].nodeValue;
-						cntC = xml.getElementsByTagName("CntC")[0].childNodes[0].nodeValue;
-						cntD = xml.getElementsByTagName("CntD")[0].childNodes[0].nodeValue;
-						total = xml.getElementsByTagName("Total")[0].childNodes[0].nodeValue;
-						//$(xml).find('Answer').each(function(){  
-						//var cntA = $(this).find('CntA').text(); 
-						//var cntB = $(this).find('CntB').text(); 
-						//var cntC = $(this).find('CntC').text(); 
-						//var cntD = $(this).find('CntD').text(); 
-						//var total = $(this).find('Total').text(); 
+				// Updated answers from students
+				socket.on('updated', function (data) {
+					console.log('Answer: ', data.mcq_answer);
+					var lec_ques = data.lec_ques;
+					var mcq_answer = data.mcq_answer;
 					
-						//});
-						// Display data
+					$.ajax({
+						//url: "http://syngtest.myproject/getstu_answers.php",
+						url: "getstu_answers.php",
+						type: 'post',
+						dataType: "xml",  
+						success: function (xml) {
+				
+							//results sent by PHP
+							cntA = xml.getElementsByTagName("CntA")[0].childNodes[0].nodeValue;
+							cntB = xml.getElementsByTagName("CntB")[0].childNodes[0].nodeValue;
+							cntC = xml.getElementsByTagName("CntC")[0].childNodes[0].nodeValue;
+							cntD = xml.getElementsByTagName("CntD")[0].childNodes[0].nodeValue;
+							total = xml.getElementsByTagName("Total")[0].childNodes[0].nodeValue;
+							//$(xml).find('Answer').each(function(){  
+							//var cntA = $(this).find('CntA').text(); 
+							//var cntB = $(this).find('CntB').text(); 
+							//var cntC = $(this).find('CntC').text(); 
+							//var cntD = $(this).find('CntD').text(); 
+							//var total = $(this).find('Total').text(); 
 						
-						$('p#resulta').html(cntA+' out of '+total);
-						$('p#resultb').html(cntB+' out of '+total);
-						$('p#resultc').html(cntC+' out of '+total);
-						$('p#resultd').html(cntD+' out of '+total);
-					},
-					error: function(){	
-					console.log('There was an error in student answering question');	
-					}
-		
-			});		
-			});			
-		
-            
-            // ask user to log in again if no username available.
-            while (name == '') {
-               name = alert("Please log in!");
-			   window.location.href = "index.html";
-			   //$.mobile.changePage($(document.location.href="index.html"), "slideup");
-            };
-            
-            // send the name to the server, and the server's 
-            // register wait will recieve this.
-            socket.emit('register', name );
-         });
-         
-         // listen for chat event and recieve data
-         //socket.on('ques', function (data) {
-         
-            // print data (jquery thing)
-           // $("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
-  
-            
-         //});
-		 
-		 // Clear input boxes
-		 $('#clear_question').click(function(){
-			// then we empty the text on the input box.
-            $("input#lec_ques").val('');
-			$("input#A").val('');
-			$("input#B").val('');
-			$("input#C").val('');
-			$("input#D").val('');
-			$("p#log").html('');
-			return false;
-			 });
+							//});
+							// Display data
+							
+							$('p#resulta').html(cntA+' out of '+total);
+							$('p#resultb').html(cntB+' out of '+total);
+							$('p#resultc').html(cntC+' out of '+total);
+							$('p#resultd').html(cntD+' out of '+total);
+						},
+						error: function(){	
+							console.log('There was an error in student answering question');	
+						}
+					});		
+				});			
+			
+				
+				// ask user to log in again if no username available.
+				while (name == '') {
+				   name = alert("Please log in!");
+				   window.location.href = "index.html";
+				   //$.mobile.changePage($(document.location.href="index.html"), "slideup");
+				};
+				
+				// send the name to the server, and the server's 
+				// register wait will recieve this.
+				socket.emit('register', name );
+			});
+			 
+			 // listen for chat event and recieve data
+			 //socket.on('ques', function (data) {
+			 
+				// print data (jquery thing)
+			   // $("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
+	  
+				
+			 //});
+			 
+			 // Clear input boxes
+			$('#clear_question').click(function(){
+				// then we empty the text on the input box.
+				$("input#lec_ques").val('');
+				$("input#A").val('');
+				$("input#B").val('');
+				$("input#C").val('');
+				$("input#D").val('');
+				$("p#log").html('');
+				return false;
+			});
 		});
+	</script>
+</head>
 
-      </script>
-   </head>
-   <body>
-  <!-- Lecturer sessionpage -->
-<div data-role="page" id="lec_sessionpage">
+<body>
+	<!-- Lecturer sessionpage -->
+	<div data-role="page" id="lec_sessionpage">
+		
+		<div data-role="header">
+			<h1>Post a question</h1>
+		</div><!-- /header -->
+		
+		<div data-role="content">
+
+			<div>
+				<label for="unit_code">Question</label>
+				<input type="text" id="lec_ques" />
+			</div>
+			
+			<div>
+				<label for="unit_name">A</label><p id='resulta'></p>
+				<input type="text" id="A" />
+			</div>
+			<div>
+				<label for="unit_name">B</label><p id='resultb'></p>
+				<input type="text" id="B" />
+			</div>
+			<div>
+				<label for="unit_name">C</label><p id='resultc'></p>
+				<input type="text" id="C" />
+			</div>
+			<div>
+				<label for="unit_name">D</label><p id='resultd'></p>
+				<input type="text" id="D" />
+			</div>
+			
+			<p id='log'>
+			</p>
+			<p id='data_received'>
+			</p>
+			
+			<fieldset>
+				<div><button type="button" data-theme="e" id="post_question_submit">Post Question</button></div>
+			</fieldset>
+			<fieldset>
+				<div><button type="button" data-theme="e" id="clear_question">Clear</button></div>
+			</fieldset>
+			
+			<!-- Buttons to direct to other functions -->
+			<div data-role="controlgroup">
+				<br>
+				<a href="index.html" data-role="button">View student's question</a>
+				<a href="index.html" data-role="button">U-scale</a>
+			</div>
+			
+			<!-- Buttons to direct to other functions -->
+			<div>
+				<button onclick="end_session();" data-role="button" data-mini = "true" id="end_session">End Session</button>
+			
+			</div>
+		</div><!-- /content -->
+
+	</div><!-- /page --> 
 	
-	<div data-role="header">
-		<h1>Post a question</h1>
-	</div><!-- /header -->
-	<div data-role="content">
-
-		<div>
-			<label for="unit_code">Question</label>
-			<input type="text" id="lec_ques" />
-		</div>
-		
-		<div>
-			<label for="unit_name">A</label><p id='resulta'></p>
-			<input type="text" id="A" />
-		</div>
-		<div>
-			<label for="unit_name">B</label><p id='resultb'></p>
-			<input type="text" id="B" />
-		</div>
-		<div>
-			<label for="unit_name">C</label><p id='resultc'></p>
-			<input type="text" id="C" />
-		</div>
-		<div>
-			<label for="unit_name">D</label><p id='resultd'></p>
-			<input type="text" id="D" />
-		</div>
-		
-		<p id='log'>
-		</p>
-		<p id='data_received'>
-		</p>
-		
-		<fieldset>
-			<div><button type="button" data-theme="e" id="post_question_submit">Post Question</button></div>
-		</fieldset>
-		<fieldset>
-			<div><button type="button" data-theme="e" id="clear_question">Clear</button></div>
-		</fieldset>
-		
-		<!-- Buttons to direct to other functions -->
-		<div data-role="controlgroup">
-			<br>
-			<a href="index.html" data-role="button">View student's question</a>
-			<a href="index.html" data-role="button">U-scale</a>
-		</div>
-		
-		<!-- Buttons to direct to other functions -->
-		<div>
-			<button onclick="end_session();" data-role="button" data-mini = "true" id="end_session">End Session</button>
-		
-		</div>
-
-
-	</div><!-- /content -->
-
-</div><!-- /page --> 
-   </body>
+</body>
 </html>

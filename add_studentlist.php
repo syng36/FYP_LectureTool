@@ -45,9 +45,9 @@ $database_name = $unit_code.'_'.$uname;
 
 	// If error in selecting table
 	if(!$r) {
-	$err=mysql_error();
-	print $err;
-	exit();
+		$err=mysql_error();
+		print $err;
+		exit();
 	}
 
 	// If student not registered

@@ -1,5 +1,6 @@
-//Written by Shea Yuin Ng
-//Date:11/9/12
+// Written by Shea Yuin Ng
+// Created 11 September 2012
+// To log out
 
 $('#page_logout_submit').live('click',function(){
   

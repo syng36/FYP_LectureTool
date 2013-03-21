@@ -33,9 +33,9 @@ $r = mysql_query($sql);
 
 // If error in selecting table
 if(!$r) {
-$err=mysql_error();
-print $err;
-exit();
+	$err=mysql_error();
+	print $err;
+	exit();
 }
 
 // If student not registered
@@ -51,9 +51,9 @@ if(mysql_affected_rows()==0){//name does not exist in unit database
 
 	// If error in selecting table
 	if(!$r) {
-	$err=mysql_error();
-	print $err;
-	exit();
+		$err=mysql_error();
+		print $err;
+		exit();
 	}
 	
 	if(mysql_affected_rows()==0){// If no then add into main list of users

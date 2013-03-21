@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+
 <!--Written by Shea Yuin Ng-->
-<!--Created 18 Jan 2013-->
+<!--Created 18 January 2013-->
 <!--Add students-->
 
 <html>
+
 <head>
 	<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
 	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
@@ -12,7 +14,8 @@
 </head>
 
 <body>
-<!-- /Lecturer- add student-->
+
+	<!-- /Lecturer- add student-->
 	<div data-role="page" id="add_student">
 
 		<div data-role="header">
@@ -20,41 +23,41 @@
 			<script type="text/javascript" charset="utf-8" src="jsscript/add_student.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/logout.js"></script>
 			<script type="text/javascript">
-		
-			function checkFilename(){
-			
-				// Store the file name into the variable
-				var fileChosen = document.getElementById('csvfile');
-				var fileName = fileChosen.value;
-		 
-				// Extract and store the file extension into another variable
-				fileExtension = fileName.substr(fileName.length - 3, 3);
+				function checkFilename(){
+				
+					// Store the file name into the variable
+					var fileChosen = document.getElementById('csvfile');
+					var fileName = fileChosen.value;
+			 
+					// Extract and store the file extension into another variable
+					fileExtension = fileName.substr(fileName.length - 3, 3);
 
-				// Only allow .csv files
-				var validFileExtensions = "csv";
-				
-				var flag = false;
-				
-				// Check if it is a csv file
-				if(fileExtension.toLowerCase() == validFileExtensions.toLowerCase()){
-						flag = true;
+					// Only allow .csv files
+					var validFileExtensions = "csv";
+					
+					var flag = false;
+					
+					// Check if it is a csv file
+					if(fileExtension.toLowerCase() == validFileExtensions.toLowerCase()){
+							flag = true;
+					}
+					
+					// Display the alert message box according to the flag value
+					if(flag == false){
+						alert('Files with extension ".' + fileExtension.toUpperCase() + '" are not allowed.\n\nYou can upload the files with .csv extensions only');
+						return false;
+					}
+					else{
+						alert('File has valid extension.');
+						return true;
+					}
 				}
-				
-				// Display the alert message box according to the flag value
-				if(flag == false){
-					alert('Files with extension ".' + fileExtension.toUpperCase() + '" are not allowed.\n\nYou can upload the files with .csv extensions only');
-					return false;
-				}
-				else{
-					alert('File has valid extension.');
-					return true;
-				}
-			}
 			</script>
 			<h1 id="unitcode"></h1> 
 		</div><!-- /header -->
 	
 		<div data-role="content">
+		
 			<h1>Add a List of Students</h1> 
 			
 			<!--A div to add a .csv list of students-->
@@ -156,77 +159,49 @@
 					}, false);// submit click end
 				  
 				</script>
-			
+				
 			</div><!--file_dialog_window-->
-			<!--<form enctype="multipart/form-data" method="post">
-				<table border="1">
-				<tr >
-				<td colspan="2" align="center"><strong>Import CSV file</strong></td>
-				</tr>
-				<tr>
-				<td align="center">CSV File:</td><td><input type="file" name="file" id="file"></td></tr>
-				<tr >
-				<td colspan="2" align="center"><input type="submit" value="submit"></td>
-				</tr>
-				</table>
-				</form>
-				<!--
-			<form>
-            <input type="file" id="student_list" name="student_list" onchange="checkFilename()" />
-            <input type="button" onclick="alertFilename()" value="Upload" />
-			</form>
-		
-			<!--
-			<form action="add_studentlist.php" method="post" enctype="multipart/form-data">
-				<label for="file">Filename:</label>
-				<input type="file" name="file" id="file"><br>
-				<input type="submit" name="submit" value="Submit">
-			</form>-->
-			 <!--<form method="post" enctype="multipart/form-data"  action="add_studentlist.php">  
-				<input type="file" name="student_list" id="student_list" />  
-				<button type="submit" id="btn">Upload Files!</button>  
-			</form>  -->
+
+			<h1>Add a Student</h1> 
 			
-		<h1>Add a Student</h1> 
-		
-		<p>To register a student</p>
-		
-		<div>
-			<label for="page_login_name">Username</label>
-			<input type="text" id="stud_name" />
-		</div><!-- /username -->
-		<div>
-			<label for="page_login_fname">First name</label>
-			<input type="text" id="fname" />
-		</div><!-- /first name -->
-		<div>
-			<label for="page_login_lname">Last name</label>
-			<input type="text" id="lname" />
-		</div><!-- /last name -->
-		<div>
-			<label for="page_login_email">Email address</label>
-			<input type="text" id="email" />
-		</div><!-- /email -->
-		<div>
-			<input type="hidden" id="status" value="S">
-		</div><!-- /status -->
-		
-		<fieldset>
-			<div><button type="button" data-theme="e" id="add_student_submit">Add student</button></div>
-		</fieldset>
-		
-		<div>
-			<br>
-			<a href="unit.html" rel="external" data-role="button" data-mini = "true">Back</a>
-		</div>
-		<div>
-			<button  type="button" data-mini = "true" id="delete_unitsubmit">Delete this unit</button>
-		</div>
-		<div>
-			<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
-		</div>
-		
-	</div><!-- /content -->
+			<p>To register a student</p>
+			
+			<div>
+				<label for="page_login_name">Username</label>
+				<input type="text" id="stud_name" />
+			</div><!-- /username -->
+			<div>
+				<label for="page_login_fname">First name</label>
+				<input type="text" id="fname" />
+			</div><!-- /first name -->
+			<div>
+				<label for="page_login_lname">Last name</label>
+				<input type="text" id="lname" />
+			</div><!-- /last name -->
+			<div>
+				<label for="page_login_email">Email address</label>
+				<input type="text" id="email" />
+			</div><!-- /email -->
+			<div>
+				<input type="hidden" id="status" value="S">
+			</div><!-- /status -->
+			
+			<fieldset>
+				<div><button type="button" data-theme="e" id="add_student_submit">Add student</button></div>
+			</fieldset>
+			
+			<div>
+				<br>
+				<a href="unit.html" rel="external" data-role="button" data-mini = "true">Back</a>
+			</div>
+			<div>
+				<button  type="button" data-mini = "true" id="delete_unitsubmit">Delete this unit</button>
+			</div>
+			<div>
+				<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
+			</div>
+			
+		</div><!-- /content -->
 
 </div><!-- /page -->
 

@@ -26,9 +26,9 @@ $r = mysql_query($sql);
 
 // If error in selecting table
 if(!$r) {
-$err=mysql_error();
-print $err;
-exit();
+	$err=mysql_error();
+	print $err;
+	exit();
 }
 
 // If username not used before
