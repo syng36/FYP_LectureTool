@@ -1,6 +1,5 @@
-// Written by Shea Yuin Ng
-// Created 18 January 2013
-// To add students into database
+//Written by Shea Yuin Ng
+//Date:18/1/13
  
 $('#add_student_submit').live('click',function(){
 	
