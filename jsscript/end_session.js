@@ -1,5 +1,4 @@
 $('#end_session').live('click',function(){
-	//haven't define in lecturer sessionpage
 	//pop-up to ensure wants to end session
 	//delete all the tables and grab data
 	
