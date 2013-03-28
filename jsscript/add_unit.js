@@ -22,26 +22,26 @@ $('#add_unit_submit').live('click',function(){
       	data: 'unit_code='+unit_code+'&unit_name='+unit_name,
       	success: function (result) {
       	//results sent by PHP
-      	if (result=="1"){
-       		$("#message").text("Unit added successfully.");
-			
-			// Clear the textboxes
-			$("#unit_code").val('');
-			$("#unit_name").val('');
-       	}
-       	else if (result=="0"){
-       		$("#message").text("Unit existed!!");
-			
-			// Clear the textboxes
-			$("#unit_code").val('');
-			$("#unit_name").val('');
-       	}
-       	else{
-       		alert(result);
-       	}	 
+			if (result=="1"){
+				$("#message").text("Unit added successfully.");
+				
+				// Clear the textboxes
+				$("#unit_code").val('');
+				$("#unit_name").val('');
+			}
+			else if (result=="0"){
+				$("#message").text("Unit existed!!");
+				
+				// Clear the textboxes
+				$("#unit_code").val('');
+				$("#unit_name").val('');
+			}
+			else{
+				alert(result);
+			}	 
 		},
       	error: function(){	
-      	alert('There was an error adding unit');	
+			alert('There was an error adding unit');	
 		}
 		
   	});

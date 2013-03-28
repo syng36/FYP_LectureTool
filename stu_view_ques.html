@@ -15,31 +15,89 @@
 	<script type="text/javascript">
 		$.post("join_session.php", function(data){
 		//$.post("http://syngtest.myproject/join_session.php", function(data){
-
-			var name = data;
+			
+			var string = data.split('_');
+			var name = string[0];
+			var unit_code = string[1];
 			var socket = io.connect('http://118.138.154.21:8000');
 			 
 			 // at document read (runs only ones).
 			 $(document).ready(function(){
-				// on click of the button (jquery thing)
-				// the things inside this clause happen only when 
-				// the button is clicked.
-				// listen for chat event and recieve data
-				socket.on('ques', function (data) {
-			 
-				// display data
-				$("h1#lec_ques").html(data.ques);
-				$('#btnA').parent().find('.ui-btn-text').text(data.A);
-				//$('#btnA').text(data.A); not working
-				$('#btnB').parent().find('.ui-btn-text').text(data.B);
-				$('#btnC').parent().find('.ui-btn-text').text(data.C);
-				$('#btnD').parent().find('.ui-btn-text').text(data.D);
-
-				// print data (jquery thing)
-				$("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
 				
-				// to check messenger
-				$("p#log").html('from: ' + data.msgr);
+				// Query the database when student first logged in
+				$.ajax({
+					//url: "http://syngtest.myproject/update_quesID.php",
+					url: "stud_query_db.php",
+					dataType: "xml",  
+					success: function (xml) {
+					//results sent by PHP	
+					
+						// Read xml file
+						$(xml).find('Ques').each(function(){ 	
+							var lec_ques = $(this).find('Question').text(); 
+							var A = $(this).find('A').text();
+							var B = $(this).find('B').text(); 	
+							var C = $(this).find('C').text(); 	
+							var D = $(this).find('D').text(); 	
+							
+							
+							if (lec_ques!= "0"){// means there's question posted by lecturer
+								$("h1#lec_ques").html(lec_ques);
+								console.log(lec_ques);
+								$('#btnA').parent().find('.ui-btn-text').text(A);
+								//$('#btnA').text(data.A); not working
+								$('#btnB').parent().find('.ui-btn-text').text(B);
+								$('#btnC').parent().find('.ui-btn-text').text(C);
+								$('#btnD').parent().find('.ui-btn-text').text(D);
+
+								// print data (jquery thing)
+								$("p#data_received").append("<br />\r\n" + lec_ques + ': A.' + A+ '     B.'+ B+'     C.'+ C+'     D.'+ D);
+								
+								// to check messenger
+								$("p#log").html('from: ' );
+							}
+						})				
+					},
+					error: function(){	
+						alert('There was an error query database');	
+					}
+					
+				});
+				
+				
+				
+				
+				socket.on('ques', function (data) {
+					console.log(unit_code);
+					if (unit_code == data.unit_code){
+					
+						$.ajax({
+							//url: "http://syngtest.myproject/update_quesID.php",
+							url: "update_quesID.php",
+							type: 'post',
+							data: 'id='+data.id,
+							success: function (result) {
+							},
+							error: function(){	
+								alert('There was an error updating question ID');	
+							}
+						});
+						
+						// display data
+						$("h1#lec_ques").html(data.ques);
+						$('#btnA').parent().find('.ui-btn-text').text(data.A);
+						//$('#btnA').text(data.A); not working
+						$('#btnB').parent().find('.ui-btn-text').text(data.B);
+						$('#btnC').parent().find('.ui-btn-text').text(data.C);
+						$('#btnD').parent().find('.ui-btn-text').text(data.D);
+
+						// print data (jquery thing)
+						$("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
+						
+						// to check messenger
+						$("p#log").html('from: ' + data.msgr);
+					}
+					
 				});
 				
 				// ask user to log in again if no username available.
@@ -156,7 +214,7 @@
 			
 			<!-- Buttons to direct to other functions -->
 			<div>
-				<a href="student_homepage.html" rel="external" data-role="button" data-mini = "true" id="end_session">End Session</a>
+				<a href="stud_unit.html" rel="external" data-role="button" data-mini = "true" id="end_session">End Session</a>
 			</div>
 
 		</div><!-- /content -->

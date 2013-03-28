@@ -11,16 +11,7 @@
 	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<script type="text/javascript">
-	
-		function start_session(){ 
-			$.post("join_session.php", function(data){
-			//$.post("http://syngtest.myproject/join.php", function(data){
-				console.log(data);
-				window.location.href = "stu_view_ques.html";
-			});
-		}
-	</script>
+
 </head>
 
 <body>
@@ -37,7 +28,7 @@
 			<p>Please choose an option</p>
 	
 			<ul data-role="listview" data-theme="e" id="unit_optionlist" data-icon="arrow-r">
-				<li><a href='#' onclick="start_session();">Answer questions</a></li>
+				<li><a href="stu_view_ques.html" rel="external" data-ajax="false">Answer questions</a></li>
 				<li><a href="stu_ask_ques.html" rel="external" data-ajax="false">Ask questions</a></li>
 			</ul>
 			

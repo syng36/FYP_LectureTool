@@ -15,10 +15,11 @@
 <body>
 
 	<!-- Lecturer sessionpage -->
-	<div data-role="page" id="lec_sessionpage">
+	<div data-role="page" id="lec_add_ques">
 		
 		<div data-role="header">
-			<h1>Post a question</h1>
+			<script type="text/javascript" charset="utf-8" src="jsscript/lec_add_ques.js"></script>
+			<h1>Add a question</h1>
 		</div><!-- /header -->
 		
 		<div data-role="content">
@@ -45,21 +46,24 @@
 			</div>
 			
 			<fieldset>
-				<div><button type="button" data-theme="e" id="post_question_submit">Post Question</button></div>
+				<div><button type="button" data-theme="e" id="add_ques_submit">Add question</button></div>
 			</fieldset>
 			
-			<!-- Buttons to direct to other functions -->
-			<div data-role="controlgroup">
-				<br>
-				<a href="index.html" data-role="button">Yes</a>
-				<a href="index.html" data-role="button">No</a>
-				<a href="index.html" data-role="button">Maybe</a>
+			<!-- To write message from PHP -->
+			<div>
+				<p id="msg"></p>
 			</div>
 			
-			<!-- Buttons to direct to other functions -->
+			<!-- /Go back to list of questions -->
 			<div>
-				<a href="view_unitpage.html" rel="external" data-role="button" data-mini = "true" id="end_session">End Session</a>
-			</div>
+				<br>
+				<a href="lec_ques_list.html" rel="external" data-role="button" data-mini = "true" data-ajax="false">Back</a>
+			</div><!-- /Back button -->
+			
+			<!-- /Log out button -->
+			<div>
+				<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
+			</div><!-- /logout button -->
 		</div><!-- /content -->
 
 	</div><!-- /page --> 

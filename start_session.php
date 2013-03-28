@@ -25,8 +25,9 @@ mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 // Create table of the unit added in main database to insert list of students
 //mysql_query("CREATE TABLE $table_name (lec_ques VARCHAR(30), uscale TINYINT(1))")  or die("Unit table cannot be added!!");
 
-// Create table to save lecturer's question
-mysql_query("CREATE TABLE lecturer_ques (lec_ques VARCHAR(500), A VARCHAR(500), B VARCHAR(500), C VARCHAR(500), D VARCHAR(500), cntA INT(4), cntB INT(4), cntC INT(4), cntD INT(4))")  or die("Lecturer's question table cannot be added!!");
+// Update for current question
+///
+//mysql_query("CREATE TABLE lecturer_ques (lec_ques VARCHAR(500), A VARCHAR(500), B VARCHAR(500), C VARCHAR(500), D VARCHAR(500), cntA INT(4), cntB INT(4), cntC INT(4), cntD INT(4))")  or die("Lecturer's question table cannot be added!!");
 
 // Close connection to mySOL
 mysql_close($dbcon);

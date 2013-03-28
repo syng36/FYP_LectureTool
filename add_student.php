@@ -18,7 +18,6 @@ $status = $_POST['status'];
 $pswd = "12345";
 $pswd = md5($pswd);
 
-
 // Get username from session variable
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];

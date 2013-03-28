@@ -13,6 +13,7 @@ include('connections.php');
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];
 $unit_name = $_SESSION['unit_name'];
+$id = $_SESSION['ques_chosen'];
 
 ////////Check whether have a list of students before start session
 
@@ -26,9 +27,7 @@ mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 //mysql_query("CREATE TABLE $table_name (lec_ques VARCHAR(30), uscale TINYINT(1))")  or die("Unit table cannot be added!!");
 
 // Create table to save lecturer's question
-mysql_query("DROP TABLE lecturer_ques")  or die("Lecturer's question table cannot be deleted!!");
-//mysql_query("DROP TABLE participant")  or die("Participants' table cannot be deleted!!");
-mysql_query("TRUNCATE TABLE participant")  or die("Participants' table cannot be deleted!!");
+mysql_query("TRUNCATE TABLE current_lecques")  or die("Lecturer's question table cannot be deleted!!");
 
 // Close connection to mySOL
 mysql_close($dbcon);

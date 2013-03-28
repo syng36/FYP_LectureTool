@@ -16,13 +16,13 @@ $.ajax({
 			var unit_name = $(this).find('UnitName').text();
 			
 			if (unit_code== "0"){// means there's no units registered for the lecturer
-					// Empty list, show this msg
-					$("#view_unitmsg").text('No units found!!');
+				// Empty list, show this msg
+				$("#view_unitmsg").text('No units found!!');
 			}
 			else{// list the units in an unordered list
-					$("#view_unitmsg").text('Please choose a unit');	
-					//$("#viewunit_optionlist").append('<li id="'+unit_code+'"><a href="unit_page.html" rel="external">'+unit_code+'  '+unit_name+'</a></li>');
-					$("#viewunit_optionlist").append('<li class="chooseunit" data-name="'+unit_code+'"><a href="#">'+unit_code+'  '+unit_name+'</a></li>');
+				$("#view_unitmsg").text('Please choose a unit');	
+				//$("#viewunit_optionlist").append('<li id="'+unit_code+'"><a href="unit_page.html" rel="external">'+unit_code+'  '+unit_name+'</a></li>');
+				$("#viewunit_optionlist").append('<li class="chooseunit" data-name="'+unit_code+'"><a href="#">'+unit_code+'  '+unit_name+'</a></li>');
 			} 
 		})
 		//$.mobile.changePage("#view_unitpage", "slideup");

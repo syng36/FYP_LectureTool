@@ -15,7 +15,7 @@
 		function end_session(){
 			$.get("end_session.php", function(data){
 			//$.get("http://syngtest.myproject/end_session.php", function(data){
-				window.location.href = "view_unitpage.html";
+				window.location.href = "lec_ques_list.html";
 			});
 		};
 
@@ -25,64 +25,67 @@
 			var name = data;
 			var socket = io.connect('http://118.138.154.21:8000');
 			 
-			 // at document read (runs only once).
-			 $(document).ready(function(){
-				// on click of the button (jquery thing)
-				// the things inside this clause happen only when 
-				// the button is clicked.
-				$('#post_question_submit').click(function(){
+			// at document read (runs only once).
+			$(document).ready(function(){
 				
-				   // Save in database
-				   //get question
-					var lec_ques = $("input#lec_ques").val();
-					if (!lec_ques) { alert('Please enter your question.'); return false; }
-		
-					//get answer A
-					var A = $("input#A").val();
-					if (!A) { alert('Please enter your answer for A.'); return false; }
-					//get answer B
-					var B = $("input#B").val();
-					if (!B) { alert('Please enter your answer for B.'); return false; }
-					//get answer C
-					var C = $("input#C").val();
-					if (!C) { alert('Please enter your answer for C.'); return false; }
-					//get answer D
-					var D = $("input#D").val();
-					if (!D) { alert('Please enter your answer for D.'); return false; }
-				  
-					//use jquery ajax to post data to php server
-					$.ajax({
-						//url: "http://syngtest.myproject/lec_question.php",
-						url: "lec_question.php",
-						type: 'post',
-						data: 'lec_ques='+lec_ques+'&A='+A+'&B='+B+'&C='+C+'&D='+D,
-						success: function (result) {
-						//results sent by PHP	 
-						},
-						error: function(){	
-						alert('There was an error saving lecturers question');	
-						}
-						
-					});
+				//use jquery ajax to post data to php server
+				$.ajax({
+					//url: "http://syngtest.myproject/lec_question.php",
+					url: "lec_post_ques.php",
+					type: 'post',
+					dataType: "xml",  
+					success: function (xml) {
+					//results sent by PHP	
 					
-				   
-				   // send message on inputbox to server
-				   socket.emit('ques', { 
-						ques: $("input#lec_ques").val(),
-						A: $("input#A").val(),
-						B: $("input#B").val(),
-						C: $("input#C").val(),
-						D: $("input#D").val()
-					});
-				   
-					$('p#resulta').html('0 out of 0');
-					$('p#resultb').html('0 out of 0');
-					$('p#resultc').html('0 out of 0');
-					$('p#resultd').html('0 out of 0');
-					$("p#log").html('Question posted');
-				   return false;
+						// Read xml file
+						$(xml).find('Ques').each(function(){ 
+							var unit_code = $(this).find('UnitCode').text(); 	
+							var id = $(this).find('ID').text(); 	
+							var lec_ques = $(this).find('Question').text(); 
+							var A = $(this).find('A').text();
+							var B = $(this).find('B').text(); 	
+							var C = $(this).find('C').text(); 	
+							var D = $(this).find('D').text(); 	
+							
+							if (lec_ques== "0"){// means there's no question posted by lecturer
+								// Empty list, show this msg
+								$("p#log").text('No question posted!!');
+							}
+							else{// list the units in an unordered list
+								// send message on inputbox to server
+								socket.emit('ques', { 
+									unit_code: unit_code,
+									id: id,
+									ques: lec_ques,
+									A: A,
+									B: B,
+									C: C,
+									D: D,
+									
+								});
+								
+								$('#lec_ques').html(lec_ques);
+								$('#A').html(A);
+								$('#B').html(B);
+								$('#C').html(C);
+								$('#D').html(D);
+								
+								//$('#resulta').html('0 out of 0');
+								//$('#resultb').html('0 out of 0');
+								//$('#resultc').html('0 out of 0');
+								///$('#resultd').html('0 out of 0');
+								//$("p#log").html('Question posted');
+							} 
+						})
+						
+						
+					},
+					error: function(){	
+					alert('There was an error posting lecturers question');	
+					}
+					
 				});
-				
+			
 				// Updated answers from students
 				socket.on('updated', function (data) {
 					console.log('Answer: ', data.mcq_answer);
@@ -112,10 +115,10 @@
 							//});
 							// Display data
 							
-							$('p#resulta').html(cntA+' out of '+total);
-							$('p#resultb').html(cntB+' out of '+total);
-							$('p#resultc').html(cntC+' out of '+total);
-							$('p#resultd').html(cntD+' out of '+total);
+							$('#resulta').html(cntA+' out of '+total);
+							$('#resultb').html(cntB+' out of '+total);
+							$('#resultc').html(cntC+' out of '+total);
+							$('#resultd').html(cntD+' out of '+total);
 						},
 						error: function(){	
 							console.log('There was an error in student answering question');	
@@ -145,17 +148,6 @@
 				
 			 //});
 			 
-			 // Clear input boxes
-			$('#clear_question').click(function(){
-				// then we empty the text on the input box.
-				$("input#lec_ques").val('');
-				$("input#A").val('');
-				$("input#B").val('');
-				$("input#C").val('');
-				$("input#D").val('');
-				$("p#log").html('');
-				return false;
-			});
 		});
 	</script>
 </head>
@@ -172,24 +164,28 @@
 
 			<div>
 				<label for="unit_code">Question</label>
-				<input type="text" id="lec_ques" />
+				<p id="lec_ques" ></p>
 			</div>
 			
 			<div>
 				<label for="unit_name">A</label><p id='resulta'></p>
-				<input type="text" id="A" />
+				<p id="A" ></p>
+				<p id="resulta" >0 out of 0</p>
 			</div>
 			<div>
 				<label for="unit_name">B</label><p id='resultb'></p>
-				<input type="text" id="B" />
+				<p id="B" ></p>
+				<p id="resultb" >0 out of 0</p>
 			</div>
 			<div>
 				<label for="unit_name">C</label><p id='resultc'></p>
-				<input type="text" id="C" />
+				<p id="C" ></p>
+				<p id="resultc" >0 out of 0</p>
 			</div>
 			<div>
 				<label for="unit_name">D</label><p id='resultd'></p>
-				<input type="text" id="D" />
+				<p id="D" ></p>
+				<p id="resultd" >0 out of 0</p>
 			</div>
 			
 			<p id='log'>
@@ -197,12 +193,11 @@
 			<p id='data_received'>
 			</p>
 			
-			<fieldset>
-				<div><button type="button" data-theme="e" id="post_question_submit">Post Question</button></div>
-			</fieldset>
-			<fieldset>
-				<div><button type="button" data-theme="e" id="clear_question">Clear</button></div>
-			</fieldset>
+			<!-- Buttons to direct to other functions -->
+			<div>
+				<button onclick="end_session();" data-theme="e" data-role="button" data-mini = "true" id="end_session">End Question</button>
+			</div>
+
 			
 			<!-- Buttons to direct to other functions -->
 			<div data-role="controlgroup">
@@ -211,11 +206,7 @@
 				<a href="index.html" data-role="button">U-scale</a>
 			</div>
 			
-			<!-- Buttons to direct to other functions -->
-			<div>
-				<button onclick="end_session();" data-role="button" data-mini = "true" id="end_session">End Session</button>
 			
-			</div>
 		</div><!-- /content -->
 
 	</div><!-- /page --> 
