@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 22 October 2012
-// To get username through IP address
+// To get result from the question
 
 // Resume session from previous session
 session_start();
@@ -13,6 +13,7 @@ include('connections.php');
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];
 $unit_name = $_SESSION['unit_name'];
+$id = $_SESSION['id'];
 
 // Create database for the unit to hold sessions
 $database_name = $unit_code.'_'.$uname;
@@ -20,30 +21,19 @@ $database_name = $unit_code.'_'.$uname;
 // Select database to connect
 mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 
-/*$result = mysql_query("SELECT mcq_answer, COUNT(username) FROM participant GROUP BY mcq_answer")  or die("Cannot count number of answers!!");
+$table_name='q_'.$id;
 
-$counter = 1;
-while($row = mysql_fetch_array($result)){
-	if ($row['mcq_answer']=="btnA") 
-		$cntA = $row['COUNT(username)'] ;
-	if ($row['mcq_answer']=="btnB") 
-		$cntB = $row['COUNT(username)'] ;
-	if ($row['mcq_answer']=="btnC") 
-		$cntC = $row['COUNT(username)'] ;
-	if ($row['mcq_answer']=="btnD") 
-		$cntD = $row['COUNT(username)'] ;
-}*/
 $btnA = 'btnA';
-$result = mysql_query("SELECT * FROM participant WHERE mcq_answer = '$btnA'", $dbcon);
+$result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnA'", $dbcon);
 $cntA = mysql_num_rows($result); 
 $btnB = 'btnB';
-$result = mysql_query("SELECT * FROM participant WHERE mcq_answer = '$btnB'", $dbcon);
+$result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnB'", $dbcon);
 $cntB = mysql_num_rows($result); 
 $btnC = 'btnC';
-$result = mysql_query("SELECT * FROM participant WHERE mcq_answer = '$btnC'", $dbcon);
+$result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnC'", $dbcon);
 $cntC = mysql_num_rows($result); 
 $btnD = 'btnD';
-$result = mysql_query("SELECT * FROM participant WHERE mcq_answer = '$btnD'", $dbcon);
+$result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnD'", $dbcon);
 $cntD = mysql_num_rows($result); 
 
 $total = $cntA+$cntB+$cntC+$cntD;

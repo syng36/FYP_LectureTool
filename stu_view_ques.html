@@ -26,7 +26,7 @@
 				
 				// Query the database when student first logged in
 				$.ajax({
-					//url: "http://syngtest.myproject/update_quesID.php",
+					//url: "http://syngtest.myproject/stud_query_db.php",
 					url: "stud_query_db.php",
 					dataType: "xml",  
 					success: function (xml) {
@@ -39,7 +39,7 @@
 							var B = $(this).find('B').text(); 	
 							var C = $(this).find('C').text(); 	
 							var D = $(this).find('D').text(); 	
-							
+							var prev_ans = $(this).find('PrevAns').text();
 							
 							if (lec_ques!= "0"){// means there's question posted by lecturer
 								$("h1#lec_ques").html(lec_ques);
@@ -49,7 +49,11 @@
 								$('#btnB').parent().find('.ui-btn-text').text(B);
 								$('#btnC').parent().find('.ui-btn-text').text(C);
 								$('#btnD').parent().find('.ui-btn-text').text(D);
-
+								
+								if(prev_ans !=''){ 
+									button = '#btn'+prev_ans;
+									$(button).attr('data-theme', 'e');
+								}
 								// print data (jquery thing)
 								$("p#data_received").append("<br />\r\n" + lec_ques + ': A.' + A+ '     B.'+ B+'     C.'+ C+'     D.'+ D);
 								
@@ -77,6 +81,10 @@
 							type: 'post',
 							data: 'id='+data.id,
 							success: function (result) {
+								if(prev_ans !=''){ 
+									button = '#btn'+prev_ans;
+									$(button).attr('data-theme', 'e');
+								}
 							},
 							error: function(){	
 								alert('There was an error updating question ID');	
@@ -114,30 +122,42 @@
 				// When a button is clicked / Student answers question
 				$("button").live('click',function(){
 					
-					// Get the id of the button clicked
-					var lec_ques = $('#lec_ques').val();
-					var stumcqanswer = $(this).attr("id");
-					//console.log(mcq_answer);
-					
-					$.ajax({
-						//url: "http://syngtest.myproject/stu_answers.php",
-						url: "stu_answers.php",
-						type: 'post',
-						data: 'stumcqanswer='+stumcqanswer,
-						success: function (result) {
-						//results sent by PHP
-							console.log(result);
-							
-						},
-						error: function(){	
-							alert('There was an error in student answering question');	
-						}
-					});
-			
-					socket.emit('updated',{
-						lec_ques: lec_ques,
-						mcq_answer: stumcqanswer
-					});
+					//Pop-up to ask if really want to delete unit
+					var answer = confirm ("Confirm your answer?")
+					if (answer){
+						// Get the id of the button clicked
+						var lec_ques = $('#lec_ques').val();
+						var mcq_answer = $(this).attr("id");
+						console.log(mcq_answer);
+						$('#btnA').attr('data-theme', 'c');
+						$('#btnB').attr('data-theme', 'c');
+						$('#btnC').attr('data-theme', 'c');
+						$('#btnD').attr('data-theme', 'c');
+						$(this).attr('data-theme', 'e');
+						
+						$.ajax({
+							//url: "http://syngtest.myproject/stu_answers.php",
+							url: "stu_answers.php",
+							type: 'post',
+							data: 'mcqanswer='+ mcq_answer,
+							success: function (data) {
+							//results sent by PHP
+								var result = data.split('_');
+								var unit_code = result[0];
+								var id = result[1];
+
+								socket.emit('updated',{
+									unit_code: unit_code,
+									id: id,
+									mcq_answer: mcq_answer
+								});
+								
+							},
+							error: function(){	
+								alert('There was an error in student answering question');	
+							}
+						});
+					}
 
 					return false;
 				});

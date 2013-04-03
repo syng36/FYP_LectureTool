@@ -33,7 +33,7 @@ $database_name = $unit_code.'_'.$uname;
 mysql_select_db("$database_name",$dbcon) or die("Cannot select database for unit!");
 
 // Insert question into table
-mysql_query("INSERT INTO lecturer_ques(lec_ques, A, B, C, D, cntA, cntB, cntC,cntD) VALUES('$lec_ques','$A','$B','$C','$D',0,0,0,0)")  or die("Unit cannot be added!!");
+mysql_query("INSERT INTO lecturer_ques(lec_ques, A, B, C, D) VALUES('$lec_ques','$A','$B','$C','$D')")  or die("Question cannot be added!!");
 
 // Get id for question
 $get_details="SELECT id FROM lecturer_ques WHERE lec_ques = '$lec_ques'";
@@ -44,7 +44,7 @@ $fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!
 // Extract 'id' field from the array
 $id = $fetch_details['id'];
 
-$table_name='Q_'.$id;
+$table_name='q_'.$id;
 
 // Create a table for each question
 mysql_query("CREATE TABLE $table_name (username VARCHAR(10), mcq_answer VARCHAR(4))") or die("Question results table cannot be added!!");

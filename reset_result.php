@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
-// Created 22 September 2012
-// To add units into lecturer's account
+// Created 3 April 2013
+// To reset the results from students
 
 // Resume session from previous session
 session_start();
@@ -13,8 +13,7 @@ include('connections.php');
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];
 $unit_name = $_SESSION['unit_name'];
-
-////////Check whether have a list of students before start session
+$id = $_SESSION['id'];
 
 // Create database for the unit to hold sessions
 $database_name = $unit_code.'_'.$uname;
@@ -24,10 +23,11 @@ mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 
 // Create table of the unit added in main database to insert list of students
 //mysql_query("CREATE TABLE $table_name (lec_ques VARCHAR(30), uscale TINYINT(1))")  or die("Unit table cannot be added!!");
+$table_name='q_'.$id;	
+mysql_query("UPDATE $table_name SET mcq_answer='0'")  or die("Answer not updated!!");
 
-// Update for current question
-///
-//mysql_query("CREATE TABLE lecturer_ques (lec_ques VARCHAR(500), A VARCHAR(500), B VARCHAR(500), C VARCHAR(500), D VARCHAR(500), cntA INT(4), cntB INT(4), cntC INT(4), cntD INT(4))")  or die("Lecturer's question table cannot be added!!");
+// Send info back to JS
+echo $unit_code.'_'.$id;
 
 // Close connection to mySOL
 mysql_close($dbcon);

@@ -11,11 +11,46 @@
 	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
 	<script type="text/javascript">
+		
 		function end_session(){
 			$.get("end_session.php", function(data){
 			//$.get("http://syngtest.myproject/end_session.php", function(data){
 				window.location.href = "lec_ques_list.html";
+			});
+		};
+		
+		function reset_result(){
+			$.get("reset_result.php", function(data){
+				$(function() {
+					$( "#barA" ).progressbar({
+						value: 0
+					});
+					
+					$( "#barB" ).progressbar({
+						value: 0
+					});
+					
+					$( "#barC" ).progressbar({
+						value: 0
+					});
+					
+					$( "#barD" ).progressbar({
+						value: 0
+					});
+					
+					$(".resultbar").css({ 'background': 'Grey' });
+					$(".resultbar > div").css({ 'background': 'Orange' });
+				});	
+				
+				$('#resulta').html('0 out of 0');
+				$('#resultb').html('0 out of 0');
+				$('#resultc').html('0 out of 0');
+				$('#resultd').html('0 out of 0');
 			});
 		};
 
@@ -45,7 +80,12 @@
 							var A = $(this).find('A').text();
 							var B = $(this).find('B').text(); 	
 							var C = $(this).find('C').text(); 	
-							var D = $(this).find('D').text(); 	
+							var D = $(this).find('D').text(); 
+							cntA = xml.getElementsByTagName("CntA")[0].childNodes[0].nodeValue;
+							cntB = xml.getElementsByTagName("CntB")[0].childNodes[0].nodeValue;
+							cntC = xml.getElementsByTagName("CntC")[0].childNodes[0].nodeValue;
+							cntD = xml.getElementsByTagName("CntD")[0].childNodes[0].nodeValue;
+							total = xml.getElementsByTagName("Total")[0].childNodes[0].nodeValue;
 							
 							if (lec_ques== "0"){// means there's no question posted by lecturer
 								// Empty list, show this msg
@@ -64,17 +104,37 @@
 									
 								});
 								
+								$(function() {
+									$( "#barA" ).progressbar({
+										value: cntA/total*100
+									});
+									
+									$( "#barB" ).progressbar({
+										value: cntB/total*100
+									});
+									
+									$( "#barC" ).progressbar({
+										value: cntC/total*100
+									});
+									
+									$( "#barD" ).progressbar({
+										value: cntD/total*100
+									});
+									
+									$(".resultbar").css({ 'background': 'Grey' });
+									$(".resultbar > div").css({ 'background': 'Orange' });
+								});	
+								
 								$('#lec_ques').html(lec_ques);
 								$('#A').html(A);
 								$('#B').html(B);
 								$('#C').html(C);
 								$('#D').html(D);
 								
-								//$('#resulta').html('0 out of 0');
-								//$('#resultb').html('0 out of 0');
-								//$('#resultc').html('0 out of 0');
-								///$('#resultd').html('0 out of 0');
-								//$("p#log").html('Question posted');
+								$('#resulta').html(cntA+' out of '+total);
+								$('#resultb').html(cntB+' out of '+total);
+								$('#resultc').html(cntC+' out of '+total);
+								$('#resultd').html(cntD+' out of '+total);
 							} 
 						})
 						
@@ -89,7 +149,8 @@
 				// Updated answers from students
 				socket.on('updated', function (data) {
 					console.log('Answer: ', data.mcq_answer);
-					var lec_ques = data.lec_ques;
+					var unit_code = data.unit_code;
+					var id = data.id;
 					var mcq_answer = data.mcq_answer;
 					
 					$.ajax({
@@ -114,6 +175,24 @@
 						
 							//});
 							// Display data
+							$(function() {
+								$( "#barA" ).progressbar({
+									value: cntA/total*100
+								});
+								
+								$( "#barB" ).progressbar({
+									value: cntB/total*100
+								});
+								
+								$( "#barC" ).progressbar({
+									value: cntC/total*100
+								});
+								
+								$( "#barD" ).progressbar({
+									value: cntD/total*100
+								});
+								
+							});					
 							
 							$('#resulta').html(cntA+' out of '+total);
 							$('#resultb').html(cntB+' out of '+total);
@@ -163,40 +242,49 @@
 		<div data-role="content">
 
 			<div>
-				<label for="unit_code">Question</label>
-				<p id="lec_ques" ></p>
+				<label style="color:green;font-size:20px;" for="unit_code">Question</label>
+				<h1 id="lec_ques"></h1>
 			</div>
 			
 			<div>
-				<label for="unit_name">A</label><p id='resulta'></p>
-				<p id="A" ></p>
-				<p id="resulta" >0 out of 0</p>
+				<label style="color:green;font-size:20px;" for="unit_name">A</label>
+				<h3 id="A" ></h3>
+				<div id="barA" class="resultbar"></div>
+				<p id="resulta" style="color:blue;font-size:15px;">0 out of 0</p>
 			</div>
 			<div>
-				<label for="unit_name">B</label><p id='resultb'></p>
-				<p id="B" ></p>
-				<p id="resultb" >0 out of 0</p>
+				<label style="color:green;font-size:20px;" for="unit_name">B</label>
+				<h3 id="B" ></h3>
+				<div id="barB" class="resultbar"></div>
+				<p id="resultb" style="color:blue;font-size:15px;">0 out of 0</p>
 			</div>
 			<div>
-				<label for="unit_name">C</label><p id='resultc'></p>
-				<p id="C" ></p>
-				<p id="resultc" >0 out of 0</p>
+				<label style="color:green;font-size:20px;" for="unit_name">C</label>
+				<h3 id="C" ></h3>
+				<div id="barC" class="resultbar"></div>
+				<p id="resultc" style="color:blue;font-size:15px;">0 out of 0</p>
 			</div>
 			<div>
-				<label for="unit_name">D</label><p id='resultd'></p>
-				<p id="D" ></p>
-				<p id="resultd" >0 out of 0</p>
+				<label style="color:green;font-size:20px;" for="unit_name">D</label>
+				<h3 id="D" ></h3>
+				<div id="barD" class="resultbar"></div>
+				<p id="resultd" style="color:blue;font-size:15px;">0 out of 0</p>
 			</div>
-			
+
 			<p id='log'>
 			</p>
 			<p id='data_received'>
 			</p>
 			
-			<!-- Buttons to direct to other functions -->
+			<!-- Button to end question -->
+			<div>
+				<button onclick="reset_result();" data-role="button" data-mini = "true" id="end_session">Reset Results</button>
+			</div><!-- Buttons to end question -->
+			
+			<!-- Button to end question -->
 			<div>
 				<button onclick="end_session();" data-theme="e" data-role="button" data-mini = "true" id="end_session">End Question</button>
-			</div>
+			</div><!-- Buttons to end question -->
 
 			
 			<!-- Buttons to direct to other functions -->

@@ -97,7 +97,7 @@
 								 
 								// Ajax post data to PHP
 								$.ajax({
-									//url: "http://syngtest.myproject/select_unit.php",
+									//url: "http://syngtest.myproject/add_studentlist.php",
 									url: "add_studentlist.php",
 									type: 'post',
 									data: 'student_list='+evt.target.result,
@@ -190,16 +190,16 @@
 				<div><button type="button" data-theme="e" id="add_student_submit">Add student</button></div>
 			</fieldset>
 			
+			<!-- /Go back to unit page -->
 			<div>
 				<br>
 				<a href="unit.html" rel="external" data-role="button" data-mini = "true">Back</a>
-			</div>
-			<div>
-				<button  type="button" data-mini = "true" id="delete_unitsubmit">Delete this unit</button>
-			</div>
+			</div><!-- /back button -->
+			
+			<!-- /Logout button -->
 			<div>
 				<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
-			</div>
+			</div><!-- /logout button -->
 			
 		</div><!-- /content -->
 

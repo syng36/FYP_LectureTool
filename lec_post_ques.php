@@ -42,6 +42,11 @@ if(mysql_affected_rows()==0){//no units exist in database
 	echo "<B>0</B>";
 	echo "<C>0</C>";
 	echo "<D>0</D>";
+	echo "<CntA>0</CntA>";
+	echo "<CntB>0</CntB>";
+	echo "<CntC>0</CntC>";
+	echo "<CntD>0</CntD>";
+	echo "<Total>0</Total>";
 	echo "</Ques>";
 	echo "</QuesList>";
 }
@@ -59,6 +64,26 @@ else{
 	$C = $current_ques["C"];
 	$D = $current_ques["D"];
 	
+	//Save id of question
+	$_SESSION['id'] = $id;
+	
+	$table_name='q_'.$id;
+
+	$btnA = 'btnA';
+	$result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnA'", $dbcon);
+	$cntA = mysql_num_rows($result); 
+	$btnB = 'btnB';
+	$result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnB'", $dbcon);
+	$cntB = mysql_num_rows($result); 
+	$btnC = 'btnC';
+	$result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnC'", $dbcon);
+	$cntC = mysql_num_rows($result); 
+	$btnD = 'btnD';
+	$result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnD'", $dbcon);
+	$cntD = mysql_num_rows($result); 
+
+	$total = $cntA+$cntB+$cntC+$cntD;
+	
 	// Print each element in XML
 	echo "<Ques>";
 	echo "<UnitCode>$unit_code</UnitCode>";
@@ -68,6 +93,11 @@ else{
 	echo "<B>$B</B>";
 	echo "<C>$C</C>";
 	echo "<D>$D</D>";
+	echo "<CntA>$cntA</CntA>";
+	echo "<CntB>$cntB</CntB>";
+	echo "<CntC>$cntC</CntC>";
+	echo "<CntD>$cntD</CntD>";
+	echo "<Total>$total</Total>";
 	echo "</Ques>";
 	echo "</QuesList>";
 }

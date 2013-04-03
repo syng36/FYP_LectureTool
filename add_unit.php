@@ -44,7 +44,7 @@ if(mysql_affected_rows()==0){//no username exist in database
 	mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 	mysql_query("CREATE TABLE student_list (username VARCHAR(10), first_name VARCHAR(30), last_name VARCHAR(50))")  or die("Students' list table cannot be added!!");
 	//mysql_query("CREATE TABLE participant (username VARCHAR(10), mcq_answer VARCHAR(4))")  or die("Participants' table cannot be added!!");
-	mysql_query("CREATE TABLE lecturer_ques (id INT NOT NULL AUTO_INCREMENT,PRIMARY KEY(id),lec_ques VARCHAR(500), A VARCHAR(500), B VARCHAR(500), C VARCHAR(500), D VARCHAR(500), cntA INT(4), cntB INT(4), cntC INT(4), cntD INT(4))")  or die("Lecturer's question table cannot be added!!");
+	mysql_query("CREATE TABLE lecturer_ques (id INT NOT NULL AUTO_INCREMENT,PRIMARY KEY(id),lec_ques VARCHAR(500), A VARCHAR(500), B VARCHAR(500), C VARCHAR(500), D VARCHAR(500))")  or die("Lecturer's question table cannot be added!!");
 	mysql_query("CREATE TABLE current_lecques (id INT, lec_ques VARCHAR(500), A VARCHAR(500), B VARCHAR(500), C VARCHAR(500), D VARCHAR(500))")  or die("Lecturer's current question table cannot be added!!");
 	echo("1");
 }
