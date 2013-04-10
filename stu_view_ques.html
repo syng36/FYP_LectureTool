@@ -7,6 +7,7 @@
 <html>
 
 <head>
+	<title> Answer Question </title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<script src="http://118.138.154.21:8000/socket.io/socket.io.js"></script>
 	<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
@@ -130,11 +131,11 @@
 						var lec_ques = $('#lec_ques').val();
 						var mcq_answer = $(this).attr("id");
 						console.log(mcq_answer);
-						$('#btnA').attr('data-theme', 'c');
-						$('#btnB').attr('data-theme', 'c');
-						$('#btnC').attr('data-theme', 'c');
-						$('#btnD').attr('data-theme', 'c');
-						$(this).attr('data-theme', 'e');
+						$('#btnA').attr('style', 'color: red;');
+						$('#btnB').attr('style', 'color: yellow;');
+						$('#btnC').attr('style', 'color: blue;');
+						$('#btnD').attr('style', 'color: #000000;');
+						$(this).attr('style', 'color: #000000;');
 						
 						$.ajax({
 							//url: "http://syngtest.myproject/stu_answers.php",
@@ -206,19 +207,19 @@
 			
 			<div>
 				<label for="answer">A</label>
-				<button data-theme="c" id="btnA"></button>
+				<button data-theme="c" id="btnA" style=""></button>
 			</div>
 			<div>
 				<label for="answer">B</label>
-				<button data-theme="c" id="btnB"></button>
+				<button data-theme="c" id="btnB" style=""></button>
 			</div>
 			<div>
 				<label for="answer">C</label>
-				<button data-theme="c" id="btnC"></button>
+				<button data-theme="c" id="btnC" style=""></button>
 			</div>
 			<div>
 				<label for="answer">D</label>
-				<button data-theme="c" id="btnD"></button>
+				<button data-theme="c" id="btnD" style=""></button>
 			</div>
 			
 			<p id='log'>
