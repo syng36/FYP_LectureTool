@@ -26,6 +26,7 @@
 			});
 		};
 		
+		// Function that delete all the answers from students
 		function reset_result(){
 			$.get("reset_result.php", function(data){
 				$(function() {
@@ -45,7 +46,9 @@
 						value: 0
 					});
 					
-					$(".resultbar").css({ 'background': 'Grey' });
+					// Style the bar graph
+					$(".resultbar").css({ 'background': 'Transparent' });
+					$(".resultbar").css({ 'border': 'None' });
 					$(".resultbar > div").css({ 'background': 'Orange' });
 				});	
 				
@@ -123,7 +126,10 @@
 										value: cntD/total*100
 									});
 									
-									$(".resultbar").css({ 'background': 'Grey' });
+									// Style the bar graph
+									//$(".resultbar").css({ 'background': 'Grey' });
+									$(".resultbar").css({ 'background': 'Transparent' });
+									$(".resultbar").css({ 'border': 'None' });
 									$(".resultbar > div").css({ 'background': 'Orange' });
 								});	
 								

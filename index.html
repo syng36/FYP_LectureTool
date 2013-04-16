@@ -11,12 +11,12 @@
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
-	<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
+	<!--<link rel="stylesheet" href="jquery.mobile-1.1.1.min.css" /> 
 	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
-	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
-	<!--<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.css"></script>-->
+	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>-->
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.css" />
 
 </head>
  
@@ -27,7 +27,7 @@
 		
 		<div data-role="header">
 			<script type="text/javascript" charset="utf-8" src="jsscript/login.js"></script>
-			<h1>Welcome</h1> 
+			<h1>Welcome! </h1> 
 			<h2>Please Login</h2> 
 		</div><!-- /header -->
 		
@@ -41,8 +41,22 @@
 				<input type="password" id="pswd" />
 			</div><!-- /password -->
 			<fieldset>
-				<div><input type="button" class="button1" data-theme="e" id="page_login_submit" value="Login"/></div>
+				<div class="button1" ><input type="button" data-theme="e" id="page_login_submit" value="Login"/></div>
 			</fieldset>
+			
+			<!-- Checkboxes to save username or password -->
+			<div  data-role="fieldcontain">
+			 	<fieldset data-role="controlgroup" >
+
+					<input type="checkbox" name="checkbox-uname" id="checkbox-uname" class="checkbox" data-mini="true"/>
+					<label for="checkbox-uname">Remember my username</label>
+
+					<input type="checkbox" name="checkbox-pswd" id="checkbox-pswd" class="checkbox" data-mini="true"/>
+					<label for="checkbox-pswd">Remember my username & password</label>
+
+			    </fieldset>
+			</div>
+			
 			<fieldset>
 				<div><a href="create_accountpage.html" rel="external" id="create_account" data-role="button" data-ajax="false">Create an account</a> </div>
 			</fieldset>
