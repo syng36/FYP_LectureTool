@@ -29,11 +29,28 @@ mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 
 // Create table of the unit added in main database to insert list of students
 //mysql_query("CREATE TABLE $table_name (lec_ques VARCHAR(30), uscale TINYINT(1))")  or die("Unit table cannot be added!!");
-$table_name='q_'.$id;	
-mysql_query("UPDATE $table_name SET mcq_answer='$mcqanswer' WHERE username='$uname'")  or die("Answer not updated!!");
+$table_name='q_'.$id;
+
+// Get the details of the unit
+$get_details="SELECT * FROM $table_name WHERE username = '$uname'";
+// Get ID of the array
+$query_details = mysql_query($get_details)  or die("Cannot query details!!");
+// Get the whole row of information of the unit
+$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
+// Extract 'unit_name' field from the array
+$prev_mcqanswer = $fetch_details['mcq_answer'];
+
+if ($prev_mcqanswer==$mcqanswer){
+	mysql_query("UPDATE $table_name SET mcq_answer='0' WHERE username='$uname'")  or die("Answer not updated!!");
+	$flag = 0;
+}
+else{
+	mysql_query("UPDATE $table_name SET mcq_answer='$mcqanswer' WHERE username='$uname'")  or die("Answer not updated!!");
+	$flag = 1;
+}
 
 // Send info back to JS
-echo $unit_code.'_'.$id;
+echo $unit_code.'_'.$id.'_'.$flag;
 
 // Close connection to mySOL
 mysql_close($dbcon);

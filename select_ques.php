@@ -27,11 +27,11 @@ $query_details = mysql_query($get_details)  or die("Cannot query details!!");
 // Get the whole row of information of the student
 $fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
 // Extract 'unit2','unit3','unit4' and 'unit5' field from the array
-$lec_ques = $fetch_details['lec_ques'];
-$A = $fetch_details['A'];
-$B = $fetch_details['B'];
-$C = $fetch_details['C'];
-$D = $fetch_details['D'];
+$lec_ques = mysql_real_escape_string($fetch_details['lec_ques']);
+$A = mysql_real_escape_string($fetch_details['A']);
+$B = mysql_real_escape_string($fetch_details['B']);
+$C = mysql_real_escape_string($fetch_details['C']);
+$D = mysql_real_escape_string($fetch_details['D']);
 
 //Save question chosen into session variables
 $_SESSION['lec_ques'] = $lec_ques;

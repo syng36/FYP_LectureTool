@@ -14,180 +14,7 @@
 	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="jquery.mobile-1.1.1.min.js"></script>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<script type="text/javascript">
-		$.post("join_session.php", function(data){
-		//$.post("http://syngtest.myproject/join_session.php", function(data){
-			
-			var string = data.split('_');
-			var name = string[0];
-			var unit_code = string[1];
-			var socket = io.connect('http://118.138.154.21:8000');
-			 
-			 // at document read (runs only ones).
-			 $(document).ready(function(){
-				
-				// Query the database when student first logged in
-				$.ajax({
-					//url: "http://syngtest.myproject/stud_query_db.php",
-					url: "stud_query_db.php",
-					dataType: "xml",  
-					success: function (xml) {
-					//results sent by PHP	
-					
-						// Read xml file
-						$(xml).find('Ques').each(function(){ 	
-							var lec_ques = $(this).find('Question').text(); 
-							var A = $(this).find('A').text();
-							var B = $(this).find('B').text(); 	
-							var C = $(this).find('C').text(); 	
-							var D = $(this).find('D').text(); 	
-							var prev_ans = $(this).find('PrevAns').text();
-							
-							if (lec_ques!= "0"){// means there's question posted by lecturer
-								$("h1#lec_ques").html(lec_ques);
-								console.log(lec_ques);
-								$('#btnA').parent().find('.ui-btn-text').text(A);
-								//$('#btnA').text(data.A); not working
-								$('#btnB').parent().find('.ui-btn-text').text(B);
-								$('#btnC').parent().find('.ui-btn-text').text(C);
-								$('#btnD').parent().find('.ui-btn-text').text(D);
-								
-								if(prev_ans !=''){ 
-									button = '#btn'+prev_ans;
-									$(button).attr('data-theme', 'e');
-								}
-								// print data (jquery thing)
-								$("p#data_received").append("<br />\r\n" + lec_ques + ': A.' + A+ '     B.'+ B+'     C.'+ C+'     D.'+ D);
-								
-								// to check messenger
-								$("p#log").html('from: ' );
-							}
-						})				
-					},
-					error: function(){	
-						alert('There was an error query database');	
-					}
-					
-				});
-				
-				
-				
-				
-				socket.on('ques', function (data) {
-					console.log(unit_code);
-					if (unit_code == data.unit_code){
-					
-						$.ajax({
-							//url: "http://syngtest.myproject/update_quesID.php",
-							url: "update_quesID.php",
-							type: 'post',
-							data: 'id='+data.id,
-							success: function (result) {
-								if(prev_ans !=''){ 
-									button = '#btn'+prev_ans;
-									$(button).attr('data-theme', 'e');
-								}
-							},
-							error: function(){	
-								alert('There was an error updating question ID');	
-							}
-						});
-						
-						// display data
-						$("h1#lec_ques").html(data.ques);
-						$('#btnA').parent().find('.ui-btn-text').text(data.A);
-						//$('#btnA').text(data.A); not working
-						$('#btnB').parent().find('.ui-btn-text').text(data.B);
-						$('#btnC').parent().find('.ui-btn-text').text(data.C);
-						$('#btnD').parent().find('.ui-btn-text').text(data.D);
-
-						// print data (jquery thing)
-						$("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
-						
-						// to check messenger
-						$("p#log").html('from: ' + data.msgr);
-					}
-					
-				});
-				
-				// ask user to log in again if no username available.
-				while (name == '') {
-				   name = alert("Please log in!");
-				   $.mobile.changePage($(document.location.href="index.html"), "slideup");
-				}
-				
-				// send the name to the server, and the server's 
-				// register wait will recieve this.
-				socket.emit('register', name );
-				
-				
-				// When a button is clicked / Student answers question
-				$("button").live('click',function(){
-					
-					//Pop-up to ask if really want to delete unit
-					var answer = confirm ("Confirm your answer?")
-					if (answer){
-						// Get the id of the button clicked
-						var lec_ques = $('#lec_ques').val();
-						var mcq_answer = $(this).attr("id");
-						console.log(mcq_answer);
-						$('#btnA').attr('style', 'color: red;');
-						$('#btnB').attr('style', 'color: yellow;');
-						$('#btnC').attr('style', 'color: blue;');
-						$('#btnD').attr('style', 'color: #000000;');
-						$(this).attr('style', 'color: #000000;');
-						
-						$.ajax({
-							//url: "http://syngtest.myproject/stu_answers.php",
-							url: "stu_answers.php",
-							type: 'post',
-							data: 'mcqanswer='+ mcq_answer,
-							success: function (data) {
-							//results sent by PHP
-								var result = data.split('_');
-								var unit_code = result[0];
-								var id = result[1];
-
-								socket.emit('updated',{
-									unit_code: unit_code,
-									id: id,
-									mcq_answer: mcq_answer
-								});
-								
-							},
-							error: function(){	
-								alert('There was an error in student answering question');	
-							}
-						});
-					}
-
-					return false;
-				});
-		 
-			});
-		 // listen for chat event and recieve data
-		 //socket.on('ques', function (data) {
-		 
-			// print data (jquery thing)
-		   // $("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
-
-			
-		 //});
-		 
-		// Student answer the question
-		//$('#button_pressed').live('click',function(){
-
-		// send message on inputbox to server
-		 //      socket.emit('ques', { ,
-		//			A: //percentage,
-		//			B://percentage,
-		//			C: //percentage,
-		//			D: //percentage
-		//		});
-		//return false;
-		//});
-		});
-	</script>
+	<script type="text/javascript" charset="utf-8" src="jsscript/stu_view_ques.js"></script>
 </head>
 
 <body>
@@ -207,19 +34,19 @@
 			
 			<div>
 				<label for="answer">A</label>
-				<button data-theme="c" id="btnA" style=""></button>
+				<button data-theme="c" class="ans_button" id="btnA" style=""></button>
 			</div>
 			<div>
 				<label for="answer">B</label>
-				<button data-theme="c" id="btnB" style=""></button>
+				<button data-theme="c" class="ans_button" id="btnB" style=""></button>
 			</div>
 			<div>
 				<label for="answer">C</label>
-				<button data-theme="c" id="btnC" style=""></button>
+				<button data-theme="c" class="ans_button" id="btnC" style=""></button>
 			</div>
 			<div>
 				<label for="answer">D</label>
-				<button data-theme="c" id="btnD" style=""></button>
+				<button data-theme="c" class="ans_button" id="btnD" style=""></button>
 			</div>
 			
 			<p id='log'>

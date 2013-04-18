@@ -97,7 +97,7 @@ else{
 	if(mysql_affected_rows()!=0){
 		$j=0;
 		 while ($row_stud_list = mysql_fetch_array($query_stud_list)) {
-			// Get lecturer's name
+			// Get student's name
 			$stud_list[$j] = $row_stud_list['username'] ;
 			$j++;
 		}

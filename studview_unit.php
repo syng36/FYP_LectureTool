@@ -52,98 +52,68 @@ else{
 	$unit3_code = $fetch_details["unit3"];
 	$unit4_code = $fetch_details["unit4"];
 	$unit5_code = $fetch_details["unit5"];
-		
-	// Get the details of unit1
-	$get_details="SELECT * FROM units WHERE unit_code = '$unit1_code'";
-	// Get ID of the array
-	$query_details = mysql_query($get_details)  or die("Cannot query details!!");
-	// Get the whole row of information of the unit
-	$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
-	// Extract 'unit_name' field from the array
-	$unit1_name = $fetch_details['unit_name'];
-	$unit1_lecname = $fetch_details['lecturer'];
-
-	// Print each element in XML
-	echo "<Unit>";
-	echo "<UnitCode>$unit1_code</UnitCode>";
-	echo "<UnitName>$unit1_name</UnitName>";
-	echo "<LecName>$unit1_lecname</LecName>";
-	echo "</Unit>";
+	$unit_code = array($unit1_code, $unit2_code, $unit3_code, $unit4_code, $unit5_code);
 	
-	if($unit2_code!=""){
-		// Get the details of the unit
-		$get_details="SELECT * FROM units WHERE unit_code = '$unit2_code'";
-		// Get ID of the array
-		$query_details = mysql_query($get_details)  or die("Cannot query details!!");
-		// Get the whole row of information of the unit
-		$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
-		// Extract 'unit_name' field from the array
-		$unit2_name = $fetch_details['unit_name'];
-		$unit2_lecname = $fetch_details['lecturer'];
+	for ($i=0; $i<5; $i++){
+		if($unit_code[$i]!=""){
+			// Check if there is more than one lecturer for the unit
+			$query=mysql_query("SELECT * FROM units WHERE unit_code = '$unit_code[$i]'")or die("Cannot access table!");
+			
+			//If no, 
+			if(mysql_affected_rows()==1){
+				// Get the whole row of information of the unit
+				$fetch_details = mysql_fetch_array($query) or die("Cannot fetch details!!");
+				// Extract 'unit_name' and 'lecturer' field from the array
+				$unit_name = $fetch_details['unit_name'];
+				$unit_lecname = $fetch_details['lecturer'];
 
-		// Print each element in XML
-		echo "<Unit>";
-		echo "<UnitCode>$unit2_code</UnitCode>";
-		echo "<UnitName>$unit2_name</UnitName>";
-		echo "<LecName>$unit2_lecname</LecName>";
-		echo "</Unit>";
-	}
-	
-	if($unit3_code!=""){
-		// Get the details of the unit
-		$get_details="SELECT * FROM units WHERE unit_code = '$unit3_code'";
-		// Get ID of the array
-		$query_details = mysql_query($get_details)  or die("Cannot query details!!");
-		// Get the whole row of information of the unit
-		$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
-		// Extract 'unit_name' field from the array
-		$unit3_name = $fetch_details['unit_name'];
-		$unit3_lecname = $fetch_details['lecturer'];
+				// Print each element in XML
+				echo "<Unit>";
+				echo "<UnitCode>$unit_code[$i]</UnitCode>";
+				echo "<UnitName>$unit_name</UnitName>";
+				echo "<LecName>$unit_lecname</LecName>";
+				echo "</Unit>";
+			}
+			else{
+				// Get the lecturer's name/s
+				$j=0;
+				 while ($row = mysql_fetch_array($query)) {
+					// Get lecturer's name
+					$lecturer[$j] = $row['lecturer'] ;
+					$j++;
+				}//while fetch lecturer's name
+				
+				// For every lecturer teaching the same unit
+				for ($k=0; $k<$j; $k++){
+					$lecturer_uname = $lecturer[$k];
+					
+					//Check if student's name in the unit's student list
+					$database_name = $unit_code[$i].'_'.$lecturer_uname;
+					mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
+					$query_stud_list=mysql_query("SELECT * FROM student_list WHERE username = '$uname'")or die("Cannot access table!");
+					
+					//If yes	
+					if(mysql_affected_rows()!=0){
+						mysql_select_db("main_database",$dbcon) or die("Cannot select database!");
+						// Get the details of the unit
+						$get_details="SELECT * FROM units WHERE unit_code = '$unit_code[$i]' and lecturer = '$lecturer_uname'";
+						// Get ID of the array
+						$query_details = mysql_query($get_details)  or die("Cannot query details!!");
+						// Get the whole row of information of the unit
+						$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
+						// Extract 'unit_name' field from the array
+						$unit_name = $fetch_details['unit_name'];
 
-		// Print each element in XML
-		echo "<Unit>";
-		echo "<UnitCode>$unit3_code</UnitCode>";
-		echo "<UnitName>$unit3_name</UnitName>";
-		echo "<LecName>$unit3_lecname</LecName>";
-		echo "</Unit>";
-	}
-	
-	if($unit4_code!=""){
-		// Get the details of the unit
-		$get_details="SELECT * FROM units WHERE unit_code = '$unit4_code'";
-		// Get ID of the array
-		$query_details = mysql_query($get_details)  or die("Cannot query details!!");
-		// Get the whole row of information of the unit
-		$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
-		// Extract 'unit_name' field from the array
-		$unit4_name = $fetch_details['unit_name'];
-		$unit4_lecname = $fetch_details['lecturer'];
-
-		// Print each element in XML
-		echo "<Unit>";
-		echo "<UnitCode>$unit4_code</UnitCode>";
-		echo "<UnitName>$unit4_name</UnitName>";
-		echo "<LecName>$unit4_lecname</LecName>";
-		echo "</Unit>";
-	}
-	
-	if($unit5_code!=""){
-		// Get the details of the unit
-		$get_details="SELECT * FROM units WHERE unit_code = '$unit5_code'";
-		// Get ID of the array
-		$query_details = mysql_query($get_details)  or die("Cannot query details!!");
-		// Get the whole row of information of the unit
-		$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
-		// Extract 'unit_name' field from the array
-		$unit5_name = $fetch_details['unit_name'];
-		$unit5_lecname = $fetch_details['lecturer'];
-
-		// Print each element in XML
-		echo "<Unit>";
-		echo "<UnitCode>$unit5_code</UnitCode>";
-		echo "<UnitName>$unit5_name</UnitName>";
-		echo "<LecName>$unit5_lecname</LecName>";
-		echo "</Unit>";
+						// Print each element in XML
+						echo "<Unit>";
+						echo "<UnitCode>$unit_code[$i]</UnitCode>";
+						echo "<UnitName>$unit_name</UnitName>";
+						echo "<LecName>$lecturer_uname</LecName>";
+						echo "</Unit>";
+					}
+				}
+			}
+		}
 	}
 		
 	echo "</Units>";

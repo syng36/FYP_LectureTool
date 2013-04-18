@@ -60,7 +60,7 @@ $(document).ready(function() {
 	/*var ThreeDays = 1*24*60*60*1000;
 	var expDate = new Date();
 	expDate.setTime (expDate.getTime() - ThreeDays);
-	document.cookie = "username" + "=ImOutOfHere; expires=" + expDate.toGMTString();
+	document.cookie = "login" + "=ImOutOfHere; expires=" + expDate.toGMTString();
 	console.log("Cookie");*/
 	
 	$(document).on('click','#page_login_submit',function(){
@@ -74,7 +74,7 @@ $(document).ready(function() {
 		if (!uname) { alert('Please enter your user name.'); return false; }
 		if ($("#checkbox-uname").prop('checked') == true) {
 			// If checkbox1 is checked, save the username in cookie
-			setCookie("login",uname,1);
+			setCookie("login",uname,120);
 		}
 		
 		//get password
@@ -83,7 +83,7 @@ $(document).ready(function() {
 		if ($("#checkbox-pswd").prop('checked') == true) {
 			// If checkbox2 is checked, both username and password are stored in a cookie
 			var login = uname+';'+pswd;
-			setCookie("login",login,1);
+			setCookie("login",login,120);
 		}
 	  
 		//use jquery ajax to post data to php server
