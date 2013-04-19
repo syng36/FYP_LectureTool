@@ -2,7 +2,8 @@
 // Created 11 September 2012
 // To log out
 
-$('#page_logout_submit').live('click',function(){
+//$('#page_logout_submit').live('click',function(){
+$(document).on('click','#page_logout_submit',function(){
   
   	//use jquery ajax to post data to php server
   	$.ajax({

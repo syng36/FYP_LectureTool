@@ -2,7 +2,8 @@
 // Created 22 March 2013
 // To add questions
 
-$('#add_ques_submit').live('click',function(){
+//$('#add_ques_submit').live('click',function(){
+$(document).on('click','#add_ques_submit', function(){
 		
    // get question
 	var lec_ques = $("#lec_ques").val();

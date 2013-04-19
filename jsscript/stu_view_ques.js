@@ -110,11 +110,12 @@ $.post("join_session.php", function(data){
 		
 		
 		// When a button is clicked / Student answers question
-		$("button").live('click',function(){
+		//$("button").live('click',function(){
+		$(document).on('click','button', function(){
 			
 			// Get the id of the button clicked
 			var lec_ques = $('#lec_ques').val();
-			var mcq_answer = $(this).attr("id");
+			var mcq_answer = $(this).prop("id");
 
 			$.ajax({
 				//url: "http://syngtest.myproject/stu_answers.php",

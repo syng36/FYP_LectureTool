@@ -57,6 +57,7 @@ else{
 	for ($i=0; $i<5; $i++){
 		if($unit_code[$i]!=""){
 			// Check if there is more than one lecturer for the unit
+			mysql_select_db("main_database",$dbcon) or die("Cannot select database!");
 			$query=mysql_query("SELECT * FROM units WHERE unit_code = '$unit_code[$i]'")or die("Cannot access table!");
 			
 			//If no, 

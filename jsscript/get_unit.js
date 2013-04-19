@@ -18,7 +18,7 @@ $.ajax({
 		//$("#viewunit_optionlist").append('<li class="chooseunit" data-name="'+unit_code+'"><a href="#">'+unit_code+'  '+unit_name+'</a></li>');
 		//Print the results
 		document.getElementById("unitcode").innerHTML=unit_code+' '+unit_name;
-		})
+		});
 	},  
 	error: function() {  
 		alert("An error occurred while processing XML file.");  

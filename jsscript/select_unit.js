@@ -2,7 +2,8 @@
 // Created 18 September 2012
 // Lecturer/student choosing a unit
 
-$('.chooseunit').live('click',function(){
+//$('.chooseunit').live('click',function(){
+$(document).on('click','.chooseunit',function(){
 	var unit_chosen = $(this).attr('data-name');
 	  	
 	$.ajax({

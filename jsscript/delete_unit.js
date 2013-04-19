@@ -2,7 +2,8 @@
 // Created 11 September 2012
 // To delete unit 
 
-$('#delete_unitsubmit').live('click',function(){
+//$('#delete_unitsubmit').live('click',function(){
+$(document).on('click','#delete_unitsubmit', function(){
 
 	//Pop-up to ask if really want to delete unit
 	var answer = confirm ("Are you sure you want to delete this unit?")

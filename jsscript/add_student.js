@@ -2,7 +2,8 @@
 // Created 18 January 2013
 // To add students into database
  
-$('#add_student_submit').live('click',function(){
+//$('#add_student_submit').live('click',function(){
+$(document).on('click','#add_student_submit', function(){
 	
 	// get student's username
 	var stud_name = $('#stud_name').val();

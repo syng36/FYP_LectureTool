@@ -1,11 +1,7 @@
 // Written by Shea Yuin Ng
 // Created 29 August 2012
 // To manage log in
-/*$(document).ready(function() {
-$(document).on('click','#page_login_submit', function(){
-    alert($(this).attr('id'));
-});
-	});*/
+
 $(document).ready(function() {
 	// A function to read the cookie
 	function getCookie(c_name){
@@ -67,7 +63,7 @@ $(document).ready(function() {
 	//$('#page_login_submit').live('click',function(){
 
 		//disable login button
-		//$("#page_login_submit",this).attr("disabled","disabled");
+		//$("#page_login_submit",this).prop("disabled","disabled");
 		
 		//get username
 		var uname = $('#uname').val();

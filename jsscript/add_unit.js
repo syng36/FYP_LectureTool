@@ -2,7 +2,8 @@
 // Created 4 September 2012
 // To add units into database
 
-$('#add_unit_submit').live('click',function(){
+//$('#add_unit_submit').live('click',function(){
+$(document).on('click','#add_unit_submit', function(){
 	
 	//get unit code
 	var unit_code = $('#unit_code').val();

@@ -2,7 +2,8 @@
 // Created 20 September 2012
 // To create account for lecturers
 
-$('#create_account_submit').live('click',function(){
+//$('#create_account_submit').live('click',function(){
+$(document).on('click','#create_account_submit', function(){
 
 	//get username
 	var uname = $('#uname').val();

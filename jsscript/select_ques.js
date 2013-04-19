@@ -2,7 +2,8 @@
 // Created 22 March 2013
 // Lecturer/student choosing a unit
 
-$('.chooseques').live('click',function(){
+//$('.chooseques').live('click',function(){
+$(document).on('click','.chooseques',function(){
 
 	// Get the ID of the question
 	var ques_chosen = $(this).attr('data-name');
