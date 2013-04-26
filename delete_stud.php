@@ -23,9 +23,25 @@ for ($i=0; $i<$j; $i++){
 	$database_name = $unit_chosen.'_'.$uname;
 	mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 	
+	// Get the ID of all the questions
+	$getid = mysql_query("SELECT * FROM lecturer_ques") or die("Cannot get question id!!");
+	$no_id=0;
+	 while ($ques_id_array = mysql_fetch_array($getid)) {
+		// Get id number of every question
+		$ques_id[$no_id] = $ques_id_array['id'] ;
+		$no_id++;
+	}
+	
+	// Delete student from the table for every question
+	for ($a=0; $a<$no_id; $a++){
+		$id = $ques_id[$a];
+		$table_name = 'q_'.$id;
+		mysql_query("DELETE FROM $table_name WHERE  username='$stud_uname[$i]'") or die("Student cannot be deleted from question table!!");
+	}
+	
 	// Delete the unit from the list of units
 	$sql="DELETE FROM student_list WHERE  username='$stud_uname[$i]'";
-	$r = mysql_query($sql) or die("Unit cannot be deleted!!");
+	$r = mysql_query($sql) or die("Student cannot be deleted!!");
 	
 	// Check if there is a same unit of different lecturers has the same student in units
 	// Connect to main database

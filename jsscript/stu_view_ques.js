@@ -8,6 +8,7 @@ $.post("join_session.php", function(data){
 	var string = data.split('_');
 	var name = string[0];
 	var unit_code = string[1];
+	var lec_uname = string[2];
 	var socket = io.connect('http://118.138.154.21:8000');
 	 
 	 // at document read (runs only ones).
@@ -47,7 +48,7 @@ $.post("join_session.php", function(data){
 						$("p#data_received").append("<br />\r\n" + lec_ques + ': A.' + A+ '     B.'+ B+'     C.'+ C+'     D.'+ D);
 						
 						// to check messenger
-						$("p#log").html('from: ' );
+						$("p#log").html('from: ' +lec_uname);
 					}
 				});				
 			},
@@ -98,6 +99,13 @@ $.post("join_session.php", function(data){
 			
 		});//socket on receive ques
 		
+		socket.on('reset_answers', function (data){
+			if (unit_code == data.unit_code){
+				$(".ans_button").buttonMarkup({ theme: "c" });
+			}// if it is the correct unit
+			
+		});//socket on receive ques
+		
 		// ask user to log in again if no username available.
 		while (name == '') {
 		   name = alert("Please log in!");
@@ -129,12 +137,12 @@ $.post("join_session.php", function(data){
 					var id = result[1];
 					var flag = result[2];
 					
-					if(flag==1){// Change answer
+					if(flag==1){// Change response
 						$(".ans_button").buttonMarkup({ theme: "c" });
 						var button = "#" + mcq_answer;
 						$(button).buttonMarkup({ theme: "e" });
 					}
-					else{// Unanswer
+					else{// Retract response
 						$(".ans_button").buttonMarkup({ theme: "c" });
 					}
 					

@@ -12,7 +12,6 @@ include('connections.php');
 // Get username, unit code and unit name from session variable
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];
-$unit_name = $_SESSION['unit_name'];
 $lec_uname = $_SESSION['lec_uname'];
 $id = $_SESSION['id'];
 
@@ -37,7 +36,7 @@ $get_details="SELECT * FROM $table_name WHERE username = '$uname'";
 $query_details = mysql_query($get_details)  or die("Cannot query details!!");
 // Get the whole row of information of the unit
 $fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
-// Extract 'unit_name' field from the array
+// Extract 'mcq_answer' field from the array
 $prev_mcqanswer = $fetch_details['mcq_answer'];
 
 if ($prev_mcqanswer==$mcqanswer){

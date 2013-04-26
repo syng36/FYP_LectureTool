@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <!--Written by Shea Yuin Ng-->
-<!--Created 22 March 2013-->
-<!--This page shows the list of questions the lecturers added-->
+<!--Created 26 April 2013-->
+<!--This page shows the understanding scale for the question-->
  
 <html>
 
@@ -16,8 +16,7 @@
 	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.css" />
 	<script src="http://118.138.154.21:8000/socket.io/socket.io.js"></script>
-	<link rel="stylesheet" href="jqueryui.css" />
-	<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />-->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 </head>
  
@@ -27,28 +26,21 @@
 	<div data-role="page" id="lec_ques_list">
 		
 		<div data-role="header">
-			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<script type="text/javascript" charset="utf-8" src="jsscript/view_queslist.js"></script>
-			<script type="text/javascript" charset="utf-8" src="jsscript/logout.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
+			<script type="text/javascript" charset="utf-8" src="jsscript/logout.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/u_scale.js"></script>
-			<a href="lec_uscale.html" rel="external" data-role="button" data-mini = "true" data-ajax="false" class = "ui-btn-right">U-Scale</a>
 			<h1 id="unitcode"></h1> 
-			<h1>List Of Questions </h1> 
+			<h1>U-Scale </h1> 
 		</div><!-- /header -->
 		
 		<div data-role="content">
 			<div id="UScale" class="UScale"></div>
-			<p id = msg></p>
-			<ul data-role="listview" data-theme="e" id="lecturer_queslist">
-			</ul>
-			<script type="text/javascript" charset="utf-8" src="jsscript/select_ques.js"></script>
-			<br>
+			<p id="uresult"></p>
 			
 			<!-- /Add question button -->
 			<div>
 				<br>
-				<a href="lec_add_ques.html" rel="external" data-theme="e" data-role="button" data-mini = "true" data-ajax="false">Add Question</a>
+				<a data-role="button"  data-theme="e" id = "reset_uscale">Reset</a>
 			</div><!-- /Add question button -->
 			
 			<!-- /Go back to unit page -->

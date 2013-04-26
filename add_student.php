@@ -58,7 +58,7 @@ if(mysql_affected_rows()==0){//name does not exist in unit database
 		mysql_query("INSERT INTO account(username, password, first_name, last_name, status, email) VALUES('$stud_name','$pswd','$stud_fname','$stud_lname','$status','$stud_email')")  or die("Account not created!!");
 		mysql_query("INSERT INTO students(username, unit1, unit2, unit3, unit4, unit5) VALUES('$stud_name','$unit_code','','','','')")  or die("Account not created!!");
 		mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
-		mysql_query("INSERT INTO student_list(username, first_name, last_name) VALUES('$stud_name','$stud_fname','$stud_lname')")  or die("Student cannot be added!!");
+		mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");
 		echo("1");
 	}
 	else{// If yes then just update the units taken by student and insert the student into the student list in unit database
@@ -88,37 +88,37 @@ if(mysql_affected_rows()==0){//name does not exist in unit database
 		// Insert unit code into the record of what units the students are taking
 		if($unit1 == $unit_code or $unit2 == $unit_code or $unit3 == $unit_code or $unit4 == $unit_code or $unit5 == $unit_code){
 			mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
-			mysql_query("INSERT INTO student_list(username, first_name, last_name) VALUES('$stud_name','$stud_fname','$stud_lname')")  or die("Student cannot be added!!");
+			mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");
 			echo("1");
 		}
 		elseif($unit1 == ""){
 			mysql_query("UPDATE students SET unit1 = '$unit_code' WHERE username='$stud_name'");
 			mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
-			mysql_query("INSERT INTO student_list(username, first_name, last_name) VALUES('$stud_name','$stud_fname','$stud_lname')")  or die("Student cannot be added!!");
+			mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");
 			echo("1");
 		}
 		elseif($unit2 == ""){
 			mysql_query("UPDATE students SET unit2 = '$unit_code' WHERE username='$stud_name'");
 			mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
-			mysql_query("INSERT INTO student_list(username, first_name, last_name) VALUES('$stud_name','$stud_fname','$stud_lname')")  or die("Student cannot be added!!");
+			mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");
 			echo("1");
 		}
 		elseif($unit3 == ""){
 			mysql_query("UPDATE students SET unit3 = '$unit_code' WHERE username='$stud_name'");
 			mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
-			mysql_query("INSERT INTO student_list(username, first_name, last_name) VALUES('$stud_name','$stud_fname','$stud_lname')")  or die("Student cannot be added!!");
+			mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");
 			echo("1");
 		}
 		elseif($unit4 == ""){
 			mysql_query("UPDATE students SET unit4 = '$unit_code' WHERE username='$stud_name'");
 			mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
-			mysql_query("INSERT INTO student_list(username, first_name, last_name) VALUES('$stud_name','$stud_fname','$stud_lname')")  or die("Student cannot be added!!");
+			mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");
 			echo("1");
 		}
 		elseif($unit5 == ""){
 			mysql_query("UPDATE students SET unit5 = '$unit_code' WHERE username='$stud_name'");
 			mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
-			mysql_query("INSERT INTO student_list(username, first_name, last_name) VALUES('$stud_name','$stud_fname','$stud_lname')")  or die("Student cannot be added!!");
+			mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");
 			echo("1");
 		}
 		else{

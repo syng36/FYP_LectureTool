@@ -9,47 +9,53 @@ $(document).on('click',"#end_ques",function(){
 	});
 });
 
-// Function that delete all the answers from students
-$(document).on('click',"#reset",function(){
-	$.get("reset_result.php", function(data){
-		$(function() {
-			$( "#barA" ).progressbar({
-				value: 0
-			});
-			
-			$( "#barB" ).progressbar({
-				value: 0
-			});
-			
-			$( "#barC" ).progressbar({
-				value: 0
-			});
-			
-			$( "#barD" ).progressbar({
-				value: 0
-			});
-			
-			// Style the bar graph
-			$(".resultbar").css({ 'background': 'Transparent' });
-			$(".resultbar").css({ 'border': 'None' });
-			$(".resultbar > div").css({ 'background': 'Orange' });
-		});	
-		
-		$('#resulta').html('0 out of 0');
-		$('#resultb').html('0 out of 0');
-		$('#resultc').html('0 out of 0');
-		$('#resultd').html('0 out of 0');
-	});
-});
-
-$.post("username.php", function(data){
-//$.post("http://syngtest.myproject/username.php", function(data){
-
-	var name = data;
+$.post("join_session.php", function(data){
+//$.post("http://syngtest.myproject/join_session.php", function(data){
+	
+	var string = data.split('_');
+	var name = string[0];
+	var unit_code = string[1];
 	var socket = io.connect('http://118.138.154.21:8000');
 	 
 	// at document read (runs only once).
 	$(document).ready(function(){
+	
+		// Function that delete all the answers from students
+		$(document).on('click',"#reset",function(){
+			$.get("reset_result.php", function(data){
+				$(function() {
+					$( "#barA" ).progressbar({
+						value: 0
+					});
+					
+					$( "#barB" ).progressbar({
+						value: 0
+					});
+					
+					$( "#barC" ).progressbar({
+						value: 0
+					});
+					
+					$( "#barD" ).progressbar({
+						value: 0
+					});
+					
+					// Style the bar graph
+					$(".resultbar").css({ 'background': 'Transparent' });
+					$(".resultbar").css({ 'border': 'None' });
+					$(".resultbar > div").css({ 'background': 'Orange' });
+				});	
+				
+				socket.emit('reset_answers', { 
+					unit_code: unit_code,			
+				});
+				
+				$('#resulta').html('0 out of 0');
+				$('#resultb').html('0 out of 0');
+				$('#resultc').html('0 out of 0');
+				$('#resultd').html('0 out of 0');
+			});
+		});
 		
 		//use jquery ajax to post data to php server
 		$.ajax({
