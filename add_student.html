@@ -25,7 +25,6 @@
 		<div data-role="header">
 			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/add_student.js"></script>
-			<script type="text/javascript" charset="utf-8" src="jsscript/logout.js"></script>
 			<script type="text/javascript">
 				function checkFilename(){
 				
@@ -59,6 +58,7 @@
 			</script>
 			<h1 id="unitcode"></h1> 
 			<h1>Add Students</h1>
+			<a href="unit.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
 		</div><!-- /header -->
 	
 		<div data-role="content">
@@ -99,19 +99,21 @@
 								//document.getElementById('byte_range').textContent = 
 								//	['Read bytes: ', start + 1, ' - ', stop + 1,
 								//	 ' of ', file.size, ' byte file'].join('');*/
-								 
+								list = escape(evt.target.result);
+								list = list.replace(/\+/g, "%2B");
+
 								// Ajax post data to PHP
 								$.ajax({
 									//url: "http://syngtest.myproject/add_studentlist.php",
 									url: "add_studentlist.php",
 									type: 'post',
-									data: 'student_list='+evt.target.result,
+									data: 'student_list='+list,
 									success: function (data) {
 										if (data==""){
 											alert('Student list successfully processed.');
 										}
 										else{
-											alert(data);
+											console.log(data);
 										};
 									},
 									error: function(){	
@@ -193,17 +195,6 @@
 			<fieldset>
 				<div><button type="button" data-theme="e" id="add_student_submit">Add student</button></div>
 			</fieldset>
-			
-			<!-- /Go back to unit page -->
-			<div>
-				<br>
-				<a href="unit.html" rel="external" data-role="button" data-mini = "true">Back</a>
-			</div><!-- /back button -->
-			
-			<!-- /Logout button -->
-			<div>
-				<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
-			</div><!-- /logout button -->
 			
 		</div><!-- /content -->
 

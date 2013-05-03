@@ -7,12 +7,12 @@
 include('connections.php');
 	
 // Get username, password, first name, last name, email and status from form
-$uname = $_POST['uname'];
-$pswd = $_POST['pswd'];
+$uname = mysql_real_escape_string($_POST['uname']);
+$pswd = mysql_real_escape_string($_POST['pswd']);
 $pswd = md5($pswd);
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
-$email = $_POST['email'];
+$fname = mysql_real_escape_string($_POST['fname']);
+$lname = mysql_real_escape_string($_POST['lname']);
+$email = mysql_real_escape_string($_POST['email']);
 $status = $_POST['status'];
 
 // Select database to connect

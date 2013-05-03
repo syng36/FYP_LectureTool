@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 
 <!--Written by Shea Yuin Ng-->
-<!--Created 22 March 2013-->
-<!--This page shows the list of questions the lecturers added-->
+<!--Created 3 May 2013-->
+<!--This page shows the list of questions asked by students-->
  
 <html>
 
 <head>
-	<title> Question List </title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
@@ -24,17 +23,16 @@
 <body>
 
 	<!-- /Lecturer home page -->
-	<div data-role="page" id="lec_ques_list">
+	<div data-role="page" id="lec_student_list">
 		
 		<div data-role="header">
 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<script type="text/javascript" charset="utf-8" src="jsscript/view_queslist.js"></script>
-			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/u_scale.js"></script>
+			<script type="text/javascript" charset="utf-8" src="jsscript/lec_stuqueslist.js"></script>
+			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
 			<h1 id="unitcode"></h1> 
-			<h1>List Of Questions </h1>
+			<h1>Students' Question List</h1>
 			<a href="unit.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
-			<a href="lec_uscale.html" rel="external" data-role="button" data-mini = "true" data-ajax="false" class = "ui-btn-right">U-Scale</a>
 		</div><!-- /header -->
 		
 		<div data-role="content">
@@ -43,17 +41,28 @@
 			<div id="UScale" class="UScale"></div>
 			
 			<p id = msg></p>
-			<ul data-role="listview" data-theme="e" id="lecturer_queslist">
-			</ul>
-			<script type="text/javascript" charset="utf-8" src="jsscript/select_ques.js"></script>
+			<table data-role="table" id="stud_queslist" class="ui-responsive table-stroke">
+				<thead>
+				<tr>
+					<th></th>
+					<th>No.</th>
+					<th>Question</th>
+					<th>Votes</th>
+				</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<p id = "statusmsg"></p>
 			<br>
 			
-			<!-- /Add question button -->
 			<div>
 				<br>
-				<a href="lec_add_ques.html" rel="external" data-theme="e" data-role="button" data-mini = "true" data-ajax="false">Add Question</a>
-			</div><!-- /Add question button -->
-
+				<a data-role="button" data-inline = "true" data-mini = "true" id = "selectall">Select All</a>
+				<a data-role="button" data-inline = "true" data-mini = "true" id = "unselectall">Unselect All</a>
+				<a data-role="button" data-inline = "true" data-mini = "true" id = "delete_studques">Delete</a>
+			</div><!-- /Back button -->
+			
 		</div><!-- /content -->
 
 	</div><!-- /page --> 

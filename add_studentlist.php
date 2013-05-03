@@ -9,8 +9,8 @@ session_start();
 // Connect to mySQL
 include('connections.php');
 
-//Get question from lecturer
-$student_list = $_POST['student_list'];
+//Get student list from lecturer
+$student_list = mysql_real_escape_string($_POST['student_list']);
 
 // Define variables to enter into database
 $status = "S";//since the list will be all students(needed to distinguish students from lecturer in the main list of users)
@@ -21,8 +21,8 @@ $pswd = md5($pswd);
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];
 
-// Split the data into lines to determine the number of students
-$data = explode("\n", $student_list);
+// Split the rows into arrays
+$data = explode(mysql_real_escape_string("\r\n"), $student_list);
 
 // Unit database name
 $database_name = $unit_code.'_'.$uname;
@@ -68,7 +68,7 @@ $database_name = $unit_code.'_'.$uname;
 		}
 		
 		if(mysql_affected_rows()==0){// If no then add into main list of users
-			mysql_query("INSERT INTO account(username, password, first_name, last_name, status, email) VALUES('$stud_name','$pswd','$stud_fname','$stud_lname','$status','$stud_email')")  or die("Account not created!!");
+			mysql_query("INSERT INTO account(username, password, first_name, last_name, status, email) VALUES('$stud_name','$pswd','$stud_fname','$stud_lname','$status','$stud_email')")  or die("Account not created!!Make sure the username is less than 10 characters");
 			mysql_query("INSERT INTO students(username, unit1, unit2, unit3, unit4, unit5) VALUES('$stud_name','$unit_code','','','','')")  or die("Account not created!!");
 			mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 			mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");
@@ -81,8 +81,8 @@ $database_name = $unit_code.'_'.$uname;
 			// Get the whole row of information of the user
 			$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
 			// Extract 'unit2','unit3','unit4' and 'unit5' field from the array
-			$stud_fname = $fetch_details['first_name'];
-			$stud_lname = $fetch_details['last_name'];
+			$stud_fname = mysql_real_escape_string($fetch_details['first_name']);
+			$stud_lname = mysql_real_escape_string($fetch_details['last_name']);
 
 			// Get the details of login username
 			$get_details="SELECT * FROM students WHERE username = '$stud_name'";

@@ -44,8 +44,8 @@ else{
 	echo "<Units>"; //Top root directory
 	while($row = mysql_fetch_array($r,MYSQL_ASSOC)){
 		//Get each element
-		$unit_code = $row["unit_code"];
-		$unit_name = $row["unit_name"];
+		$unit_code = htmlspecialchars($row["unit_code"]);
+		$unit_name = htmlspecialchars($row["unit_name"]);
 		
 		// Print each element in XML
 		echo "<Unit>";

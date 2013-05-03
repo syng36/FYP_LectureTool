@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <!--Written by Shea Yuin Ng-->
-<!--Created 3 October 2012-->
-<!--This is the lecturer's page to view results-->
+<!--Created 2 May 2013-->
+<!--Student post questions to lecturers-->
 
 <html>
 <head>
@@ -19,41 +19,29 @@
 <body>
 
 	<!-- Lecturer sessionpage -->
-	<div data-role="page" id="lec_add_ques">
+	<div data-role="page" id="stu_add_ques">
 		
 		<div data-role="header">
-			<script type="text/javascript" charset="utf-8" src="jsscript/lec_add_ques.js"></script>
+			<script type="text/javascript" charset="utf-8" src="jsscript/stu_add_ques.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
 			<h1 id="unitcode"></h1> 
 			<h1>Add a question</h1>
-			<a href="lec_ques_list.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
+			<a href="stu_ask_ques.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
 		</div><!-- /header -->
 		
 		<div data-role="content">
 			<div>
-				<label for="lec_ques">Question</label>
-				<input type="text" id="lec_ques" />
+				<label for="ques_title">Title</label>
+				<input type="text" id="ques_title" />
 			</div>
 			
-			<div>
-				<label for="answer">A</label>
-				<input type="text" id="A" />
-			</div>
-			<div>
-				<label for="answer">B</label>
-				<input type="text" id="B" />
-			</div>
-			<div>
-				<label for="answer">C</label>
-				<input type="text" id="C" />
-			</div>
-			<div>
-				<label for="answer">D</label>
-				<input type="text" id="D" />
+			<div >
+				<label for="question">Question</label>
+				<textarea cols="40" rows="8" name="question" id="question"></textarea>
 			</div>
 			
 			<fieldset>
-				<a data-role="button"  data-theme="e" id = "add_ques_submit">Add question</a>
+				<a data-role="button"  data-theme="e" id = "add_ques_submit">Submit question</a>
 			</fieldset>
 			
 			<!-- To write message from PHP -->

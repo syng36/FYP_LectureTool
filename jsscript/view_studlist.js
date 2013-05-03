@@ -54,7 +54,10 @@ $(document).on('click',"#unselectall",function(){
 $(document).on('click',"#delete_stud",function(){
 	var List = [];
 	$(':checkbox:checked').each(function(i){
-		List[i] = $(this).prop('id');
+		name = $(this).prop('id');
+		name = escape(name);
+		name = name.replace(/\+/g, "%2B");
+		List[i] = name;
     });
 	
 	if(List != ""){

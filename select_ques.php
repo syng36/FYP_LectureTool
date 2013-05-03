@@ -9,12 +9,12 @@ session_start();
 // Connect to mySQL
 include('connections.php');
 
-//Get question from lecturer
-$id = $_POST['ques_chosen'];// holds the id number of the ques
-
 // Get username and unit code from session variable
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];
+
+//Get question from lecturer
+$id = $_POST['ques_chosen'];// holds the id number of the ques
 
 // Select database to connect
 $database_name = $unit_code.'_'.$uname;

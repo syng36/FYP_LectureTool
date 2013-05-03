@@ -28,6 +28,8 @@ $fetch_unitname = mysql_fetch_array($query_unitname) or die("Cannot fetch unitna
 $unit_name = $fetch_unitname['unit_name'];
 // Save unit name in session variable
 $_SESSION['unit_name']=$unit_name;
+$unit_name = htmlspecialchars($unit_name);
+$unit_chosen = htmlspecialchars($unit_chosen);
 
 // Output data in XML format
 header("Content-type: text/xml"); //Declare saving data in XML form

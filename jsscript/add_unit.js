@@ -8,10 +8,15 @@ $(document).on('click','#add_unit_submit', function(){
 	//get unit code
 	var unit_code = $('#unit_code').val();
   	if (!unit_code) { alert('Please enter a unit code.'); return false; }
+	if(/^[a-zA-Z0-9- ]*$/.test(unit_code) == false) {
+		alert('Please enter a unit code without any special characters'); return false;
+	}
   	
   	//get unit name
   	var unit_name = $('#unit_name').val();
   	if (!unit_name) { alert('Please enter a unit name.'); return false; }
+	unit_name = escape(unit_name);
+	unit_name = unit_name.replace(/\+/g, "%2B");
   	
   	//var uname = $('.puname').val();
   

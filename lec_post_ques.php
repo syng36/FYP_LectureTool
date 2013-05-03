@@ -58,11 +58,11 @@ else{
 	$current_ques = mysql_fetch_array($r);
 	//Get each element
 	$id = $current_ques["id"];
-	$lec_ques = $current_ques["lec_ques"];
-	$A = $current_ques["A"];
-	$B = $current_ques["B"];
-	$C = $current_ques["C"];
-	$D = $current_ques["D"];
+	$lec_ques = htmlspecialchars($current_ques["lec_ques"]);
+	$A = htmlspecialchars($current_ques["A"]);
+	$B = htmlspecialchars($current_ques["B"]);
+	$C = htmlspecialchars($current_ques["C"]);
+	$D = htmlspecialchars($current_ques["D"]);
 	
 	//Save id of question
 	$_SESSION['id'] = $id;

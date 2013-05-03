@@ -7,7 +7,8 @@ $.post("join_session.php", function(data){
 	var string = data.split('_');
 	var name = string[0];
 	var unit_code = string[1];
-	var socket = io.connect('http://118.138.154.21:8000');
+	
+	var socket = io.connect('http://melts.eng.monash.edu:8000');
 	 
 	 // at document read (runs only ones).
 	 $(document).ready(function(){

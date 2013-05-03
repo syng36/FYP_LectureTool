@@ -65,8 +65,9 @@ else{
 				// Get the whole row of information of the unit
 				$fetch_details = mysql_fetch_array($query) or die("Cannot fetch details!!");
 				// Extract 'unit_name' and 'lecturer' field from the array
-				$unit_name = $fetch_details['unit_name'];
-				$unit_lecname = $fetch_details['lecturer'];
+				$unit_name = htmlspecialchars($fetch_details['unit_name']);
+				$unit_lecname = htmlspecialchars($fetch_details['lecturer']);
+				$unit_code[$i] = htmlspecialchars($unit_code[$i]);
 
 				// Print each element in XML
 				echo "<Unit>";
@@ -103,7 +104,9 @@ else{
 						// Get the whole row of information of the unit
 						$fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!!");
 						// Extract 'unit_name' field from the array
-						$unit_name = $fetch_details['unit_name'];
+						$unit_name = htmlspecialchars($fetch_details['unit_name']);
+						$lecturer_uname = htmlspecialchars($lecturer_uname);
+						$unit_code[$i] = htmlspecialchars($unit_code[$i]);
 
 						// Print each element in XML
 						echo "<Unit>";

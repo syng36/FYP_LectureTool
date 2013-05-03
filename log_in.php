@@ -10,8 +10,8 @@ session_start();
 include('connections.php');
 
 // Retrieve data from html form through post method
-$uname = $_POST['uname'];
-$pswd = $_POST['pswd'];
+$uname = mysql_real_escape_string($_POST['uname']);
+$pswd = mysql_real_escape_string($_POST['pswd']);
 $pswd = md5($pswd);
 
 // Select database to connect

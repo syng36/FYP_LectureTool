@@ -72,6 +72,8 @@ $(document).ready(function() {
 			// If checkbox1 is checked, save the username in cookie
 			setCookie("login",uname,120);
 		}
+		uname = escape(uname);
+		uname = uname.replace(/\+/g, "%2B");
 		
 		//get password
 		var pswd = $('#pswd').val();
@@ -81,6 +83,8 @@ $(document).ready(function() {
 			var login = uname+';'+pswd;
 			setCookie("login",login,120);
 		}
+		pswd = escape(pswd);
+		pswd = pswd.replace(/\+/g, "%2B");
 	  
 		//use jquery ajax to post data to php server
 		$.ajax({

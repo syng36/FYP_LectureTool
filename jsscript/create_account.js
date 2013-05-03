@@ -8,27 +8,36 @@ $(document).on('click','#create_account_submit', function(){
 	//get username
 	var uname = $('#uname').val();
   	if (!uname) { alert('Please enter your user name.'); return false; }
+	uname = escape(uname);
+	uname = uname.replace(/\+/g, "%2B");
   	
   	//get password
   	var pswd = $('#pswd').val();
   	if (!pswd) { alert('Please enter your password.'); return false; }
+	pswd = escape(pswd);
+	pswd = pswd.replace(/\+/g, "%2B");
 	
 	//get first name
   	var fname = $('#fname').val();
   	if (!fname) { alert('Please enter your first name.'); return false; }
+	fname = escape(fname);
+	fname = fname.replace(/\+/g, "%2B");
 	
 	//get last name
   	var lname = $('#lname').val();
   	if (!lname) { alert('Please enter your last name.'); return false; }
+	lname = escape(lname);
+	lname = lname.replace(/\+/g, "%2B");
 	
 	//get email
   	var email = $('#email').val();
   	if (!email) { alert('Please enter your email address.'); return false; }
+	email = escape(email);
+	email = email.replace(/\+/g, "%2B");
 	
 	//get status
   	var status = $('#status').val();
-	console.log(status);
-  
+	
   	//use jquery ajax to post data to php server
   	$.ajax({
       	//url: "http://syngtest.myproject/create_account.php",

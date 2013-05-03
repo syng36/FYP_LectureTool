@@ -15,7 +15,8 @@ $.post("join_session.php", function(data){
 	var string = data.split('_');
 	var name = string[0];
 	var unit_code = string[1];
-	var socket = io.connect('http://118.138.154.21:8000');
+	var socket = io.connect('http://melts.eng.monash.edu:8000');
+	
 	 
 	// at document read (runs only once).
 	$(document).ready(function(){
@@ -203,7 +204,6 @@ $.post("join_session.php", function(data){
 			});		
 		});			
 	
-		
 		// ask user to log in again if no username available.
 		while (name == '') {
 		   name = alert("Please log in!");
@@ -214,15 +214,5 @@ $.post("join_session.php", function(data){
 		// send the name to the server, and the server's 
 		// register wait will recieve this.
 		socket.emit('register', name );
-	});
-	 
-	 // listen for chat event and recieve data
-	 //socket.on('ques', function (data) {
-	 
-		// print data (jquery thing)
-	   // $("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
-
-		
-	 //});
-	 
+	}); 
 });

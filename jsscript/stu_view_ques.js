@@ -9,7 +9,7 @@ $.post("join_session.php", function(data){
 	var name = string[0];
 	var unit_code = string[1];
 	var lec_uname = string[2];
-	var socket = io.connect('http://118.138.154.21:8000');
+	var socket = io.connect('http://melts.eng.monash.edu:8000');
 	 
 	 // at document read (runs only ones).
 	 $(document).ready(function(){
@@ -32,7 +32,7 @@ $.post("join_session.php", function(data){
 					var prev_ans = $(this).find('PrevAns').text();
 					
 					if (lec_ques!= "0"){// means there's question posted by lecturer
-						$("h1#lec_ques").html(lec_ques);
+						$('#lec_ques').html(lec_ques);
 						$('#btnA').parent().find('.ui-btn-text').text(A);
 						//$('#btnA').text(data.A); not working
 						$('#btnB').parent().find('.ui-btn-text').text(B);
@@ -45,10 +45,10 @@ $.post("join_session.php", function(data){
 							//$(button).attr('data-theme', 'e'); not working
 						}
 						// print data (jquery thing)
-						$("p#data_received").append("<br />\r\n" + lec_ques + ': A.' + A+ '     B.'+ B+'     C.'+ C+'     D.'+ D);
+						//$("p#data_received").append("<br />\r\n" + lec_ques + ': A.' + A+ '     B.'+ B+'     C.'+ C+'     D.'+ D);
 						
 						// to check messenger
-						$("p#log").html('from: ' +lec_uname);
+						//$("p#log").html('from: ' +lec_uname);
 					}
 				});				
 			},
@@ -70,7 +70,6 @@ $.post("join_session.php", function(data){
 					type: 'post',
 					data: 'id=' + id,
 					success: function (prev_ans) {
-						console.log(prev_ans);
 						$(".ans_button").buttonMarkup({ theme: "c" });
 						if(prev_ans !='0'){ 
 							var button = "#" + prev_ans;
@@ -122,7 +121,7 @@ $.post("join_session.php", function(data){
 		$(document).on('click','button', function(){
 			
 			// Get the id of the button clicked
-			var lec_ques = $('#lec_ques').val();
+			//var lec_ques = $('#lec_ques').val();
 			var mcq_answer = $(this).prop("id");
 
 			$.ajax({

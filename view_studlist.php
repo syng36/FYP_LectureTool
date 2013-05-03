@@ -49,9 +49,9 @@ else{
 	echo "<StudList>"; //Top root directory
 	while($row = mysql_fetch_array($r,MYSQL_ASSOC)){
 		//Get each element
-		$stud_uname = $row["username"];
-		$stud_fname = $row["first_name"];
-		$stud_lname = $row["last_name"];
+		$stud_uname = htmlspecialchars($row["username"]);
+		$stud_fname = htmlspecialchars($row["first_name"]);
+		$stud_lname = htmlspecialchars($row["last_name"]);
 		
 		// Print each element in XML
 		echo "<Student>";

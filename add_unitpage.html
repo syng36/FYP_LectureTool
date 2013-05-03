@@ -21,13 +21,11 @@
 
 	<!-- Lecturer- add unit page -->
 	<div data-role="page" id="add_unitpage">
-		
-		<!-- Define javascripts -->
-		<script type="text/javascript" charset="utf-8" src="jsscript/add_unit.js"></script>
-		<script type="text/javascript" charset="utf-8" src="jsscript/logout.js"></script>
-		
+	
 		<div data-role="header">
-			<h1>Add unit</h1>  
+			<script type="text/javascript" charset="utf-8" src="jsscript/add_unit.js"></script>
+			<h1>Add unit</h1> 
+			<a href="lecturer_homepage.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
 		</div><!-- /header -->
 		
 		<div data-role="content">
@@ -52,15 +50,6 @@
 				<p id="message"></p>
 			</div>
 			
-			<!-- /Go back to lecturer's homepage -->
-			<div>
-				<a href="lecturer_homepage.html" rel="external" data-role="button" data-mini = "true" data-ajax="false">Back</a>
-			</div><!-- /Back button -->
-			
-			<!-- /Log out button -->
-			<div>
-				<button  type="button" data-mini = "true" id="page_logout_submit">Logout</button>
-			</div><!-- /Log out button -->
 		</div><!-- /content -->
 
 	</div><!-- /page --> 

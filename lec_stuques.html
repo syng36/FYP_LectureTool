@@ -1,47 +1,54 @@
 <!DOCTYPE html>
 
 <!--Written by Shea Yuin Ng-->
-<!--Created 26 April 2013-->
-<!--This page shows the understanding scale for the question-->
- 
-<html>
+<!--Created 3 May 2013-->
+<!--Student view the questions from students-->
 
+<html>
 <head>
-	<title> Question List </title>
+	<title> Student's Question </title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.css" />
 	<script src="http://melts.eng.monash.edu:8000/socket.io/socket.io.js"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+	<!--<link rel="stylesheet" href="jqueryui.css" />-->
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 </head>
- 
-<body>
 
-	<!-- /Lecturer home page -->
-	<div data-role="page" id="lec_ques_list">
+<body>
+	<!-- Lecturer sessionpage -->
+	<div data-role="page" id="lec_sessionpage">
 		
 		<div data-role="header">
-			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/u_scale.js"></script>
+			<script type="text/javascript" charset="utf-8" src="jsscript/stu_stuques.js"></script>
+			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
 			<h1 id="unitcode"></h1> 
-			<h1>U-Scale </h1>
-			<a href="unit.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>			
+			<a href="lec_stuqueslist.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
 		</div><!-- /header -->
 		
 		<div data-role="content">
-			<div id="UScale" class="UScale"></div>
-			<p id="uresult"></p>
 			
-			<!-- /Add question button -->
+			<!--U-Scale bar-->
+			<div id="UScale" class="UScale"></div>
+			
 			<div>
-				<br>
-				<a data-role="button"  data-theme="e" id = "reset_uscale">Reset</a>
-			</div><!-- /Add question button -->
+				<h1 id="ques_title"></h1>
+			</div>
+			
+			<div style="background-color:white;">
+				<label style="color:green;font-size:20px;" for="question">Question</label>
+				<p id="question" style = "white-space: pre;"></p>
+			</div>
+			
+			<div>
+				<h4 id="numOfVotes" ></h4>
+			</div>
 			
 		</div><!-- /content -->
 

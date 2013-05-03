@@ -13,7 +13,7 @@ include('connections.php');
 $uname = $_SESSION['uname'];
 $unit_chosen = $_SESSION['unit_chosen'];
 $unit_name = $_SESSION['unit_name'];
-$list = $_POST['list'];
+$list = mysql_real_escape_string($_POST['list']);
 
 $stud_uname = explode(',', $list);
 $j = count($stud_uname);

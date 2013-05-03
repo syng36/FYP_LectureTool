@@ -49,7 +49,7 @@ else{
 	while($row = mysql_fetch_array($r,MYSQL_ASSOC)){
 		//Get each element
 		$id = $row["id"];
-		$lec_ques = $row["lec_ques"];
+		$lec_ques = htmlspecialchars($row["lec_ques"]);
 		
 		// Print each element in XML
 		echo "<Ques>";
