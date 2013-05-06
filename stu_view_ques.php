@@ -78,7 +78,8 @@ else if($status=='S'){
 	mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 
 	// Check whether the username for the unit already existed
-	$sql="SELECT * FROM students_ques ORDER BY votes DESC LIMIT 0,5";
+	//$sql="SELECT * FROM students_ques ORDER BY votes DESC LIMIT 0,5";//To limit the number of questions viewed
+	$sql="SELECT * FROM students_ques ORDER BY votes DESC ";
 	$r = mysql_query($sql);
 
 	// If error in selecting table

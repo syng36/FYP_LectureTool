@@ -31,7 +31,7 @@ $database_name = $unit_code.'_'.$uname;
   for ($i=1; $i<count($data)-1; $i++){
 	// Get the name of each student and insert into the database for the unit
 	$student = explode(",", $data[$i]);
-	$stud_name = $student[0];
+	$stud_name = strtolower($student[0]);
 	$stud_fname = $student[1];
 	$stud_lname = $student[2];
 	$stud_email = $student[3];
