@@ -47,7 +47,7 @@ $id = $fetch_details['id'];
 $table_name='q_'.$id;
 
 // Create a table for each question
-mysql_query("CREATE TABLE $table_name (username VARCHAR(10), mcq_answer VARCHAR(4))") or die("Question results table cannot be added!!");
+mysql_query("CREATE TABLE $table_name (username VARCHAR(20), mcq_answer VARCHAR(4))") or die("Question results table cannot be added!!");
 
 // Close connection to mySOL
 mysql_close($dbcon);

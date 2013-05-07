@@ -45,7 +45,7 @@ $(document).on('click','.chooseques',function(){
       	type: 'post',
       	data: 'ques_chosen='+ques_chosen,
       	success: function (data) {
-			if(status==""){
+			if(data==""){
 				$.mobile.changePage($(document.location.href="stu_stuques.html"), "slideup"); 
 			}
 			else{

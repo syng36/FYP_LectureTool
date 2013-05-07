@@ -32,7 +32,7 @@ exit();
 // If username not used before
 if(mysql_affected_rows()==0){//no username exist in database
 	// Insert username and password into database
-	mysql_query("INSERT INTO account(username, password, first_name, last_name, status, email) VALUES('$uname','$pswd','$fname','$lname','$status','$email')")  or die("Account not created!!");
+	mysql_query("INSERT INTO account(username, password, first_name, last_name, status, email) VALUES('$uname','$pswd','$fname','$lname','$status','$email')")  or die("Account not created!! Username probably more than 20 characters");
 	echo('1');// Represent success
 }
 else{

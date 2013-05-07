@@ -68,7 +68,7 @@ $database_name = $unit_code.'_'.$uname;
 		}
 		
 		if(mysql_affected_rows()==0){// If no then add into main list of users
-			mysql_query("INSERT INTO account(username, password, first_name, last_name, status, email) VALUES('$stud_name','$pswd','$stud_fname','$stud_lname','$status','$stud_email')")  or die("Account not created!!Make sure the username is less than 10 characters");
+			mysql_query("INSERT INTO account(username, password, first_name, last_name, status, email) VALUES('$stud_name','$pswd','$stud_fname','$stud_lname','$status','$stud_email')")  or die("Account not created!!Make sure the username is less than 20 characters");
 			mysql_query("INSERT INTO students(username, unit1, unit2, unit3, unit4, unit5) VALUES('$stud_name','$unit_code','','','','')")  or die("Account not created!!");
 			mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 			mysql_query("INSERT INTO student_list(username, first_name, last_name, u_scale) VALUES('$stud_name','$stud_fname','$stud_lname','0')")  or die("Student cannot be added!!");

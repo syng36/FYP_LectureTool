@@ -29,7 +29,7 @@ mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 $reg_stud = mysql_query("SELECT * FROM $table_name WHERE username = '$uname'") or die("Cannot query student's username!");
 
 if(mysql_affected_rows()==0){// If no, insert student's name to the table of answer for the question
-	mysql_query("INSERT INTO $table_name(username, mcq_answer) VALUES('$uname','')")  or die("Cannot insert student into table!");
+	mysql_query("INSERT INTO $table_name(username, mcq_answer) VALUES('$uname','0')")  or die("Cannot insert student into table!");
 }
 else{// If yes then get previous answer
 	// Get the details of the unit

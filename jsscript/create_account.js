@@ -8,6 +8,9 @@ $(document).on('click','#create_account_submit', function(){
 	//get username
 	var uname = $('#uname').val();
   	if (!uname) { alert('Please enter your user name.'); return false; }
+	if(/^[a-zA-Z0-9- ]*$/.test(uname) == false) {
+		alert('Please enter a username without any special characters'); return false;
+	}
 	uname = escape(uname);
 	uname = uname.replace(/\+/g, "%2B");
   	

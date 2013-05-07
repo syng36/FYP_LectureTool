@@ -4,7 +4,6 @@
 
 // Use jquery ajax to get data from php server
 $.ajax({
-	//url: "http://syngtest.myproject/view_queslist.php",
 	url: "view_queslist.php",
 	type: 'post',
 	dataType: "xml",  

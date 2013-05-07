@@ -1,44 +1,42 @@
 // Written by Shea Yuin Ng
-// Created 3 April 2013
+// Created 6 May 2013
 // To list the students taking the unit
 
 // Use jquery ajax to get data from php server
 $.ajax({
-	//url: "http://syngtest.myproject/view_studlist.php",
-	url: "view_studlist.php",
+	url: "view_queslist.php",
 	type: 'post',
 	dataType: "xml",  
 	success: function (xml) {
 		
 		var counter = 1;
-
+		
 		// Read xml file
-		$(xml).find('Student').each(function(){ 
-			var stud_uname = $(this).find('Username').text(); 
-			var stud_fname = $(this).find('FirstName').text(); 
-			var stud_lname = $(this).find('LastName').text(); 			
-
-			if (stud_uname== "0"){// means there's no students
-				// Empty table, show this msg
-				$("#msg").text('No student found!!');
+		$(xml).find('Ques').each(function(){ 
+			var id = $(this).find('ID').text(); 
+			var ques = $(this).find('Question').text(); 		
+			
+			if (ques== "0"){// means there's no units registered for the lecturer
+				// Empty list, show this msg
+				$("#msg").text('No questions found!!');
 			}
-			else{// list the students in a table format
-				$("#msg").text('Student List');	
-				$("tbody").append('<tr><td align="center"><input type="checkbox" class="cbox" id="'+stud_uname+'"/></td><td>'+counter+'</td><td>'+stud_uname+'</td><td>'+stud_fname+'</td><td>'+stud_lname+'</td></tr>');
+			else{// list the units in an unordered list
+				$("#msg").text('Question List');	
+				$("tbody").append('<tr><td align="center"><input type="checkbox" class="cbox" id="'+id+'"/></td><td>'+counter+'</td><td>'+ques+'</td></tr>');
 				counter = counter+1;
-			}
+			} 
 		})
 		//$.mobile.changePage("#view_unitpage", "slideup");
 	},  
 	complete:function(){
 		//$("#lecturer_queslist").listview();
-		$("#stud_list").listview('refresh');
+		$("#lecturer_queslist").listview('refresh');
 	},
 	error: function() {  
 		alert("An error occurred while processing XML file.");  
 	}  
 
-});
+})
 
 // Select all functionality
 $(document).on('click',"#selectall",function(){
@@ -51,7 +49,7 @@ $(document).on('click',"#unselectall",function(){
 });
 
 // Select all functionality
-$(document).on('click',"#delete_stud",function(){
+$(document).on('click',"#delete_lecques",function(){
 	var List = [];
 	$(':checkbox:checked').each(function(i){
 		name = $(this).prop('id');
@@ -62,7 +60,7 @@ $(document).on('click',"#delete_stud",function(){
 	
 	if(List != ""){
 		$.ajax({
-			url: "delete_stud.php",
+			url: "delete_lecques.php",
 			type: 'post',
 			data: 'list='+List,
 			success: function (result) {
@@ -74,11 +72,11 @@ $(document).on('click',"#delete_stud",function(){
 				alert(result);
 			},
 			error: function(){	
-			alert('There was an error deleting students');	
+			alert('There was an error deleting question');	
 			}
 			
 		});
 	}
 	else
-	alert("No students selected!");
+	alert("No question selected!");
 });
