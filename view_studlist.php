@@ -20,7 +20,7 @@ $database_name = $unit_code.'_'.$uname;
 mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 
 // Check whether the username for the unit already existed
-$sql="SELECT * FROM student_list ORDER BY last_name ASC";
+$sql="SELECT * FROM student_list";
 $r = mysql_query($sql);
 
 // If error in selecting table

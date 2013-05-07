@@ -60,12 +60,6 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
    
-	socket.on('updated_vote', function (response) {
-		socket.broadcast.emit('updated_vote',{
-			unit_code: response.unit_code,
-			votenum: response.votenum,
-		});
-	});
    // listen for user registrations
    // then set the socket nickname to 
    socket.on('register', function (name) {
