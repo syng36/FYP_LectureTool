@@ -13,25 +13,29 @@ $(document).on('click','#add_ques_submit', function(){
 
 	//get answer A
 	var A = $("#A").val();
-	if (!A) { alert('Please enter your answer for A.'); return false; }
+	//if (!A) { alert('Please enter your answer for A.'); return false; }
+	if (!A) { A = ""; }
 	A = escape(A);
 	A = A.replace(/\+/g, "%2B");
 
 	//get answer B
 	var B = $("#B").val();
-	if (!B) { alert('Please enter your answer for B.'); return false; }
+	//if (!B) { alert('Please enter your answer for B.'); return false; }
+	if (!B) { B = ""; }
 	B = escape(B);
 	B = B.replace(/\+/g, "%2B");
 
 	//get answer C
 	var C = $("#C").val();
-	if (!C) { alert('Please enter your answer for C.'); return false; }
+	//if (!C) { alert('Please enter your answer for C.'); return false; }
+	if (!C) { C = ""; }
 	C = escape(C);
 	C = C.replace(/\+/g, "%2B");
 
 	//get answer D
 	var D = $("#D").val();
-	if (!D) { alert('Please enter your answer for D.'); return false; }
+	//if (!D) { alert('Please enter your answer for D.'); return false; }
+	if (!D) { D = ""; }
 	D = escape(D);
 	D = D.replace(/\+/g, "%2B");
   

@@ -18,6 +18,9 @@ $status = $_POST['status'];
 $pswd = "12345";
 $pswd = md5($pswd);
 
+// Change username to all lowercase characters
+$stud_name = strtolower($stud_name);
+
 // Get username from session variable
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];

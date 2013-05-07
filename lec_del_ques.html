@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <!--Written by Shea Yuin Ng-->
-<!--Created 3 May 2013-->
+<!--Created 6 May 2013-->
 <!--This page shows the list of questions asked by students-->
  
 <html>
@@ -28,11 +28,11 @@
 		<div data-role="header">
 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 			<script type="text/javascript" charset="utf-8" src="jsscript/u_scale.js"></script>
-			<script type="text/javascript" charset="utf-8" src="jsscript/lec_stuqueslist.js"></script>
+			<script type="text/javascript" charset="utf-8" src="jsscript/delete_lecques.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
 			<h1 id="unitcode"></h1> 
-			<h1>Students' Question List</h1>
-			<a href="unit.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
+			<h1>Delete Question</h1>
+			<a href="lec_ques_list.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
 		</div><!-- /header -->
 		
 		<div data-role="content">
@@ -41,13 +41,12 @@
 			<div id="UScale" class="UScale"></div>
 			
 			<p id = msg></p>
-			<table data-role="table" id="stud_queslist" class="ui-responsive table-stroke">
+			<table data-role="table" id="lecturer_queslist" class="ui-responsive table-stroke">
 				<thead>
 				<tr>
 					<th></th>
 					<th>No.</th>
 					<th>Question</th>
-					<th>Votes</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -60,7 +59,7 @@
 				<br>
 				<a data-role="button" data-inline = "true" data-mini = "true" id = "selectall">Select All</a>
 				<a data-role="button" data-inline = "true" data-mini = "true" id = "unselectall">Unselect All</a>
-				<a data-role="button" data-inline = "true" data-mini = "true" id = "delete_studques">Delete</a>
+				<a data-role="button" data-inline = "true" data-mini = "true" id = "delete_lecques">Delete</a>
 			</div><!-- /Function button -->
 			
 		</div><!-- /content -->
