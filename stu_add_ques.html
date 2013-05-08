@@ -14,9 +14,6 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.css" />
-	<script src="http://melts.eng.monash.edu:8000/socket.io/socket.io.js"></script>
-	<link rel="stylesheet" href="my_custom_theme.min.css" />
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile.structure-1.3.0.min.css" />
 </head>
 
 <body>
@@ -25,7 +22,6 @@
 	<div data-role="page" id="stu_add_ques">
 		
 		<div data-role="header">
-			<script type="text/javascript" charset="utf-8" src="jsscript/stud_uscale.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/stu_add_ques.js"></script>
 			<script type="text/javascript" charset="utf-8" src="jsscript/get_unit.js"></script>
 			<h1 id="unitcode"></h1> 
@@ -34,13 +30,6 @@
 		</div><!-- /header -->
 		
 		<div data-role="content">
-		
-			<!--U-scale grid-->
-			<div class="ui-grid-a" >
-				<div class="ui-block-a"><a data-role="button"  data-theme="h" class="u_scale" id = "Y"><img src="good.png" /></a></div>
-				<div class="ui-block-b"><a data-role="button"  data-theme="f" class="u_scale" id = "N"><img src="bad.png" /></a></div>
-			</div>
-			
 			<div>
 				<label for="ques_title">Title</label>
 				<input type="text" id="ques_title" />

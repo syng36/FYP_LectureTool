@@ -79,51 +79,50 @@ $.post("join_session.php", function(data){
 		
 		// When there is student responding to the uscale
 		socket.on('updated_uscale', function (data) {
-			if (unit_code==data.unit_code){
-				$.ajax({
-					//url: "http://syngtest.myproject/getu_scale.php",
-					url: "getu_scale.php",
-					type: 'post',
-					dataType: "xml",  
-					success: function (xml) {
+			if (unit_code==data.unit_code)
+			$.ajax({
+				//url: "http://syngtest.myproject/getu_scale.php",
+				url: "getu_scale.php",
+				type: 'post',
+				dataType: "xml",  
+				success: function (xml) {
 
-						//results sent by PHP
-						cntY = xml.getElementsByTagName("CntY")[0].childNodes[0].nodeValue;
-						cntN = xml.getElementsByTagName("CntN")[0].childNodes[0].nodeValue;
-						total = xml.getElementsByTagName("Total")[0].childNodes[0].nodeValue;
+					//results sent by PHP
+					cntY = xml.getElementsByTagName("CntY")[0].childNodes[0].nodeValue;
+					cntN = xml.getElementsByTagName("CntN")[0].childNodes[0].nodeValue;
+					total = xml.getElementsByTagName("Total")[0].childNodes[0].nodeValue;
+					
+					if (total==0)
+					{
+						$(function() {
+							$( "#UScale" ).progressbar({
+								value: 0
+							});
+						});	
 						
-						if (total==0)
-						{
-							$(function() {
-								$( "#UScale" ).progressbar({
-									value: 0
-								});
-							});	
-							
-							// Style the bar graph
-							$("#UScale").css({ 'background': 'Orange' });
-							
-							$('#uresult').html('');
-						}
-						else{
-							$(function() {
-								$( "#UScale" ).progressbar({
-									value: cntY/total*100
-								});
-							});	
-
-							// Style the bar graph
-							$("#UScale").css({ 'background': 'Red' });
-							$("#UScale > div").css({ 'background': 'Green' });
-							
-							$('#uresult').html(cntY+' out of '+total+' understands AND '+cntN+' out of '+total+' panicking');
-						}
-					},
-					error: function(){	
-						console.log('There was an error in getting U-scale');	
+						// Style the bar graph
+						$("#UScale").css({ 'background': 'Orange' });
+						
+						$('#uresult').html('');
 					}
-				});
-			}
+					else{
+						$(function() {
+							$( "#UScale" ).progressbar({
+								value: cntY/total*100
+							});
+						});	
+
+						// Style the bar graph
+						$("#UScale").css({ 'background': 'Red' });
+						$("#UScale > div").css({ 'background': 'Green' });
+						
+						$('#uresult').html(cntY+' out of '+total+' understands AND '+cntN+' out of '+total+' panicking');
+					}
+				},
+				error: function(){	
+					console.log('There was an error in getting U-scale');	
+				}
+			});		
 		});			
 		/*$( "#UScale" ).progressbar({
 			value: 0
