@@ -73,6 +73,12 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 	
+	socket.on('del_stu_ques', function (response) {
+		socket.broadcast.emit('del_stu_ques',{
+			unit_code: response.unit_code,
+		});
+	});
+	
    // listen for user registrations
    // then set the socket nickname to 
    socket.on('register', function (name) {
