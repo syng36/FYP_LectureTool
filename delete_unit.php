@@ -20,7 +20,7 @@ mysql_select_db("main_database",$dbcon) or die("Cannot select database!");
 $database_name = $unit_chosen.'_'.$uname;
 
 // Delete the unit from the list of units
-$sql="DELETE FROM units WHERE  unit_code='$unit_chosen' and unit_name='$unit_name' and lecturer = '$uname'";
+$sql="DELETE FROM units WHERE  unit_code='$unit_chosen' and lecturer = '$uname'";
 $r = mysql_query($sql) or die("Unit cannot be deleted!!");
 
 // Check if another unit have the same unit code in units

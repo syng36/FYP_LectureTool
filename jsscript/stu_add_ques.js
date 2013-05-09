@@ -49,8 +49,6 @@ $.post("join_session.php", function(data){
 					else{
 						$("#msg").text(result);
 					}	 
-					
-
 				},
 				error: function(){	
 					alert('There was an error submitting your question');	

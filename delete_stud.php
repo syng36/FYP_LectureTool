@@ -23,8 +23,8 @@ for ($i=0; $i<$j; $i++){
 	$database_name = $unit_chosen.'_'.$uname;
 	mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 	
-	// Get the ID of all the questions
-	$getid = mysql_query("SELECT * FROM lecturer_ques") or die("Cannot get question id!!");
+	// Get the ID of all the questions from lecturers
+	$getid = mysql_query("SELECT id FROM lecturer_ques") or die("Cannot get question id!!");
 	$no_id=0;
 	 while ($ques_id_array = mysql_fetch_array($getid)) {
 		// Get id number of every question
@@ -32,11 +32,30 @@ for ($i=0; $i<$j; $i++){
 		$no_id++;
 	}
 	
-	// Delete student from the table for every question
+	// Delete student from the table for every question from lecturer
 	for ($a=0; $a<$no_id; $a++){
 		$id = $ques_id[$a];
 		$table_name = 'q_'.$id;
 		mysql_query("DELETE FROM $table_name WHERE  username='$stud_uname[$i]'") or die("Student cannot be deleted from question table!!");
+	}
+	
+	// Get the ID of all the questions from students
+	$getid = mysql_query("SELECT id FROM students_ques") or die("Cannot get question id!!");
+	$no_id=0;
+	 while ($stuques_id_array = mysql_fetch_array($getid)) {
+		// Get id number of every question
+		$stuques_id[$no_id] = $stuques_id_array['id'] ;
+		$no_id++;
+	}
+	
+	// Delete student from the table for every question from students
+	for ($a=0; $a<$no_id; $a++){
+		$id = $stuques_id[$a];
+		$table_name = 'sq_'.$id;
+		mysql_query("DELETE FROM $table_name WHERE  username='$stud_uname[$i]'") or die("Student cannot be deleted from question table!!");
+		$votes = mysql_query("SELECT * FROM $table_name", $dbcon);
+		$cnt = mysql_num_rows($votes); 
+		mysql_query("UPDATE students_ques SET votes='$cnt' WHERE id='$id'")  or die("Votes not updated!!");
 	}
 	
 	// Delete the unit from the list of units

@@ -23,7 +23,12 @@ for ($i=0; $i<$j; $i++){
 	$database_name = $unit_chosen.'_'.$uname;
 	mysql_select_db($database_name,$dbcon) or die("Cannot select unit database!");
 	
+	// Delete from student question list
 	mysql_query("DELETE FROM students_ques WHERE  id='$qid[$i]'") or die("Question cannot be deleted!!");
+	
+	// Drop table containing the results
+	$tablename = 'sq_'.$qid[$i];
+	mysql_query("DROP TABLE $tablename") or die("Question table cannot be dropped!!");
 	
 }//for every question
 ?>

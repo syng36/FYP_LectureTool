@@ -24,11 +24,16 @@ $.post("join_session.php", function(data){
 					var ques_title = $(this).find('Title').text(); 
 					var question = $(this).find('Question').text();
 					var votenum = $(this).find('VoteNum').text();
+					var flag = $(this).find('Flag').text();
 						
 					$("#ques_title").append(ques_title);
 					$("#question").append(question);
 					$("#numOfVotes").append('Total Number of Votes: '+votenum);
-
+					
+					if (flag==1){
+						//$('#vote').prop('disabled', true);
+						$('#vote').addClass("ui-disabled");
+					}
 				})
 			},  
 			error: function() {  
@@ -54,11 +59,15 @@ $.post("join_session.php", function(data){
 				url: "vote.php",
 				type: 'post',
 				success: function (data) {
+				
 					$("#numOfVotes").html('Total Number of Votes: '+data);
 					socket.emit('updated_vote',{
 						unit_code: unit_code,
 						votenum: data,
 					});//socket emit
+					
+					//$("#vote").prop("disabled", true);
+					$('#vote').addClass("ui-disabled");
 				},
 				error: function(){	
 				alert('There was an error selecting the unit');	

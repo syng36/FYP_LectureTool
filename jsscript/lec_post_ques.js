@@ -147,7 +147,6 @@ $.post("join_session.php", function(data){
 	
 		// Updated answers from students
 		socket.on('updated', function (data) {
-			console.log('Answer: ', data.mcq_answer);
 			var unit_code = data.unit_code;
 			var id = data.id;
 			var mcq_answer = data.mcq_answer;

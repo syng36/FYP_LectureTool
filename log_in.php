@@ -29,6 +29,7 @@ if(mysql_affected_rows()==0){
 }
 else{// Log in successful, username and password matching
 	//Store the variables in the session variable
+	$uname = strtolower($uname);
 	$_SESSION['uname'] = $uname;
 	$_SESSION['pswd'] = $pswd;
 	

@@ -17,14 +17,23 @@ include('connections.php');
 // Select database to connect
 mysql_select_db("main_database",$dbcon) or die("Cannot select database!");
 
-// Get the unitname
-//$get_unitname="SELECT * FROM units WHERE lecturer = '$uname' and unit_code='$unit_chosen'";
-$get_unitname="SELECT * FROM units WHERE unit_code='$unit_chosen'";
+if ($status=='L'){
+	// Get the unitname
+	//$get_unitname="SELECT * FROM units WHERE lecturer = '$uname' and unit_code='$unit_chosen'";
+	$get_unitname="SELECT * FROM units WHERE unit_code='$unit_chosen' and lecturer='$uname'";
+}
+else{
+	$lec_uname = $_SESSION['lec_uname'];
+	// Get the unitname
+	//$get_unitname="SELECT * FROM units WHERE lecturer = '$uname' and unit_code='$unit_chosen'";
+	$get_unitname="SELECT * FROM units WHERE unit_code='$unit_chosen' and lecturer='$lec_uname'";
+}
+
 // Get ID of the array
 $query_unitname = mysql_query($get_unitname)  or die("Cannot query unit name!!");
 // Get the whole row of information of the user
 $fetch_unitname = mysql_fetch_array($query_unitname) or die("Cannot fetch unitname!!");
-// Extract 'status' field from the array
+// Extract 'unit_name' field from the array
 $unit_name = $fetch_unitname['unit_name'];
 // Save unit name in session variable
 $_SESSION['unit_name']=$unit_name;
