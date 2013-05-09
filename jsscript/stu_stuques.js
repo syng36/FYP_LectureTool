@@ -30,14 +30,17 @@ $.post("join_session.php", function(data){
 					$("#question").append(question);
 					$("#numOfVotes").append('Total Number of Votes: '+votenum);
 					
+					// Ensure data-icon is plus
+					$('#vote').prop('data-icon', 'plus');
+					
 					if (flag==1){
-						//$('#vote').prop('disabled', true);
-						$('#vote').addClass("ui-disabled");
+						$('#vote').prop('data-icon', 'minus');
+						$('#vote .ui-icon').addClass('ui-icon-minus').removeClass('ui-icon-plus');
 					}
-				})
+				});
 			},  
 			error: function() {  
-			alert("An error occurred while processing XML file.");  
+				alert("An error occurred while processing XML file.");  
 			}  
 		});
 
@@ -54,20 +57,36 @@ $.post("join_session.php", function(data){
 		}
 		
 		$(document).on('click','#vote',function(){
-				
+			
+			// To detect whether plus or minus vote
+			btn_status = $('#vote').prop("data-icon");
+
 			$.ajax({
 				url: "vote.php",
+				data: 'btn_status='+btn_status,
 				type: 'post',
-				success: function (data) {
+				success: function (vote) {
+				console.log(vote);
+					var votestring = vote.split(',');
+					var votenum = votestring[0];
+					var btn_status = votestring[1];
 				
-					$("#numOfVotes").html('Total Number of Votes: '+data);
+					$("#numOfVotes").html('Total Number of Votes: '+votenum);
 					socket.emit('updated_vote',{
 						unit_code: unit_code,
-						votenum: data,
+						votenum: votenum,
 					});//socket emit
 					
-					//$("#vote").prop("disabled", true);
-					$('#vote').addClass("ui-disabled");
+					if(btn_status=="plus"){
+						$('#vote').prop('data-icon', 'minus');
+						$('#vote .ui-icon').addClass('ui-icon-minus').removeClass('ui-icon-plus');
+					}
+					else{
+						$('#vote').prop('data-icon', 'plus');
+						$('#vote .ui-icon').addClass('ui-icon-plus').removeClass('ui-icon-minus');
+					}
+					//$("#vote").prop("disabled", true);// This doesn't fade the button
+					//$('#vote').addClass("ui-disabled");// This does
 				},
 				error: function(){	
 				alert('There was an error selecting the unit');	

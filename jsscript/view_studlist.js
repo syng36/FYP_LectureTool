@@ -23,12 +23,10 @@ $.ajax({
 				$("#msg").text('No student found!!');
 			}
 			else{// list the students in a table format
-				$("#msg").text('Student List');	
 				$("tbody").append('<tr><td align="center"><input type="checkbox" class="cbox" id="'+stud_uname+'"/></td><td>'+counter+'</td><td>'+stud_uname+'</td><td>'+stud_fname+'</td><td>'+stud_lname+'</td></tr>');
 				counter = counter+1;
 			}
 		})
-		//$.mobile.changePage("#view_unitpage", "slideup");
 	},  
 	complete:function(){
 		//$("#lecturer_queslist").listview();
@@ -37,7 +35,6 @@ $.ajax({
 	error: function() {  
 		alert("An error occurred while processing XML file.");  
 	}  
-
 });
 
 // Select all functionality

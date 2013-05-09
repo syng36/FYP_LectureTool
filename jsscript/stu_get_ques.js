@@ -46,8 +46,7 @@ $.post("join_session.php", function(data){
 
 		$(document).on('click','.chooseques',function(){
 			var ques_chosen = $(this).attr('data-name');
-			console.log(ques_chosen);
-				
+
 			$.ajax({
 				url: "select_stuques.php",
 				type: 'post',
