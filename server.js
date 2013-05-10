@@ -42,24 +42,28 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 	
+	// Lecturer reset the results for mcq ques
 	socket.on('reset_answers', function (response) {
 		socket.broadcast.emit('reset_answers',{
 			unit_code: response.unit_code,
 		});
 	});
 	
+	// Students respond to u-scale
 	socket.on('updated_uscale', function (response) {
 		socket.broadcast.emit('updated_uscale',{
 			unit_code: response.unit_code,
 		});
 	});
 	
+	// Lecturer reset the u-scale
 	socket.on('reset_uscale', function (response) {
 		socket.broadcast.emit('reset_uscale',{
 			unit_code: response.unit_code,
 		});
 	});
    
+	// Students vote for students' question
 	socket.on('updated_vote', function (response) {
 		socket.broadcast.emit('updated_vote',{
 			unit_code: response.unit_code,
@@ -67,12 +71,14 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 	
+	// Students post questions to lecturers
 	socket.on('stu_add_ques', function (response) {
 		socket.broadcast.emit('stu_add_ques',{
 			unit_code: response.unit_code,
 		});
 	});
 	
+	// Lecturer delete students' question
 	socket.on('del_stu_ques', function (response) {
 		socket.broadcast.emit('del_stu_ques',{
 			unit_code: response.unit_code,
