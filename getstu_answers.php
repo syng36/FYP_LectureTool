@@ -37,7 +37,7 @@ $result = mysql_query("SELECT * FROM $table_name WHERE mcq_answer = '$btnD'", $d
 $cntD = mysql_num_rows($result); 
 
 $total = $cntA+$cntB+$cntC+$cntD;
-//echo $total;
+
 // Output data in XML format
 header("Content-type: text/xml"); //Declare saving data in XML form
 echo '<?xml version="1.0" encoding="utf-8"?>'; // Print XML tag

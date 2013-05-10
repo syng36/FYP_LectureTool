@@ -9,6 +9,12 @@ $.post("join_session.php", function(data){
 	var unit_code = string[1];
 	
 	var socket = io.connect('http://melts.eng.monash.edu:8000');
+	
+	// ask user to log in again if no username available.
+	while (name == '') {
+	   name = alert("Please log in!");
+	   $.mobile.changePage($(document.location.href="index.html"), "slideup");
+	}
 	 
 	 // at document read (runs only ones).
 	 $(document).ready(function(){
@@ -30,26 +36,18 @@ $.post("join_session.php", function(data){
 			}// if it is the correct unit
 		});//socket on receive ques
 		
-		// ask user to log in again if no username available.
-		while (name == '') {
-		   name = alert("Please log in!");
-		   $.mobile.changePage($(document.location.href="index.html"), "slideup");
-		}
-		
 		// send the name to the server, and the server's 
 		// register wait will recieve this.
 		socket.emit('register', name );
 		
 		
-		// When a button is clicked / Student answers question
-		//$("button").live('click',function(){
+		// When a button is clicked / Student respond to u-scale
 		$(document).on('click','.u_scale', function(){
 			
 			// Get the id of the button clicked
 			var u_scale = $(this).prop("id");
 
 			$.ajax({
-				//url: "http://syngtest.myproject/stu_answers.php",
 				url: "stud_uscale.php",
 				type: 'post',
 				data: 'uscale='+ u_scale,
@@ -63,6 +61,7 @@ $.post("join_session.php", function(data){
 						//Set the button themes to default
 						$("#Y").buttonMarkup({ theme: "h" });
 						$("#N").buttonMarkup({ theme: "f" });
+						
 						// Highlight current response button
 						if (u_scale == "Y")
 							$("#Y").buttonMarkup({ theme: "i" });
@@ -75,6 +74,7 @@ $.post("join_session.php", function(data){
 						$("#N").buttonMarkup({ theme: "f" });
 					}
 					
+					// Signal student change response
 					socket.emit('updated_uscale',{
 						unit_code: unit_code,
 					});//socket emit

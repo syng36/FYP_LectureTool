@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 11 September 2012
-// To get username through IP address
+// To get username through session variable
 
 // Resume session from previous session
 session_start();

@@ -21,17 +21,14 @@ $.ajax({
 			else{// list the units in an unordered list
 				$("#msg").text('Please choose a question');	
 				$("#lecturer_queslist").append('<li class="chooseques" data-name="'+id+'"><a href="#">'+ques+'</a></li>');
-				//console.log ('<li class="chooseques" data-name="'+id+'"><a href="#">'+ques+'</a></li>');
 			} 
 		})
-		//$.mobile.changePage("#view_unitpage", "slideup");
 	},  
 	complete:function(){
-		//$("#lecturer_queslist").listview();
 		$("#lecturer_queslist").listview('refresh');
 	},
 	error: function() {  
-		alert("An error occurred while processing XML file.");  
+		alert("Please log in!");
+		$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 	}  
-
-})
+})// ajax

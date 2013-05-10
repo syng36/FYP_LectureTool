@@ -19,11 +19,25 @@
 	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>-->
 	<script type="text/javascript">
-	//$.post("http://syngtest.myproject/username.php", function(data){
-	$.post("username.php", function(data){
-		//document.getElementById("puname").innerHTML=data;
-		$("#puname").text(data);
-	});
+	$.ajax({
+		url: "username.php",
+		type: 'post',
+		success: function (data) {
+			var find = /Undefined index/gi;
+
+			if ( data.search(find) == -1 ){
+				$("#puname").text(data);
+			}
+			else{
+				alert("Please log in!");
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");  
+			}
+		}, 
+		error: function() {  
+			alert("Please log in!");
+			$.mobile.changePage($(document.location.href="index.html"), "slideup");  
+		}  
+	})// ajax
 	</script>
 </head>
  

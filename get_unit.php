@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
-// Created 18 September 2012
-// To get username through IP address
+// Created 3 October 2012
+// To unit name and unit code for the unit chosen
 
 // Resume session from previous session
 session_start();

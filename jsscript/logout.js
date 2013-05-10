@@ -7,7 +7,6 @@ $(document).on('click','#page_logout_submit',function(){
   
   	//use jquery ajax to post data to php server
   	$.ajax({
-      	//url: "http://syngtest.myproject/log_out.php",
 		url: "log_out.php",
       	type: 'post',
       	success: function (result) {
@@ -18,9 +17,8 @@ $(document).on('click','#page_logout_submit',function(){
        		 
 		},
       	error: function(){	
-      	alert('There was an error logging out');	
+			alert('There was an error logging out');	
 		}
-		
-  	});
+  	});// ajax
   	return false;
-});
+});// onclick logout

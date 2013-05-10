@@ -20,6 +20,4 @@ $id = $_POST['ques_chosen'];// holds the id number of the ques
 // Save id in session variable
 $_SESSION['stu_ques_chosen'] = $id;
 
-// Close connection to mySOL
-mysql_close($dbcon);
 ?>

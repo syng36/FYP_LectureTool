@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 4 September 2012
-// To add units into database
+// For lecturer to add units into database
 
 //$('#add_unit_submit').live('click',function(){
 $(document).on('click','#add_unit_submit', function(){
@@ -17,12 +17,9 @@ $(document).on('click','#add_unit_submit', function(){
   	if (!unit_name) { alert('Please enter a unit name.'); return false; }
 	unit_name = escape(unit_name);
 	unit_name = unit_name.replace(/\+/g, "%2B");
-  	
-  	//var uname = $('.puname').val();
   
   	//use jquery ajax to post data to php server
   	$.ajax({
-      	//url: "http://syngtest.myproject/add_unit.php",
 		url: "add_unit.php",
       	type: 'post',
       	data: 'unit_code='+unit_code+'&unit_name='+unit_name,
@@ -49,7 +46,6 @@ $(document).on('click','#add_unit_submit', function(){
       	error: function(){	
 			alert('There was an error adding unit');	
 		}
-		
-  	});
+  	});// ajax
   	return false;
-});
+});// onclick add unit

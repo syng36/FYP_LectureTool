@@ -127,7 +127,7 @@ for ($i=0; $i<$j; $i++){
 			if(mysql_affected_rows()!=0){
 				$flag = 1;
 			}
-		}
+		}// For each lecturer
 
 		//If no
 		if($flag == 0)
@@ -170,4 +170,7 @@ for ($i=0; $i<$j; $i++){
 		}
 	}//main if
 }//for every student
+
+// Close connection to mySOL
+mysql_close($dbcon);
 ?>

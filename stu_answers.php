@@ -18,8 +18,6 @@ $id = $_SESSION['id'];
 // Get student's answer
 $mcqanswer = $_POST['mcqanswer'];
 
-////////Check whether have a list of students before start session
-
 // Create database for the unit to hold sessions
 $database_name = $unit_code.'_'.$lec_uname;
 	
@@ -39,11 +37,11 @@ $fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!
 // Extract 'mcq_answer' field from the array
 $prev_mcqanswer = $fetch_details['mcq_answer'];
 
-if ($prev_mcqanswer==$mcqanswer){
+if ($prev_mcqanswer==$mcqanswer){// To retract answer
 	mysql_query("UPDATE $table_name SET mcq_answer='0' WHERE username='$uname'")  or die("Answer not updated!!");
 	$flag = 0;
 }
-else{
+else{// To answer or to change answer
 	mysql_query("UPDATE $table_name SET mcq_answer='$mcqanswer' WHERE username='$uname'")  or die("Answer not updated!!");
 	$flag = 1;
 }

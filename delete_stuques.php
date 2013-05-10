@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 3 May 2013 
-// To delete students from lecturer's unit
+// To delete students' question from lecturer's unit
 
 // Resume session from previous session
 session_start();
@@ -31,4 +31,7 @@ for ($i=0; $i<$j; $i++){
 	mysql_query("DROP TABLE $tablename") or die("Question table cannot be dropped!!");
 	
 }//for every question
+
+// Close connection to mySOL
+mysql_close($dbcon);
 ?>

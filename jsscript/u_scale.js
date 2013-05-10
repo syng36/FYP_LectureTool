@@ -3,7 +3,6 @@
 // Displaying understanding scale
 
 $.post("join_session.php", function(data){
-//$.post("http://syngtest.myproject/join_session.php", function(data){
 	
 	var string = data.split('_');
 	var name = string[0];
@@ -15,8 +14,10 @@ $.post("join_session.php", function(data){
 	 
 		// Function that delete all the answers from students
 		$(document).on('click',"#reset_uscale",function(){
+			// Clear all results in database
 			$.get("reset_uscale.php", function(data){
 				$(function() {
+					// Reset progress bar to 0
 					$( "#UScale" ).progressbar({
 						value: 0
 					});
@@ -25,7 +26,7 @@ $.post("join_session.php", function(data){
 					$("#UScale").css({ 'background': 'Orange' });	
 				});	
 
-				// Reset student's buttons
+				// Give signal to reset student's buttons
 				socket.emit('reset_uscale', { 
 					unit_code: data,
 				});
@@ -34,7 +35,6 @@ $.post("join_session.php", function(data){
 		
 		// Query database for previous result
 		$.ajax({
-			//url: "http://syngtest.myproject/getu_scale.php",
 			url: "getu_scale.php",
 			type: 'post',
 			dataType: "xml",  
@@ -73,7 +73,8 @@ $.post("join_session.php", function(data){
 				}
 			},
 			error: function(){	
-				console.log('There was an error in getting U-scale');	
+				alert("Please log in!");
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 			}
 		});	
 		
@@ -120,17 +121,11 @@ $.post("join_session.php", function(data){
 						}
 					},
 					error: function(){	
-						console.log('There was an error in getting U-scale');	
+						alert("Please log in!");
+						$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 					}
-				});
-			}
-		});			
-		/*$( "#UScale" ).progressbar({
-			value: 0
-		});
-
-		// Style the bar graph
-		$("#UScale").css({ 'background': 'Red' });
-		$("#UScale > div").css({ 'background': 'Green' });*/
+				});// ajax
+			}// execute only if the correct unit
+		});	// socket on student response		
 	});//document ready
 });//post join_session

@@ -4,13 +4,11 @@
 
 $(document).on('click',"#end_ques",function(){
 	$.get("end_session.php", function(data){
-	//$.get("http://syngtest.myproject/end_session.php", function(data){
 		window.location.href = "lec_ques_list.html";
 	});
-});
+});// onclick end session
 
 $.post("join_session.php", function(data){
-//$.post("http://syngtest.myproject/join_session.php", function(data){
 	
 	var string = data.split('_');
 	var name = string[0];
@@ -47,6 +45,7 @@ $.post("join_session.php", function(data){
 					$(".resultbar > div").css({ 'background': 'Orange' });
 				});	
 				
+				// Signal answers has been reset
 				socket.emit('reset_answers', { 
 					unit_code: unit_code,			
 				});
@@ -55,18 +54,16 @@ $.post("join_session.php", function(data){
 				$('#resultb').html('0 out of 0');
 				$('#resultc').html('0 out of 0');
 				$('#resultd').html('0 out of 0');
-			});
-		});
+			});// get
+		});// onclick reset answers
 		
 		//use jquery ajax to post data to php server
 		$.ajax({
-			//url: "http://syngtest.myproject/lec_question.php",
 			url: "lec_post_ques.php",
 			type: 'post',
 			dataType: "xml",  
 			success: function (xml) {
-			//results sent by PHP	
-			
+		
 				// Read xml file
 				$(xml).find('Ques').each(function(){ 
 					var unit_code = $(this).find('UnitCode').text(); 	
@@ -98,7 +95,7 @@ $.post("join_session.php", function(data){
 							C: C,
 							D: D,
 							
-						});
+						});// socket emit
 						
 						$(function() {
 							$( "#barA" ).progressbar({
@@ -118,7 +115,6 @@ $.post("join_session.php", function(data){
 							});
 							
 							// Style the bar graph
-							//$(".resultbar").css({ 'background': 'Grey' });
 							$(".resultbar").css({ 'background': 'Transparent' });
 							$(".resultbar").css({ 'border': 'None' });
 							$(".resultbar > div").css({ 'background': 'Orange' });
@@ -140,9 +136,9 @@ $.post("join_session.php", function(data){
 				
 			},
 			error: function(){	
-			alert('There was an error posting lecturers question');	
-			}
-			
+				alert("Please log in!");
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");  
+			}	
 		});
 	
 		// Updated answers from students
@@ -152,7 +148,6 @@ $.post("join_session.php", function(data){
 			var mcq_answer = data.mcq_answer;
 			
 			$.ajax({
-				//url: "http://syngtest.myproject/getstu_answers.php",
 				url: "getstu_answers.php",
 				type: 'post',
 				dataType: "xml",  
@@ -198,20 +193,19 @@ $.post("join_session.php", function(data){
 					$('#resultd').html(cntD+' out of '+total);
 				},
 				error: function(){	
-					console.log('There was an error in student answering question');	
+					alert('There was an error in student answering question');	
 				}
-			});		
+			});// ajax	
 		});			
 	
 		// ask user to log in again if no username available.
 		while (name == '') {
 		   name = alert("Please log in!");
 		   window.location.href = "index.html";
-		   //$.mobile.changePage($(document.location.href="index.html"), "slideup");
 		};
 		
 		// send the name to the server, and the server's 
 		// register wait will recieve this.
 		socket.emit('register', name );
-	}); 
-});
+	}); // document ready
+});// post

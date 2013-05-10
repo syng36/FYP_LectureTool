@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 11 September 2012
-// To delete unit 
+// For lecturer to delete unit 
 
 //$('#delete_unitsubmit').live('click',function(){
 $(document).on('click','#delete_unitsubmit', function(){
@@ -10,7 +10,6 @@ $(document).on('click','#delete_unitsubmit', function(){
 	if (answer)
 	  	//use jquery ajax to post data to php server
 		$.ajax({
-			//url: "http://syngtest.myproject/delete_unit.php",
 			url: "delete_unit.php",
 			type: 'post',
 			success: function (result) {
@@ -21,9 +20,8 @@ $(document).on('click','#delete_unitsubmit', function(){
 				 
 			},
 			error: function(){	
-			alert('There was an error deleting unit');	
+				alert('There was an error deleting unit');	
 			}
-			
 		});
   	return false;
-});
+});// onclick delete unit

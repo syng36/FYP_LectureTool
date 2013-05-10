@@ -43,4 +43,6 @@ else{// If yes then get previous answer
 	echo $mcq_answer;
 }
 
+// Close connection to mySOL
+mysql_close($dbcon);
 ?>

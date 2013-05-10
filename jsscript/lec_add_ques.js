@@ -41,7 +41,6 @@ $(document).on('click','#add_ques_submit', function(){
   
 	//use jquery ajax to post data to php server
 	$.ajax({
-		//url: "http://syngtest.myproject/lec_question.php",
 		url: "lec_add_ques.php",
 		type: 'post',
 		data: 'lec_ques='+lec_ques+'&A='+A+'&B='+B+'&C='+C+'&D='+D,
@@ -59,12 +58,9 @@ $(document).on('click','#add_ques_submit', function(){
 			else{
 				$("#msg").text(result);
 			}	 
-			
-
 		},
 		error: function(){	
 			alert('There was an error saving lecturers question');	
 		}
-		
-	});
-});
+	});// ajax
+});// onclick add question

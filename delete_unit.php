@@ -166,9 +166,6 @@ else{
 		}
 	}
 }//main if
- 
-// Connect to main database
-//mysql_select_db("main_database",$dbcon) or die("Cannot select database!");
 
 // Drop the deleted unit's database
 $sql = 'DROP DATABASE '.$database_name;
@@ -177,4 +174,7 @@ if (mysql_query($sql, $dbcon)) {
 } else {
     echo 'Error dropping database: ' . mysql_error() . "\n";
 }
+
+// Close connection to mySOL
+mysql_close($dbcon);
 ?>

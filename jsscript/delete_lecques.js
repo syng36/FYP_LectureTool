@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 6 May 2013
-// To list the students taking the unit
+// For lecturers to delete their question
 
 // Use jquery ajax to get data from php server
 $.ajax({
@@ -26,17 +26,15 @@ $.ajax({
 				counter = counter+1;
 			} 
 		})
-		//$.mobile.changePage("#view_unitpage", "slideup");
 	},  
 	complete:function(){
-		//$("#lecturer_queslist").listview();
 		$("#lecturer_queslist").listview('refresh');
 	},
 	error: function() {  
-		alert("An error occurred while processing XML file.");  
+		alert("Please log in!");
+		$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 	}  
-
-})
+});// ajax
 
 // Select all functionality
 $(document).on('click',"#selectall",function(){
@@ -48,9 +46,11 @@ $(document).on('click',"#unselectall",function(){
 	  $('.cbox').prop('checked', false);
 });
 
-// Select all functionality
+// Submit delete question
 $(document).on('click',"#delete_lecques",function(){
 	var List = [];
+	
+	// Get the ID of all the checked boxes
 	$(':checkbox:checked').each(function(i){
 		name = $(this).prop('id');
 		name = escape(name);
@@ -58,6 +58,7 @@ $(document).on('click',"#delete_lecques",function(){
 		List[i] = name;
     });
 	
+	// If there are questions selected
 	if(List != ""){
 		$.ajax({
 			url: "delete_lecques.php",
@@ -72,11 +73,12 @@ $(document).on('click',"#delete_lecques",function(){
 				alert(result);
 			},
 			error: function(){	
-			alert('There was an error deleting question');	
+				alert('There was an error deleting question');	
 			}
-			
-		});
+		});// ajax
 	}
-	else
-	alert("No question selected!");
-});
+	else{
+		// If there is no question selected
+		alert("No question selected!");
+	}
+});// on click delete ques button

@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 22 March 2013
-// Lecturer/student choosing a unit
+// Lecturer chose to post a question
 
 //$('.chooseques').live('click',function(){
 $(document).on('click','.chooseques',function(){
@@ -9,7 +9,6 @@ $(document).on('click','.chooseques',function(){
 	var ques_chosen = $(this).attr('data-name');
 	  	
 	$.ajax({
-      	//url: "http://syngtest.myproject/select_ques.php",
 		url: "select_ques.php",
       	type: 'post',
       	data: 'ques_chosen='+ques_chosen,
@@ -22,7 +21,7 @@ $(document).on('click','.chooseques',function(){
 			}
 		},
       	error: function(){	
-      	alert('There was an error selecting the unit');	
+			alert('There was an error selecting the question');	
 		}
   	});
 });

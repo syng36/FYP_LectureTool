@@ -3,7 +3,6 @@
 // To list the students taking the unit
 
 $.post("join_session.php", function(data){
-//$.post("http://syngtest.myproject/join_session.php", function(data){
 	
 	var string = data.split('_');
 	var name = string[0];
@@ -37,24 +36,21 @@ $.post("join_session.php", function(data){
 						counter = counter+1;
 					}
 				})
-				//$.mobile.changePage("#view_unitpage", "slideup");
 			},  
 			complete:function(){
-				//$("#lecturer_queslist").listview();
 				$("#stud_queslist").listview('refresh');
 			},
 			error: function() {  
-				alert("An error occurred while processing XML file.");  
+				alert("Please log in!");
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");
 			}  
-		});
+		});// ajax
 
 		// When lecturer chose to view a question
 		$(document).on('click','.chooseques',function(){
 			var ques_chosen = $(this).attr('data-name');
-			console.log(ques_chosen);
-				
+
 			$.ajax({
-				//url: "http://syngtest.myproject/stu_select_ques.php",
 				url: "select_stuques.php",
 				type: 'post',
 				data: 'ques_chosen='+ques_chosen,
@@ -67,11 +63,10 @@ $.post("join_session.php", function(data){
 					}
 				},
 				error: function(){	
-				alert('There was an error selecting the unit');	
+					alert('There was an error selecting the question');	
 				}
 			});
-		});
-
+		});// onclick choose question
 
 		// Select all functionality
 		$(document).on('click',"#selectall",function(){
@@ -83,8 +78,9 @@ $.post("join_session.php", function(data){
 			  $('.cbox').prop('checked', false);
 		});
 
-		// Select all functionality
+		// Submit questions to be deleted
 		$(document).on('click',"#delete_studques",function(){
+			// Get the list of checked boxes
 			var List = [];
 			$(':checkbox:checked').each(function(i){
 				qid = $(this).prop('id');
@@ -99,6 +95,7 @@ $.post("join_session.php", function(data){
 					success: function (result) {
 						//results sent by PHP
 						if (result==""){
+							// Signal student question is deleted
 							socket.emit('del_stu_ques',{
 								unit_code: unit_code,
 							});//socket emit
@@ -108,14 +105,13 @@ $.post("join_session.php", function(data){
 						alert(result);
 					},
 					error: function(){	
-					alert('There was an error deleting questions');	
+						alert('There was an error deleting questions');	
 					}
-					
-				});
+				});// ajax
 			}
 			else
-			alert("No questions selected!");
-		});
+				alert("No questions selected!");
+		});// onclick delete question button
 		
 		socket.on('stu_add_ques', function (data) {
 			if (unit_code==data.unit_code){
@@ -146,18 +142,17 @@ $.post("join_session.php", function(data){
 								counter = counter+1;
 							}
 						})
-						//$.mobile.changePage("#view_unitpage", "slideup");
 					},  
 					complete:function(){
-						//$("#lecturer_queslist").listview();
 						$("#stud_queslist").listview('refresh');
 					},
 					error: function() {  
-						alert("An error occurred while processing XML file.");  
+						alert("Please log in!");
+						$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 					}  
-				});
+				});// ajax
 			}
-		});	
+		});	// on student add question
 		
 		// Update list if there are students voted		
 		socket.on('updated_vote', function (data) {
@@ -189,17 +184,15 @@ $.post("join_session.php", function(data){
 								counter = counter+1;
 							}
 						})
-						//$.mobile.changePage("#view_unitpage", "slideup");
 					},  
 					complete:function(){
-						//$("#lecturer_queslist").listview();
 						$("#stud_queslist").listview('refresh');
 					},
 					error: function() {  
 						alert("An error occurred while processing XML file.");  
 					}  
-				});
+				});// ajax
 			}
-		});				
+		});// on updated votes			
 	});//document ready
 });//post join_session

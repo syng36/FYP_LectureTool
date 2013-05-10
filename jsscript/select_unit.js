@@ -7,7 +7,6 @@ $(document).on('click','.chooseunit',function(){
 	var unit_chosen = $(this).attr('data-name');
 	  	
 	$.ajax({
-      	//url: "http://syngtest.myproject/select_unit.php",
 		url: "select_unit.php",
       	type: 'post',
       	data: 'unit_chosen='+unit_chosen,
@@ -20,7 +19,7 @@ $(document).on('click','.chooseunit',function(){
 			}
 		},
       	error: function(){	
-      	alert('There was an error selecting the unit');	
+			alert('There was an error selecting the unit');	
 		}
   	});
 });

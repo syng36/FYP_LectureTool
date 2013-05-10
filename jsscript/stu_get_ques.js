@@ -3,12 +3,17 @@
 // To list the questions posted by students in student's view
 
 $.post("join_session.php", function(data){
-//$.post("http://syngtest.myproject/join_session.php", function(data){
 	
 	var string = data.split('_');
 	var name = string[0];
 	var unit_code = string[1];
 	var socket = io.connect('http://melts.eng.monash.edu:8000');
+	
+	// ask user to log in again if no username available.
+	while (name == '') {
+	   name = alert("Please log in!");
+	   $.mobile.changePage($(document.location.href="index.html"), "slideup");
+	}
 	 
 	 // at document read (runs only ones).
 	 $(document).ready(function(){
@@ -24,7 +29,7 @@ $.post("join_session.php", function(data){
 					var id = $(this).find('ID').text(); 
 					var title = $(this).find('Title').text();
 							
-					if (id == "0"){// means there's no units registered for the lecturer
+					if (id == "0"){// means there's no questions posted by students
 						// Empty list, show this msg
 						$("#view_quesmsg").text('No questions found!!');
 					}
@@ -33,16 +38,15 @@ $.post("join_session.php", function(data){
 						$("#stu_queslist").append('<li class="chooseques" data-name="'+id+'"><a href="#">'+title+'</a></li>');
 					} 
 				})
-				//$.mobile.changePage("#view_unitpage", "slideup");
 			},  
 			complete:function(){
-				//$("#stu_queslist").listview();
 				$("#stu_queslist").listview('refresh');
 			},
 			error: function() {  
-			alert("An error occurred while processing XML file.");  
+				alert("Please log in!");
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");
 			}  
-		});
+		}); // ajax
 
 		$(document).on('click','.chooseques',function(){
 			var ques_chosen = $(this).attr('data-name');
@@ -60,10 +64,10 @@ $.post("join_session.php", function(data){
 					}
 				},
 				error: function(){	
-				alert('There was an error selecting the unit');	
+					alert('There was an error selecting the unit');	
 				}
-			});
-		});
+			});// ajax
+		});// onclick when any question is chosen
 		
 		// Update list if there are students voted
 		socket.on('updated_vote', function (data) {
@@ -83,7 +87,7 @@ $.post("join_session.php", function(data){
 							var id = $(this).find('ID').text(); 
 							var title = $(this).find('Title').text();
 									
-							if (id == "0"){// means there's no units registered for the lecturer
+							if (id == "0"){// means there's no questions posted by students
 								// Empty list, show this msg
 								$("#view_quesmsg").text('No questions found!!');
 							}
@@ -92,18 +96,17 @@ $.post("join_session.php", function(data){
 								$("#stu_queslist").append('<li class="chooseques" data-name="'+id+'"><a href="#">'+title+'</a></li>');
 							} 
 						})
-						//$.mobile.changePage("#view_unitpage", "slideup");
 					},  
 					complete:function(){
-						//$("#stu_queslist").listview();
 						$("#stu_queslist").listview('refresh');
 					},
 					error: function() {  
-					alert("An error occurred while processing XML file.");  
+						alert("Please log in!");
+						$.mobile.changePage($(document.location.href="index.html"), "slideup");
 					}  
-				});
+				});// ajax
 			}
-		});	
+		});	//on updated vote
 			
 		socket.on('del_stu_ques', function (data) {
 			if (unit_code==data.unit_code){
@@ -122,7 +125,7 @@ $.post("join_session.php", function(data){
 							var id = $(this).find('ID').text(); 
 							var title = $(this).find('Title').text();
 									
-							if (id == "0"){// means there's no units registered for the lecturer
+							if (id == "0"){// means there's no questions posted by students
 								// Empty list, show this msg
 								$("#view_quesmsg").text('No questions found!!');
 							}
@@ -131,18 +134,17 @@ $.post("join_session.php", function(data){
 								$("#stu_queslist").append('<li class="chooseques" data-name="'+id+'"><a href="#">'+title+'</a></li>');
 							} 
 						})
-						//$.mobile.changePage("#view_unitpage", "slideup");
 					},  
 					complete:function(){
-						//$("#stu_queslist").listview();
 						$("#stu_queslist").listview('refresh');
 					},
 					error: function() {  
-					alert("An error occurred while processing XML file.");  
+						alert("Please log in!");
+						$.mobile.changePage($(document.location.href="index.html"), "slideup");
 					}  
 				});
 			}
-		});	
+		});	// on delete questions from student
 
 		socket.on('stu_add_ques', function (data) {
 			if (unit_code==data.unit_code){
@@ -161,7 +163,7 @@ $.post("join_session.php", function(data){
 							var id = $(this).find('ID').text(); 
 							var title = $(this).find('Title').text();
 									
-							if (id == "0"){// means there's no units registered for the lecturer
+							if (id == "0"){// means there's no questions posted by students
 								// Empty list, show this msg
 								$("#view_quesmsg").text('No questions found!!');
 							}
@@ -170,17 +172,16 @@ $.post("join_session.php", function(data){
 								$("#stu_queslist").append('<li class="chooseques" data-name="'+id+'"><a href="#">'+title+'</a></li>');
 							} 
 						})
-						//$.mobile.changePage("#view_unitpage", "slideup");
 					},  
 					complete:function(){
-						//$("#stu_queslist").listview();
 						$("#stu_queslist").listview('refresh');
 					},
 					error: function() {  
-					alert("An error occurred while processing XML file.");  
+						alert("Please log in!");
+						$.mobile.changePage($(document.location.href="index.html"), "slideup");
 					}  
-				});
+				}); // ajax
 			}
-		});					
+		});	// on student add question				
 	});//document ready
 });//post join_session

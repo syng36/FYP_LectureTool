@@ -34,7 +34,6 @@ $(document).on('click','#add_student_submit', function(){
   
   	//use jquery ajax to post data to php server
   	$.ajax({
-      	//url: "http://syngtest.myproject/add_student.php",
 		url: "add_student.php",
       	type: 'post',
       	data: 'stud_name='+stud_name+'&fname='+fname+'&lname='+lname+'&status='+status+'&email='+email,
@@ -50,7 +49,8 @@ $(document).on('click','#add_student_submit', function(){
 				//print errors sent by PHP
 				alert(result);
 			}	
-				
+			
+			// Clear all textboxes
 			$("#stud_name").val('');
 			$("#fname").val('');
 			$("#lname").val('');
@@ -59,7 +59,6 @@ $(document).on('click','#add_student_submit', function(){
       	error: function(){	
 			alert('There was an error adding student');	
 		}
-		
-  	});
+  	});// ajax
   	return false;
-});
+});//onclick submit student button

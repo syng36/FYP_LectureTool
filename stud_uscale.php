@@ -32,12 +32,12 @@ $fetch_details = mysql_fetch_array($query_details) or die("Cannot fetch details!
 // Extract 'unit_name' field from the array
 $prev_uscale = $fetch_details['u_scale'];
 
-if ($prev_uscale==$u_scale){
-	mysql_query("UPDATE student_list SET u_scale='0' WHERE username='$uname'")  or die("Answer not updated!!");
+if ($prev_uscale==$u_scale){// To retract response
+	mysql_query("UPDATE student_list SET u_scale='0' WHERE username='$uname'")  or die("Response not updated!!");
 	$flag = 0;
 }
-else{
-	mysql_query("UPDATE student_list SET u_scale='$u_scale' WHERE username='$uname'")  or die("Answer not updated!!");
+else{// To respond or to change response
+	mysql_query("UPDATE student_list SET u_scale='$u_scale' WHERE username='$uname'")  or die("Response not updated!!");
 	$flag = 1;
 }
 

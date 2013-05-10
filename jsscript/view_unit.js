@@ -4,7 +4,6 @@
 
 // Use jquery ajax to get data from php server
 $.ajax({
-	//url: "http://syngtest.myproject/view_unit.php",
 	url: "view_unit.php",
 	type: 'post',
 	dataType: "xml",  
@@ -25,14 +24,13 @@ $.ajax({
 				$("#viewunit_optionlist").append('<li class="chooseunit" data-name="'+unit_code+'"><a href="#">'+unit_code+'  '+unit_name+'</a></li>');
 			} 
 		})
-		//$.mobile.changePage("#view_unitpage", "slideup");
 	},  
 	complete:function(){
 		//$("#viewunit_optionlist").listview();
 		$("#viewunit_optionlist").listview('refresh');
 	},
 	error: function() {  
-	alert("An error occurred while processing XML file.");  
+		alert("Please log in!");
+		$.mobile.changePage($(document.location.href="index.html"), "slideup"); 
 	}  
-
-});
+});// ajax

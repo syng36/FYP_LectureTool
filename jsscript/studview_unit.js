@@ -1,10 +1,9 @@
 // Written by Shea Yuin Ng
 // Created 18 March 2013
-// To list the units taken by students
+// To list the units taken by students in student's view
 
 // Use jquery ajax to get data from php server
 $.ajax({
-	//url: "http://syngtest.myproject/view_unit.php",
 	url: "studview_unit.php",
 	type: 'post',
 	dataType: "xml",  
@@ -22,17 +21,15 @@ $.ajax({
 			}
 			else{// list the units in an unordered list
 					$("#view_unitmsg").text('Please choose a unit');	
-					//$("#viewunit_optionlist").append('<li id="'+unit_code+'"><a href="unit_page.html" rel="external">'+unit_code+'  '+unit_name+'</a></li>');
 					$("#viewunit_optionlist").append('<li class="chooseunit" data-name="'+unit_code+'_'+lec_name+'"><a href="#">'+unit_code+'  '+unit_name+' - '+lec_name+'</a></li>');
 			} 
 		})
 	},  
 	complete:function(){
-		//$("#viewunit_optionlist").listview();
 		$("#viewunit_optionlist").listview('refresh');
 	},
 	error: function() {  
-	alert("An error occurred while processing XML file.");  
+		alert("Please log in!");
+		$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 	}  
-
-});
+});// ajax

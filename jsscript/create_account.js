@@ -43,26 +43,23 @@ $(document).on('click','#create_account_submit', function(){
 	
   	//use jquery ajax to post data to php server
   	$.ajax({
-      	//url: "http://syngtest.myproject/create_account.php",
 		url: "create_account.php",
       	type: 'post',
       	data: 'uname='+uname+'&pswd='+pswd+'&fname='+fname+'&lname='+lname+'&status='+status+'&email='+email,
       	success: function (result) {
-      	//results sent by PHP
-      	//$(".puname").text(uname);
-      	if (result=="1"){
-			alert('Account successfully created. You may login now.=)');
-       		$.mobile.changePage($(document.location.href="index.html"), "slideup");
-       	}
-       	else{
-			alert(result);
-       		$.mobile.changePage("#create_accountpage", "slideup");
-       	}	 
+			//results sent by PHP
+			if (result=="1"){
+				alert('Account successfully created. You may login now.=)');
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");
+			}
+			else{
+				alert(result);
+				$.mobile.changePage("#create_accountpage", "slideup");
+			}	 
 		},
       	error: function(){	
-      	alert('There was an error in creating account');	
+			alert('There was an error in creating account');	
 		}
-		
-  	});
+  	});// ajax
   	return false;
-});
+});// onclick create account button

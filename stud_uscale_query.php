@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
-// Created 27 March 2013
-// For student to get the question from database
+// Created 26 April 2013
+// For student to get their status of u-scale from database
 
 // Resume session from previous session
 session_start();

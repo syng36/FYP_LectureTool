@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 3 April 2013
-// To view units for each lecturer
+// To view the student list for the unit
 
 // Resume session from previous session
 session_start();
@@ -9,7 +9,7 @@ session_start();
 // Connect to mySQL
 include('connections.php');
 
-// Get username, unit code and unit name from session variable
+// Get username and chosen unit code from session variable
 $uname = $_SESSION['uname'];
 $unit_code = $_SESSION['unit_chosen'];
 

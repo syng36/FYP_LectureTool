@@ -3,7 +3,6 @@
 // To enable students to view and answer questions from lecturer
 
 $.post("join_session.php", function(data){
-//$.post("http://syngtest.myproject/join_session.php", function(data){
 	
 	var string = data.split('_');
 	var name = string[0];
@@ -16,7 +15,6 @@ $.post("join_session.php", function(data){
 		
 		// Query the database when student first logged in
 		$.ajax({
-			//url: "http://syngtest.myproject/stud_query_db.php",
 			url: "stud_query_db.php",
 			dataType: "xml",  
 			success: function (xml) {
@@ -33,8 +31,8 @@ $.post("join_session.php", function(data){
 					
 					if (lec_ques!= "0"){// means there's question posted by lecturer
 						$('#lec_ques').html(lec_ques);
-						$('#btnA').parent().find('.ui-btn-text').text(A);
 						//$('#btnA').text(data.A); not working
+						$('#btnA').parent().find('.ui-btn-text').text(A);
 						$('#btnB').parent().find('.ui-btn-text').text(B);
 						$('#btnC').parent().find('.ui-btn-text').text(C);
 						$('#btnD').parent().find('.ui-btn-text').text(D);
@@ -44,19 +42,14 @@ $.post("join_session.php", function(data){
 							$(button).buttonMarkup({ theme: "e" });
 							//$(button).attr('data-theme', 'e'); not working
 						}
-						// print data (jquery thing)
-						//$("p#data_received").append("<br />\r\n" + lec_ques + ': A.' + A+ '     B.'+ B+'     C.'+ C+'     D.'+ D);
-						
-						// to check messenger
-						//$("p#log").html('from: ' +lec_uname);
 					}
 				});				
 			},
 			error: function(){	
-				alert('There was an error query database');	
-			}
-			
-		});
+				alert("Please log in!");
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");  
+			}	
+		});// ajax
 		
 		// On receiving questions
 		socket.on('ques', function (data){
@@ -84,7 +77,6 @@ $.post("join_session.php", function(data){
 				// display data
 				$('#lec_ques').html(data.ques);
 				$('#btnA').parent().find('.ui-btn-text').text(data.A);
-				//$('#btnA').text(data.A); not working
 				$('#btnB').parent().find('.ui-btn-text').text(data.B);
 				$('#btnC').parent().find('.ui-btn-text').text(data.C);
 				$('#btnD').parent().find('.ui-btn-text').text(data.D);
@@ -102,7 +94,6 @@ $.post("join_session.php", function(data){
 			if (unit_code == data.unit_code){
 				$(".ans_button").buttonMarkup({ theme: "c" });
 			}// if it is the correct unit
-			
 		});//socket on receive ques
 		
 		// ask user to log in again if no username available.
@@ -114,7 +105,6 @@ $.post("join_session.php", function(data){
 		// send the name to the server, and the server's 
 		// register wait will recieve this.
 		socket.emit('register', name );
-		
 		
 		// When a button is clicked / Student answers question
 		//$("button").live('click',function(){
@@ -150,7 +140,6 @@ $.post("join_session.php", function(data){
 						id: id,
 						mcq_answer: mcq_answer
 					});//socket emit
-					
 				},
 				error: function(){	
 					alert('There was an error in student answering question');	

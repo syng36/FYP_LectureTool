@@ -1,10 +1,9 @@
 // Written by Shea Yuin Ng
 // Created 3 April 2013
-// To list the students taking the unit
+// To list the students taking the unit and to delete students from the list
 
 // Use jquery ajax to get data from php server
 $.ajax({
-	//url: "http://syngtest.myproject/view_studlist.php",
 	url: "view_studlist.php",
 	type: 'post',
 	dataType: "xml",  
@@ -29,13 +28,13 @@ $.ajax({
 		})
 	},  
 	complete:function(){
-		//$("#lecturer_queslist").listview();
 		$("#stud_list").listview('refresh');
 	},
 	error: function() {  
-		alert("An error occurred while processing XML file.");  
+		alert("Please log in!");
+		$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 	}  
-});
+});// ajax
 
 // Select all functionality
 $(document).on('click',"#selectall",function(){
@@ -47,8 +46,9 @@ $(document).on('click',"#unselectall",function(){
 	  $('.cbox').prop('checked', false);
 });
 
-// Select all functionality
+// Delete students
 $(document).on('click',"#delete_stud",function(){
+	// Get the username of each student selected
 	var List = [];
 	$(':checkbox:checked').each(function(i){
 		name = $(this).prop('id');
@@ -57,6 +57,7 @@ $(document).on('click',"#delete_stud",function(){
 		List[i] = name;
     });
 	
+	// If there are students selected
 	if(List != ""){
 		$.ajax({
 			url: "delete_stud.php",
@@ -68,14 +69,14 @@ $(document).on('click',"#delete_stud",function(){
 					location.reload(true);
 				}
 				else
-				alert(result);
+					alert(result);
 			},
 			error: function(){	
-			alert('There was an error deleting students');	
+				alert('There was an error deleting students');	
 			}
-			
-		});
+		});// ajax
 	}
 	else
-	alert("No students selected!");
-});
+		// If there is no student selected
+		alert("No students selected!");
+});// onclick delete student button

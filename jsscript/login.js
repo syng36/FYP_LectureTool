@@ -49,10 +49,10 @@ $(document).ready(function() {
 			$('#pswd').val(pswd);
 		}
 		else // no password stored
-		$('#uname').val(username);
+			$('#uname').val(username);
 	}
   
-
+	// To delete cookies (set expiry date to minus the number of days set originally)
 	/*var ThreeDays = 1*24*60*60*1000;
 	var expDate = new Date();
 	expDate.setTime (expDate.getTime() - ThreeDays);
@@ -61,9 +61,6 @@ $(document).ready(function() {
 	
 	$(document).on('click','#page_login_submit',function(){
 	//$('#page_login_submit').live('click',function(){
-
-		//disable login button
-		//$("#page_login_submit",this).prop("disabled","disabled");
 		
 		//get username
 		var uname = $('#uname').val();
@@ -88,13 +85,11 @@ $(document).ready(function() {
 	  
 		//use jquery ajax to post data to php server
 		$.ajax({
-			//url: "http://syngtest.myproject/log_in.php",
 			url: "log_in.php",
 			type: 'post',
 			data: 'uname='+uname+'&pswd='+pswd,
 			success: function (result) {
 				//results sent by PHP
-				//$(".puname").text(uname);
 				if (result=="S"){
 					$.mobile.changePage($(document.location.href="student_homepage.html"), "slideup");
 				}
@@ -107,10 +102,9 @@ $(document).ready(function() {
 				}	 
 			},
 			error: function(){	
-			alert('There was an error logging in');	
+				alert('There was an error logging in');	
 			}
-			
-		});
+		});// ajax
 		return false;
 	});
 });

@@ -33,6 +33,7 @@ $.post("join_session.php", function(data){
 					// Ensure data-icon is plus
 					$('#vote').prop('data-icon', 'plus');
 					
+					// If student already voted, change the button to an unvote button
 					if (flag==1){
 						$('#vote').prop('data-icon', 'minus');
 						$('#vote .ui-icon').addClass('ui-icon-minus').removeClass('ui-icon-plus');
@@ -40,9 +41,10 @@ $.post("join_session.php", function(data){
 				});
 			},  
 			error: function() {  
-				alert("An error occurred while processing XML file.");  
+				alert("Please log in!");
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");
 			}  
-		});
+		});// ajax
 
 		socket.on('updated_vote', function (data){
 			if (unit_code == data.unit_code){
@@ -89,10 +91,10 @@ $.post("join_session.php", function(data){
 					//$('#vote').addClass("ui-disabled");// This does
 				},
 				error: function(){	
-				alert('There was an error selecting the unit');	
+					alert('There was an error selecting the unit');	
 				}
-			});
-		});
+			});// ajax
+		});// onclick vote button
 	});//document ready
 });//post join_session
 

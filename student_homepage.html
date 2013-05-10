@@ -16,11 +16,25 @@
 	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.css" />
 	<script type="text/javascript">
-	 //$.post("http://syngtest.myproject/username.php", function(data){
-	 $.post("username.php", function(data){
-		//document.getElementById("puname").innerHTML=data;
-		$("#puname").text(data);
-	});
+	$.ajax({
+		url: "username.php",
+		type: 'post',
+		success: function (data) {
+			var find = /Undefined index/gi;
+
+			if ( data.search(find) == -1 ){
+				$("#puname").text(data);
+			}
+			else{
+				alert("Please log in!");
+				$.mobile.changePage($(document.location.href="index.html"), "slideup");  
+			}
+		}, 
+		error: function() {  
+			alert("Please log in!");
+			$.mobile.changePage($(document.location.href="index.html"), "slideup");  
+		}  
+	})// ajax
 	</script>
 </head>
 

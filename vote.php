@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
-// Created 26 April 2013
-// To reset the u-scale response from students
+// Created 6 May 2013
+// For students to vote up or vote down students' questions
 
 // Resume session from previous session
 session_start();

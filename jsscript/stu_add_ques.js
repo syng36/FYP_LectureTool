@@ -3,7 +3,6 @@
 // Student add questions to ask lecturers
 
 $.post("join_session.php", function(data){
-//$.post("http://syngtest.myproject/join_session.php", function(data){
 	
 	var string = data.split('_');
 	var name = string[0];
@@ -30,7 +29,6 @@ $.post("join_session.php", function(data){
 		  
 			//use jquery ajax to post data to php server
 			$.ajax({
-				//url: "http://syngtest.myproject/lec_question.php",
 				url: "stu_add_ques.php",
 				type: 'post',
 				data: 'ques_title='+ques_title+'&question='+question,
@@ -53,14 +51,7 @@ $.post("join_session.php", function(data){
 				error: function(){	
 					alert('There was an error submitting your question');	
 				}
-				
-			});
-		});
-		
-		// ask user to log in again if no username available.
-		while (name == '') {
-		   name = alert("Please log in!");
-		   $.mobile.changePage($(document.location.href="index.html"), "slideup");
-		}
+			});// ajax
+		});// onclick add question submit
 	});//document ready
 });//post join_session
