@@ -21,7 +21,6 @@ $.ajax({
 				$("#msg").text('No questions found!!');
 			}
 			else{// list the units in an unordered list
-				$("#msg").text('Question List');	
 				$("tbody").append('<tr><td align="center"><input type="checkbox" class="cbox" id="'+id+'"/></td><td>'+counter+'</td><td>'+ques+'</td></tr>');
 				counter = counter+1;
 			} 
