@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 3 April 2013
-// To reset the results from students
+// For lecturers to reset the answers from students
 
 // Resume session from previous session
 session_start();

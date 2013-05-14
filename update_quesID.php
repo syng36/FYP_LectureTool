@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 27 March 2013
-// To update the question ID for the question received
+// For students to update the ID of the question posted by the lecturer
 
 // Resume session from previous session
 session_start();

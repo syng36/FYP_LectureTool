@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 11 September 2012
-// For lecturer to delete unit 
+// For lecturers to delete unit 
 
 //$('#delete_unitsubmit').live('click',function(){
 $(document).on('click','#delete_unitsubmit', function(){

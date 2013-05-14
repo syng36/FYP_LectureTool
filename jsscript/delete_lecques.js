@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 6 May 2013
-// For lecturers to delete their question
+// For lecturers to delete their questions from question list
 
 // Use jquery ajax to get data from php server
 $.ajax({

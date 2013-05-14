@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 5 September 2012
-// To list the units taught by the lecturer
+// For lecturers to view the list of units added by them
 
 // Use jquery ajax to get data from php server
 $.ajax({

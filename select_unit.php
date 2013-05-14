@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 18 September 2012
-// To get username through session variables
+// For both lecturers and students to choose a unit
 
 // Resume session from previous session
 session_start();

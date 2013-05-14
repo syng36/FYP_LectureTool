@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 29 August 2012
-// To manage log in
+// To login
 
 $(document).ready(function() {
 	// A function to read the cookie

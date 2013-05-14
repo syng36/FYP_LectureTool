@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 18 September 2012
-// Lecturer/student choosing a unit
+// For both lecturers and students to choose a unit
 
 //$('.chooseunit').live('click',function(){
 $(document).on('click','.chooseunit',function(){

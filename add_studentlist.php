@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 21 January 2013
-// To upload the csv student list
+// For lecturers to add students into the student list of a unit using a CSV list
 
 // Resume session from previous session
 session_start();

@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 18 January 2013
-// To add students into database
+// For lecturers to add students into the student list of a unit
  
 //$('#add_student_submit').live('click',function(){
 $(document).on('click','#add_student_submit', function(){

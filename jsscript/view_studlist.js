@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 3 April 2013
-// To list the students taking the unit and to delete students from the list
+// For lecturers to view the student list for a unit
 
 // Use jquery ajax to get data from php server
 $.ajax({

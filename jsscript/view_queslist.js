@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 22 March 2013
-// To list the questions added by lecturers
+// For lecturers to view their list of questions
 
 // Use jquery ajax to get data from php server
 $.ajax({

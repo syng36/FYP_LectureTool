@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 4 September 2012
-// For lecturer to add units into database
+// For lecturers to add units taught by them
 
 //$('#add_unit_submit').live('click',function(){
 $(document).on('click','#add_unit_submit', function(){

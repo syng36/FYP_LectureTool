@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 22 October 2012
-// To save the answers from students
+// For students to answer questions from lecturers
 
 // Resume session from previous session
 session_start();

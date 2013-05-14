@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 3 October 2012
-// To unit name and unit code for the unit chosen
+// Get the unit name and code to be printed on the page header
 
 // Resume session from previous session
 session_start();

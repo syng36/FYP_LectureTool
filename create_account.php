@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 20 September 2012
-// To insert data into database to create account
+// To register lecturers into the system
 
 // Connect to mySQL
 include('connections.php');

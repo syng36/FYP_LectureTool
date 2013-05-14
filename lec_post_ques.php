@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 26 March 2013
-// To get the question from database to post the question
+// For lecturers to post questions to students
 
 // Resume session from previous session
 session_start();

@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 30 April 2013
-// To list the questions posted by students in student's view
+// For students to view the list of questions posted by students
 
 $.post("join_session.php", function(data){
 	

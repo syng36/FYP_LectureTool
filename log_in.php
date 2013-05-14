@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 23 August 2012
-// To log in into account
+// To login
 
 // Start a new session
 session_start();

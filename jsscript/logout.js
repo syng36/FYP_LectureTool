@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 11 September 2012
-// To log out
+// To logout
 
 //$('#page_logout_submit').live('click',function(){
 $(document).on('click','#page_logout_submit',function(){

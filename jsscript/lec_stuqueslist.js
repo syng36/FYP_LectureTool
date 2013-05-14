@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
-// Created 3 April 2013
-// To list the students taking the unit
+// Created 3 May 2013
+// For lecturers view the list of questions posted by students and to delete questions from students 
 
 $.post("join_session.php", function(data){
 	

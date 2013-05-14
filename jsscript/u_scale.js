@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 19 April 2013
-// Displaying understanding scale
+// For lecturers to view the responses of the understanding scale
 
 $.post("join_session.php", function(data){
 

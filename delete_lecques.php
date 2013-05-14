@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 6 May 2013 
-// To delete questions from lecturer
+// For lecturers to delete their questions from question list
 
 // Resume session from previous session
 session_start();

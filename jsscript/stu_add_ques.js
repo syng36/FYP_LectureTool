@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 2 May 2013
-// Student add questions to ask lecturers
+// For students to post questions to lecturers
 
 $.post("join_session.php", function(data){
 	

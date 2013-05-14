@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 22 March 2013
-// Lecturer chose to post a question
+// For lecturers to choose which question to post to students
 
 //$('.chooseques').live('click',function(){
 $(document).on('click','.chooseques',function(){

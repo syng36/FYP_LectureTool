@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 4 September 2012
-// To add units into lecturer's account
+// For lecturers to add units taught by them
 
 // Resume session from previous session
 session_start();

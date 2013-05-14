@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 20 September 2012
-// To create account for lecturers
+// To register lecturers into the system
 
 //$('#create_account_submit').live('click',function(){
 $(document).on('click','#create_account_submit', function(){

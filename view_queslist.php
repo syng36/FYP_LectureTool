@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 22 March 2013
-// To view questions added by lecturer
+// For lecturers to view their list of questions
 
 // Resume session from previous session
 session_start();

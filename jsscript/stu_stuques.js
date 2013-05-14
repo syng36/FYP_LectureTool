@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 3 May 2013
-// Student view the questions from students
+// For students to view and vote for the question posted by student
 
 $.post("join_session.php", function(data){
 	

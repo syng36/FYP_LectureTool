@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 4 September 2012
-// To view units for each lecturer
+// For lecturers to view the list of units added by them
 
 // Resume session from previous session
 session_start();

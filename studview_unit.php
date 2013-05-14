@@ -1,7 +1,8 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 18 March 2013
-// To list the units taken by students
+// For students to view list  of units after the lecturers added them  
+
 
 // Resume session from previous session
 session_start();

@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 27 March 2013
-// For student to get the question from database
+// For students to get the question from database if lecturer already posted the question
 
 // Resume session from previous session
 session_start();

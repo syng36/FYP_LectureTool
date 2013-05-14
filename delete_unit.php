@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 19 September 2012
-// To delete units from lecturer's account
+// For lecturers to delete unit
 
 // Resume session from previous session
 session_start();

@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 26 April 2013
-// To save the response of understanding scale from student
+// For students to respond to the understanding scale
 
 // Resume session from previous session
 session_start();

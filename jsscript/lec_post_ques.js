@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 19 April 2013
-// For a lecturer to post questions
+// For lecturers to post questions and view the results of the posted question
 
 $(document).on('click',"#end_ques",function(){
 	$.get("end_session.php", function(data){

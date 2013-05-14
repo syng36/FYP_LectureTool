@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 19 October 2012
-// To end the session
+// For lecturers to end the posting of question to students
 
 // Resume session from previous session
 session_start();

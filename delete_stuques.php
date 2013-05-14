@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 3 May 2013 
-// To delete students' question from lecturer's unit
+// For lecturers to delete questions from students 
 
 // Resume session from previous session
 session_start();

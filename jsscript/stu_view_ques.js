@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 16 April 2013
-// To enable students to view and answer questions from lecturer
+// For students to view and answer questions from lecturers
 
 $.post("join_session.php", function(data){
 	
@@ -53,12 +53,10 @@ $.post("join_session.php", function(data){
 		
 		// On receiving questions
 		socket.on('ques', function (data){
-			if (unit_code == data.unit_code){
+			if (unit_code == data.unit_code && lec_uname == data.lec_name){
 				var id = data.id;
-				var lec_name = data.lec_name;
 
 				$.ajax({
-					//url: "http://syngtest.myproject/update_quesID.php",
 					url: "update_quesID.php",
 					type: 'post',
 					data: 'id=' + id,
@@ -81,11 +79,6 @@ $.post("join_session.php", function(data){
 				$('#btnC').parent().find('.ui-btn-text').text(data.C);
 				$('#btnD').parent().find('.ui-btn-text').text(data.D);
 
-				// print data (jquery thing)
-				$("p#data_received").append("<br />\r\n" + data.ques + ': A.' + data.A+ '     B.'+ data.B+'     C.'+ data.C+'     D.'+ data.D);
-				
-				// to check messenger
-				$("p#log").html('from: ' + data.msgr);
 			}// if it is the correct unit
 			
 		});//socket on receive ques

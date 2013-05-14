@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 22 March 2013
-// To determine the qeustion posted by the lecturer
+// For lecturers to choose which question to post to students
 
 // Resume session from previous session
 session_start();

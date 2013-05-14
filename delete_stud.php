@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 18 April 2013 
-// To delete students from lecturer's unit
+// For lecturers to delete students from the student list
 
 // Resume session from previous session
 session_start();

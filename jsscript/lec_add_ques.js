@@ -1,6 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 22 March 2013
-// To add questions
+// For lecturers to add questions to question list
 
 //$('#add_ques_submit').live('click',function(){
 $(document).on('click','#add_ques_submit', function(){

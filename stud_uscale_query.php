@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 26 April 2013
-// For student to get their status of u-scale from database
+// For students to get their previous respond to the understanding scale
 
 // Resume session from previous session
 session_start();

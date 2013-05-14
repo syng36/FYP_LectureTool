@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 26 April 2013
-// To reset the u-scale response from students
+// For lecturers to reset the understanding scale responses from students
 
 // Resume session from previous session
 session_start();

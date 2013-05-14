@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 22 October 2012
-// To get result from the question
+// For lecturers to view the results of the posted question
 
 // Resume session from previous session
 session_start();

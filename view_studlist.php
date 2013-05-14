@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 3 April 2013
-// To view the student list for the unit
+// For lecturers to view the student list for a unit
 
 // Resume session from previous session
 session_start();

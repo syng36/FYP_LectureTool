@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 14 March 2013
-// To register a student
+// For lecturers to add students into the student list of a unit
 
 // Resume session from previous session
 session_start();

@@ -1,7 +1,7 @@
 <?php
 // Written by Shea Yuin Ng
 // Created 23 October 2012
-// To get the username and unit code when joining session
+// To get the username and unit code for real time function
 
 // Resume session from previous session
 session_start();
