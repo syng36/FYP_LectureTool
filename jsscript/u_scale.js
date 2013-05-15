@@ -2,13 +2,14 @@
 // Created 19 April 2013
 // For lecturers to view the responses of the understanding scale
 
+
 $.post("join_session.php", function(data){
 
-	//$.getScript(location.host + ":8000/socket.io/socket.io.js", null);
+	
 	var string = data.split('_');
 	var name = string[0];
 	var unit_code = string[1];
-	var socket = io.connect('http://melts.eng.monash.edu:8000');
+	var socket = io.connect('http://'+location.host+':8000');
 	//var socket = io.connect(location.host + ':8000/socket.io/socket.io.js');
 	 
 	 // at document read (runs only ones).

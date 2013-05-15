@@ -10,14 +10,10 @@
 	<title> Homepage </title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.css" />
 	<script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
-	<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
-	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>-->
 	<script type="text/javascript">
 	$.ajax({
 		url: "username.php",
@@ -52,6 +48,7 @@
 			<h1>Welcome </h1> 
 			<h1 id="puname"></h1>
 			<a data-role="button" data-ajax="false" id="page_logout_submit" class = "ui-btn-left">Logout</a>
+			<a href="lec_settings.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-right">Settings</a>
 		</div><!-- /header -->
 		
 		<div data-role="content">

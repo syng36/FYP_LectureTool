@@ -1,3 +1,7 @@
+// Written by Shea Yuin Ng
+// Created 28 October 2012
+// The socket io websocket server
+
 var io = require('socket.io').listen(8000);
 
 // open the socket connection
