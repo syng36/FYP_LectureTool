@@ -62,7 +62,7 @@
 	
 		<div data-role="content">
 		
-			<h1>Add a List of Students</h1> 
+			<h2>Add a List of Students</h2> 
 			
 			<!--A div to add a .csv list of students-->
 			<div class="file_dialog_window">
@@ -72,8 +72,6 @@
 				<!--File browser and a submit button-->
 				<input type="file" id="csvfile" name="csvfile" onchange="checkFilename()" /> 				
 				<button data-theme="e" id = "student_list_submit">Submit</button>
-				<!--<div id="byte_range"></div>
-				<div id="byte_content"></div>-->
 				
 				<script>
 					// Define function
@@ -94,16 +92,11 @@
 						// If we use onloadend, we need to check the readyState.
 						reader.onloadend = function(evt) {
 							if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-								//document.getElementById('byte_content').textContent = evt.target.result;
-								//document.getElementById('byte_range').textContent = 
-								//	['Read bytes: ', start + 1, ' - ', stop + 1,
-								//	 ' of ', file.size, ' byte file'].join('');*/
 								list = escape(evt.target.result);
 								list = list.replace(/\+/g, "%2B");
 
 								// Ajax post data to PHP
 								$.ajax({
-									//url: "http://syngtest.myproject/add_studentlist.php",
 									url: "add_studentlist.php",
 									type: 'post',
 									data: 'student_list='+list,
@@ -166,8 +159,20 @@
 				</script>
 				
 			</div><!--file_dialog_window-->
+			
+			<h2>Copy List from Another Lecturer</h2> 
+			<div data-role="fieldcontain">
+				<label for="sel_stud_list" class="select">Choose student list:</label>
+				<select name="sel_stud_list" id="sel_stud_list">
 
-			<h1>Add a Student</h1> 
+				</select>
+				
+				<fieldset>
+					<div><button type="button" data-theme="e" id="copy_studlist">Copy list</button></div>
+				</fieldset>
+			</div>
+			
+			<h2>Add a Student</h2> 
 			
 			<p>To register a student</p>
 			

@@ -6,7 +6,7 @@
 $hostname_localhost ="localhost";
 //$database_localhost ="mydatabase";
 $username_localhost ="root";
-$password_localhost =""; 
+$password_localhost ="melts"; 
 
 //connect to mySQL
 $dbcon = mysql_connect($hostname_localhost,$username_localhost,$password_localhost);
