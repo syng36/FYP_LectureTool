@@ -64,4 +64,4 @@ $(document).ready(function() {
 			}
 		});// ajax
 	});// onclick add question
-}),//doc ready
+});//doc ready
