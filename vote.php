@@ -32,15 +32,17 @@ $votes = htmlspecialchars($stu_ques["votes"]);
 if ($btn_status=='plus'){
 	// To keep track who has voted for this question
 	mysql_query("INSERT INTO $table_name(username) VALUES('$uname')")  or die("Vote cannot be added!!");
-	// Add one to number of vote
-	$votes = $votes + 1;
+	// Recount votes
+	$cntvotes = mysql_query("SELECT * FROM $table_name");
+	$votes = mysql_num_rows($cntvotes);
 	mysql_query("UPDATE students_ques SET votes='$votes' WHERE id = '$id'")  or die("Votes not updated!!");
 }
 else{
 	// To keep track who has voted for this question
 	mysql_query("DELETE FROM $table_name WHERE  username='$uname'") or die("Vote cannot be retracted!!");
-	// Minus one to number of vote
-	$votes = $votes - 1;
+	// Recount votes
+	$cntvotes = mysql_query("SELECT * FROM $table_name");
+	$votes = mysql_num_rows($cntvotes);
 	mysql_query("UPDATE students_ques SET votes='$votes' WHERE id = '$id'")  or die("Votes not updated!!");
 }
 
