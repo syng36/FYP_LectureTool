@@ -63,5 +63,6 @@ $(document).ready(function() {
 				alert('There was an error saving lecturers question');	
 			}
 		});// ajax
+		return false;
 	});// onclick add question
 });//doc ready

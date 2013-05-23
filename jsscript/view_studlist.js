@@ -40,11 +40,13 @@ $(document).ready(function() {
 	// Select all functionality
 	$(document).on('click',"#selectall",function(){
 		  $('.cbox').prop('checked', true);
+		  return false;
 	});
 
 	// Unselect all funtionality
 	$(document).on('click',"#unselectall",function(){
 		  $('.cbox').prop('checked', false);
+		  return false;
 	});
 
 	// Delete students
@@ -77,8 +79,10 @@ $(document).ready(function() {
 				}
 			});// ajax
 		}
-		else
+		else{
 			// If there is no student selected
 			alert("No students selected!");
+		}
+		return false;
 	});// onclick delete student button
 });// doc ready

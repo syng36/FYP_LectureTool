@@ -21,6 +21,7 @@ $(document).ready(function() {
 			error: function(){	
 				alert('There was an error selecting the unit');	
 			}
-		});
-	});
-});
+		}); //ajax
+		return false;
+	});// onclick 
+});// document ready

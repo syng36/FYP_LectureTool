@@ -67,6 +67,7 @@ $.post("join_session.php", function(data){
 					alert('There was an error selecting the unit');	
 				}
 			});// ajax
+			return false;
 		});// onclick when any question is chosen
 		
 		// Update list if there are students voted

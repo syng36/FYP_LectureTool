@@ -2,12 +2,6 @@
 // Created 19 April 2013
 // For lecturers to post questions and view the results of the posted question
 
-$(document).on('click',"#end_ques",function(){
-	$.get("end_session.php", function(data){
-		window.location.href = "lec_ques_list.html";
-	});
-});// onclick end session
-
 $.post("join_session.php", function(data){
 	
 	var string = data.split('_');
@@ -18,6 +12,12 @@ $.post("join_session.php", function(data){
 	 
 	// at document read (runs only once).
 	$(document).ready(function(){
+		$(document).on('click',"#end_ques",function(){
+			$.get("end_session.php", function(data){
+				window.location.href = "lec_ques_list.html";
+			});
+			return false;
+		});// onclick end session
 	
 		// Function that delete all the answers from students
 		$(document).on('click',"#reset",function(){
@@ -55,6 +55,7 @@ $.post("join_session.php", function(data){
 				$('#resultc').html('0 out of 0');
 				$('#resultd').html('0 out of 0');
 			});// get
+			return false;
 		});// onclick reset answers
 		
 		//use jquery ajax to post data to php server
@@ -139,7 +140,7 @@ $.post("join_session.php", function(data){
 				alert("Please log in!");
 				$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 			}	
-		});
+		});//ajax
 	
 		// Updated answers from students
 		socket.on('updated', function (data) {

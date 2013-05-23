@@ -1,5 +1,6 @@
 // Written by Shea Yuin Ng
 // Created 29 August 2012
+// With reference from "Javascript Cookies" available at http://www.w3schools.com/js/js_cookies.asp
 // To login
 
 $(document).ready(function() {
@@ -60,7 +61,6 @@ $(document).ready(function() {
 	console.log("Cookie");*/
 	
 	$(document).on('click','#page_login_submit',function(){
-	//$('#page_login_submit').live('click',function(){
 		
 		//get username
 		var uname = $('#uname').val();
@@ -106,5 +106,5 @@ $(document).ready(function() {
 			}
 		});// ajax
 		return false;
-	});
-});
+	});//onclick
+});// document ready

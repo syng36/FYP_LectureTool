@@ -53,6 +53,7 @@ $.post("join_session.php", function(data){
 					alert('There was an error submitting your question');	
 				}
 			});// ajax
+			return false;
 		});// onclick add question submit
 	});//document ready
 });//post join_session

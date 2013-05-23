@@ -3,7 +3,6 @@
 // To register lecturers into the system
 
 $(document).ready(function() {
-	//$('#create_account_submit').live('click',function(){
 	$(document).on('click','#create_account_submit', function(){
 
 		//get username

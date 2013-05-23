@@ -79,7 +79,7 @@ else if($status=='S'){
 
 	// Check whether the username for the unit already existed
 	//$sql="SELECT * FROM students_ques ORDER BY votes DESC LIMIT 0,5";//To limit the number of questions viewed
-	$sql="SELECT * FROM students_ques ORDER BY votes DESC ";
+	$sql="SELECT * FROM students_ques ORDER BY votes DESC, id DESC ";
 	$r = mysql_query($sql);
 
 	// If error in selecting table

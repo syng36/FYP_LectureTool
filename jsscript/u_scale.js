@@ -2,9 +2,7 @@
 // Created 19 April 2013
 // For lecturers to view the responses of the understanding scale
 
-
 $.post("join_session.php", function(data){
-
 	
 	var string = data.split('_');
 	var name = string[0];
@@ -33,8 +31,9 @@ $.post("join_session.php", function(data){
 				socket.emit('reset_uscale', { 
 					unit_code: data,
 				});
-			});
-		});
+			});//get
+			return false;
+		});//onclick
 		
 		// Query database for previous result
 		$.ajax({

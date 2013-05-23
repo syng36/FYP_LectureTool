@@ -65,17 +65,20 @@ $.post("join_session.php", function(data){
 				error: function(){	
 					alert('There was an error selecting the question');	
 				}
-			});
+			});// ajax
+			return false;
 		});// onclick choose question
 
 		// Select all functionality
 		$(document).on('click',"#selectall",function(){
 			  $('.cbox').prop('checked', true);
+			  return false;
 		});
 
 		// Unselect all funtionality
 		$(document).on('click',"#unselectall",function(){
 			  $('.cbox').prop('checked', false);
+			  return false;
 		});
 
 		// Submit questions to be deleted
@@ -109,8 +112,10 @@ $.post("join_session.php", function(data){
 					}
 				});// ajax
 			}
-			else
+			else{
 				alert("No questions selected!");
+			}
+			return false;
 		});// onclick delete question button
 		
 		socket.on('stu_add_ques', function (data) {
@@ -151,7 +156,7 @@ $.post("join_session.php", function(data){
 						$.mobile.changePage($(document.location.href="index.html"), "slideup");  
 					}  
 				});// ajax
-			}
+			}// if
 		});	// on student add question
 		
 		// Update list if there are students voted		
@@ -192,7 +197,7 @@ $.post("join_session.php", function(data){
 						alert("An error occurred while processing XML file.");  
 					}  
 				});// ajax
-			}
+			}// if
 		});// on updated votes			
 	});//document ready
 });//post join_session
