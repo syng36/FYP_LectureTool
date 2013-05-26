@@ -8,7 +8,6 @@ $.post("join_session.php", function(data){
 	var name = string[0];
 	var unit_code = string[1];
 	var socket = io.connect('http://'+location.host+':8000');
-	//var socket = io.connect(location.host + ':8000/socket.io/socket.io.js');
 	 
 	 // at document read (runs only ones).
 	 $(document).ready(function(){
@@ -84,7 +83,6 @@ $.post("join_session.php", function(data){
 		socket.on('updated_uscale', function (data) {
 			if (unit_code==data.unit_code){
 				$.ajax({
-					//url: "http://syngtest.myproject/getu_scale.php",
 					url: "getu_scale.php",
 					type: 'post',
 					dataType: "xml",  

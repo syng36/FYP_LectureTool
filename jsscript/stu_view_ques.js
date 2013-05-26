@@ -100,7 +100,6 @@ $.post("join_session.php", function(data){
 		socket.emit('register', name );
 		
 		// When a button is clicked / Student answers question
-		//$("button").live('click',function(){
 		$(document).on('click','button', function(){
 			
 			// Get the id of the button clicked

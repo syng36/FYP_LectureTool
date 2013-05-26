@@ -9,11 +9,9 @@ $.post("join_session.php", function(data){
 	var unit_code = string[1];
 	var lec_uname = string[2];
 	var socket = io.connect('http://'+location.host+':8000');
-	//var socket = io.connect('http://'+location.host+':8000');
 	
 	// at document read (runs only ones).
 	 $(document).ready(function(){
-		//$('#add_ques_submit').live('click',function(){
 		$(document).on('click','#add_ques_submit', function(){
 				
 		   // get question title

@@ -31,12 +31,20 @@
 			<h1 id="unitcode"></h1> 
 			<h1>Students' Question List</h1>
 			<a href="unit.html" rel="external" data-role="button" data-ajax="false" class = "ui-btn-left">Back</a>
+			<a href="lec_uscale.html" rel="external" data-role="button" data-mini = "true" data-ajax="false" class = "ui-btn-right">U-Scale</a>
 		</div><!-- /header -->
 		
 		<div data-role="content">
 		
 			<!--U-Scale bar-->
 			<div id="UScale" class="UScale"></div>
+			
+			<div>
+				<br>
+				<a data-role="button" data-inline = "true" data-mini = "true" id = "selectall">Select All</a>
+				<a data-role="button" data-inline = "true" data-mini = "true" id = "unselectall">Unselect All</a>
+				<a data-role="button" data-inline = "true" data-mini = "true" id = "delete_studques">Delete</a>
+			</div><!-- /Function button -->
 			
 			<p id = msg></p>
 			<table data-role="table" id="stud_queslist" class="ui-responsive table-stroke">
@@ -54,12 +62,7 @@
 			<p id = "statusmsg"></p>
 			<br>
 			
-			<div>
-				<br>
-				<a data-role="button" data-inline = "true" data-mini = "true" id = "selectall">Select All</a>
-				<a data-role="button" data-inline = "true" data-mini = "true" id = "unselectall">Unselect All</a>
-				<a data-role="button" data-inline = "true" data-mini = "true" id = "delete_studques">Delete</a>
-			</div><!-- /Function button -->
+			
 			
 		</div><!-- /content -->
 
