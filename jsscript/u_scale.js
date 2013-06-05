@@ -24,6 +24,8 @@ $.post("join_session.php", function(data){
 					
 					// Style the bar graph
 					$("#UScale").css({ 'background': 'Orange' });	
+					
+					$('#uresult').html('');
 				});	
 
 				// Give signal to reset student's buttons
